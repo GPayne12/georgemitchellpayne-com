@@ -1,0 +1,95 @@
+---
+// Fetches the latest commit from the portfolio repo at build time.
+// Renders nothing on API failure so the page degrades cleanly.
+
+const REPO = 'GPayne12/georgemitchellpayne-com';
+
+interface Commit {
+  sha: string;
+  message: string;
+  date: Date;
+}
+
+let latest: Commit | null = null;
+
+try {
+  const res = await fetch(
+    `https://api.github.com/repos/${REPO}/commits?per_page=1`,
+    { headers: { Accept: 'application/vnd.github.v3+json' } }
+  );
+  if (res.ok) {
+    const [item] = await res.json();
+    const firstLine = item.commit.message.split('\n')[0];
+    latest = {
+      sha: item.sha.slice(0, 7),
+      message: firstLine.length > 64 ? firstLine.slice(0, 64) + '…' : firstLine,
+      date: new Date(item.commit.author.date),
+    };
+  }
+} catch {
+  // build-time fetch failed — strip omitted
+}
+
+function ago(date: Date): string {
+  const s = Math.floor((Date.now() - date.getTime()) / 1000);
+  if (s < 3600)  return `${Math.floor(s / 60)}m ago`;
+  if (s < 86400) return `${Math.floor(s / 3600)}h ago`;
+  const d = Math.floor(s / 86400);
+  return `${d}d ago`;
+}
+---
+
+{latest && (
+  <section class="now-building" aria-label="Latest commit">
+    <div class="container">
+      <p class="telemetry now-label">// now building</p>
+      <p class="now-line">
+        <span class="now-key">site</span><span class="now-sep">:</span>
+        <span class="now-val">georgemitchellpayne.com</span>
+        <span class="now-dot">·</span>
+        <span class="now-key">commit</span><span class="now-sep">:</span>
+        <span class="now-sha">{latest.sha}</span>
+        <span class="now-dot">·</span>
+        <span class="now-message">"{latest.message}"</span>
+        <span class="now-dot">·</span>
+        <span class="now-live">{ago(latest.date)}</span>
+      </p>
+    </div>
+  </section>
+)}
+
+<style>
+  .now-building {
+    padding-block: var(--space-8);
+  }
+
+  .now-label {
+    margin-bottom: var(--space-2);
+  }
+
+  .now-line {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-ink-muted);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-1);
+    column-gap: var(--space-2);
+  }
+
+  .now-key   { color: var(--color-ink-muted); }
+  .now-sep   { color: var(--color-border); }
+  .now-val   { color: var(--color-ink); }
+  .now-dot   { color: var(--color-border); padding-inline: var(--space-1); }
+  .now-sha   { color: var(--color-ink-muted); }
+  .now-live  { color: var(--color-telemetry); }
+
+  .now-message {
+    color: var(--color-ink-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 42ch;
+  }
+</style>
