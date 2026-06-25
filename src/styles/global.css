@@ -1,0 +1,302 @@
+/* ============================================================
+   Design Tokens — georgemitchellpayne.com
+   Aesthetic: field notebook meets telemetry
+
+   Three font roles:
+     display  — Fraunces (variable, optical-size-aware serif)
+                Used sparingly for positioning statements only
+     body     — Source Serif 4 (optical-size serif, reading-optimized)
+                All long-form prose and headings
+     mono     — JetBrains Mono
+                The telemetry voice: live data, counters, status labels
+
+   Accent choice: forest green (#2d6a4f)
+     Calm, distinctive, not a default palette pick.
+     Contrast on --color-bg: ~6.1:1 — passes WCAG 2.2 AA for normal text.
+   ============================================================ */
+
+:root {
+  /* --- Palette --- */
+  --color-bg:           #faf9f7;   /* warm off-white, like aged paper */
+  --color-surface:      #f0ede7;   /* cards, code blocks, inset areas */
+  --color-border:       #d4cfc7;   /* quiet dividers */
+  --color-ink:          #1a1916;   /* near-black with warmth */
+  --color-ink-muted:    #5c5a55;   /* secondary text, labels */
+  --color-accent:       #2d6a4f;   /* forest green — the single restrained accent */
+  --color-accent-hover: #235840;   /* darkened for hover states */
+  --color-telemetry:    #1e7a4a;   /* telemetry readouts — slightly brighter */
+
+  /* --- Font families --- */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body:    'Source Serif 4', Georgia, serif;
+  --font-mono:    'JetBrains Mono', 'Courier New', monospace;
+
+  /* --- Type scale (fluid, clamp-based) --- */
+  --text-xs:   clamp(0.694rem, 0.67rem  + 0.12vw, 0.75rem);
+  --text-sm:   clamp(0.833rem, 0.80rem  + 0.17vw, 0.875rem);
+  --text-base: clamp(1rem,     0.96rem  + 0.22vw, 1.0625rem);
+  --text-lg:   clamp(1.2rem,   1.14rem  + 0.30vw, 1.25rem);
+  --text-xl:   clamp(1.44rem,  1.35rem  + 0.45vw, 1.5rem);
+  --text-2xl:  clamp(1.728rem, 1.60rem  + 0.64vw, 1.875rem);
+  --text-3xl:  clamp(2.074rem, 1.90rem  + 0.87vw, 2.25rem);
+  --text-4xl:  clamp(2.488rem, 2.24rem  + 1.24vw, 3rem);
+  --text-5xl:  clamp(3rem,     2.65rem  + 1.75vw, 3.75rem);
+
+  /* --- Spacing scale --- */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* --- Layout --- */
+  --max-width:     72rem;
+  --content-width: 48rem;
+
+  /* --- Motion --- */
+  --duration-fast: 100ms;
+  --duration-base: 180ms;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================
+   Reset
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+/* Respect motion preference — kills all transitions/animations site-wide */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.75;
+  color: var(--color-ink);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+}
+
+/* ============================================================
+   Accessibility
+   ============================================================ */
+
+/* Skip link — off-screen until focused by keyboard */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-4);
+  z-index: 100;
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-accent);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  text-decoration: none;
+  border-radius: 0 0 3px 3px;
+  transition: top var(--duration-fast) var(--ease-standard);
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* Visible focus ring for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============================================================
+   Typography
+   ============================================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-body);
+  font-weight: 600;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+/* Apply display font by class — never globally on headings */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+
+code, kbd, samp, pre {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+/* Telemetry: the mono voice for live/measured content */
+.telemetry {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-telemetry);
+  letter-spacing: 0.02em;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+/* ============================================================
+   Layout primitives
+   ============================================================ */
+
+.site-wrapper {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+main {
+  flex: 1;
+  padding-block: var(--space-16);
+}
+
+/* ============================================================
+   Site header & navigation
+   ============================================================ */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4rem;
+  gap: var(--space-8);
+}
+
+.nav-home {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-ink);
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
+}
+.nav-home:hover {
+  color: var(--color-accent);
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  gap: var(--space-6);
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+.nav-links a:hover,
+.nav-links a[aria-current='page'] {
+  color: var(--color-accent);
+}
+.nav-links a[aria-current='page'] {
+  font-weight: 500;
+}
+
+@media (max-width: 36em) {
+  .nav-links {
+    gap: var(--space-4);
+  }
+}
+
+/* ============================================================
+   Site footer
+   ============================================================ */
+
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  padding-block: var(--space-8);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.footer-copy {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+}
+
+.footer-links {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  gap: var(--space-5);
+}
+
+.footer-links a {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+.footer-links a:hover {
+  color: var(--color-accent);
+}

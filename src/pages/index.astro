@@ -1,11 +1,182 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const swatches = [
+  { label: '--color-bg',          value: '#faf9f7', border: true  },
+  { label: '--color-surface',     value: '#f0ede7', border: true  },
+  { label: '--color-border',      value: '#d4cfc7', border: true  },
+  { label: '--color-ink-muted',   value: '#5c5a55', border: false },
+  { label: '--color-ink',         value: '#1a1916', border: false },
+  { label: '--color-accent',      value: '#2d6a4f', border: false },
+  { label: '--color-telemetry',   value: '#1e7a4a', border: false },
+];
+
+const typeSteps = [
+  { step: '5xl',  label: 'text-5xl'  },
+  { step: '4xl',  label: 'text-4xl'  },
+  { step: '3xl',  label: 'text-3xl'  },
+  { step: '2xl',  label: 'text-2xl'  },
+  { step: 'xl',   label: 'text-xl'   },
+  { step: 'lg',   label: 'text-lg'   },
+  { step: 'base', label: 'text-base' },
+  { step: 'sm',   label: 'text-sm'   },
+  { step: 'xs',   label: 'text-xs'   },
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Design System Preview — GMP">
+  <div class="container">
+
+    <!-- ── Font roles ─────────────────────────────────── -->
+    <section class="preview-section">
+      <p class="telemetry label">// font-display · Fraunces</p>
+      <p class="font-display display-sample">I'm a learning engineer.</p>
+
+      <p class="telemetry label">// font-body · Source Serif 4</p>
+      <p class="body-sample">
+        I build the tools, curricula, and systems that accelerate how people learn
+        at work — then measure whether they actually worked. This is the body font:
+        calm, legible, built for reading.
+      </p>
+
+      <p class="telemetry label">// font-mono · JetBrains Mono (telemetry voice)</p>
+      <p class="mono-sample">
+        now_building: career-aggregator
+        &nbsp;·&nbsp; status: <span style="color: var(--color-telemetry);">live</span>
+        &nbsp;·&nbsp; commits_this_week: 14
+      </p>
+    </section>
+
+    <!-- ── Palette ────────────────────────────────────── -->
+    <section class="preview-section">
+      <p class="telemetry label">// palette</p>
+      <div class="swatch-row">
+        {swatches.map(({ label, value, border }) => (
+          <div class="swatch-item">
+            <div
+              class="swatch-chip"
+              style={`background:${value};${border ? 'border:1px solid var(--color-border);' : ''}`}
+            />
+            <span class="swatch-label">{label}</span>
+            <span class="swatch-hex">{value}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ── Type scale ─────────────────────────────────── -->
+    <section class="preview-section">
+      <p class="telemetry label">// type scale · fluid clamp</p>
+      <div class="scale-list">
+        {typeSteps.map(({ step, label }) => (
+          <div class="scale-row">
+            <span class="scale-token">--{label}</span>
+            <span style={`font-size:var(--text-${step});line-height:1.2;`}>
+              Learning engineer.
+            </span>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ── Accessibility: focus & link demos ──────────── -->
+    <section class="preview-section">
+      <p class="telemetry label">// interactive states</p>
+      <p class="body-sample">
+        Focus a link with <kbd>Tab</kbd> to see the :focus-visible ring.
+        &nbsp;<a href="#">Example link</a> &nbsp;
+        <a href="/builds">Builds</a> &nbsp;
+        <a href="/about">About</a>
+      </p>
+    </section>
+
+  </div>
 </Layout>
+
+<style>
+  .preview-section {
+    margin-bottom: var(--space-16);
+  }
+
+  .label {
+    margin-bottom: var(--space-4);
+  }
+
+  .display-sample {
+    font-size: var(--text-5xl);
+    line-height: 1.05;
+    margin-bottom: var(--space-12);
+  }
+
+  .body-sample {
+    font-size: var(--text-lg);
+    max-width: 52ch;
+    margin-bottom: var(--space-8);
+  }
+
+  .mono-sample {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-ink-muted);
+    margin-bottom: var(--space-8);
+  }
+
+  /* Palette */
+  .swatch-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .swatch-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  .swatch-chip {
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 4px;
+  }
+
+  .swatch-label,
+  .swatch-hex {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--color-ink-muted);
+    white-space: nowrap;
+  }
+
+  /* Type scale */
+  .scale-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .scale-row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-4);
+  }
+
+  .scale-token {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--color-ink-muted);
+    width: 7rem;
+    flex-shrink: 0;
+  }
+
+  /* Keyboard label */
+  kbd {
+    display: inline-block;
+    padding: 1px 5px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    font-size: 0.85em;
+  }
+</style>
