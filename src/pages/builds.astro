@@ -1,0 +1,241 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const builds = await getCollection('builds');
+const sorted = builds.sort((a, b) => a.data.order - b.data.order);
+
+function isRealUrl(url: string | undefined): boolean {
+  if (!url) return false;
+  return !url.includes('localhost') && !url.includes('127.0.0.1');
+}
+---
+
+<Layout
+  title="Builds — George Mitchell Payne"
+  description="Side projects and tools built with code and AI. Open decision logs, real outcomes."
+>
+  <div class="container">
+
+    <section class="builds-header">
+      <p class="telemetry section-label">// builds</p>
+      <h1 class="builds-title">What I build</h1>
+      <p class="builds-lead">
+        Side projects and tools — each with an open decision log. The choices,
+        the tradeoffs, and what broke.
+      </p>
+    </section>
+
+    {sorted.length === 0 ? (
+      <p class="builds-empty">Builds coming soon.</p>
+    ) : (
+      <ul class="builds-list" role="list">
+        {sorted.map(b => (
+          <li class="build-row">
+
+            <div class="build-header">
+              <div class="build-title-row">
+                <h2 class="build-title">{b.data.title}</h2>
+                <span class={`build-status status--${b.data.status}`}>
+                  {b.data.status === 'live' ? 'live' : 'in progress'}
+                </span>
+              </div>
+              <ul class="build-stack" role="list" aria-label="Stack">
+                {b.data.stack.map(tech => (
+                  <li class="stack-tag">{tech}</li>
+                ))}
+              </ul>
+            </div>
+
+            <p class="build-summary">{b.data.summary}</p>
+
+            <div class="decision-log">
+              <p class="telemetry decision-label">// decision log</p>
+              <p class="decision-body">{b.data.decisionLog}</p>
+            </div>
+
+            <div class="build-links">
+              <a
+                href={b.data.repo}
+                class="build-link"
+                rel="noopener noreferrer"
+                aria-label={`View ${b.data.title} source on GitHub`}
+              >
+                GitHub →
+              </a>
+              {isRealUrl(b.data.demo) && (
+                <a
+                  href={b.data.demo}
+                  class="build-link"
+                  rel="noopener noreferrer"
+                  aria-label={`View ${b.data.title} live demo`}
+                >
+                  Live demo →
+                </a>
+              )}
+            </div>
+
+          </li>
+        ))}
+      </ul>
+    )}
+
+  </div>
+</Layout>
+
+<style>
+  /* ── Header ───────────────────────────────────────── */
+  .builds-header {
+    padding-top: var(--space-4);
+    margin-bottom: var(--space-12);
+    max-width: var(--content-width);
+  }
+
+  .section-label {
+    margin-bottom: var(--space-4);
+  }
+
+  .builds-title {
+    font-size: var(--text-4xl);
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: var(--space-4);
+  }
+
+  .builds-lead {
+    font-size: var(--text-lg);
+    color: var(--color-ink-muted);
+    line-height: 1.65;
+    max-width: 44ch;
+  }
+
+  .builds-empty {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-ink-muted);
+  }
+
+  /* ── Build list ───────────────────────────────────── */
+  .builds-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .build-row {
+    padding-block: var(--space-10);
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    max-width: var(--content-width);
+  }
+
+  .build-row:last-child {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  /* ── Build header ─────────────────────────────────── */
+  .build-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .build-title-row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .build-title {
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .build-status {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.04em;
+    padding: 0.15em 0.55em;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+
+  .status--live {
+    background: var(--color-eng-wash);
+    color: var(--color-eng);
+  }
+
+  .status--in-progress {
+    background: var(--color-ld-wash);
+    color: var(--color-ld);
+  }
+
+  .build-stack {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .stack-tag {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 0.15em 0.55em;
+    border-radius: 3px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── Summary & decision log ───────────────────────── */
+  .build-summary {
+    font-size: var(--text-base);
+    line-height: 1.7;
+    color: var(--color-ink);
+  }
+
+  .decision-log {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: var(--space-5) var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .decision-label {
+    font-size: var(--text-xs);
+    margin: 0;
+  }
+
+  .decision-body {
+    font-size: var(--text-sm);
+    line-height: 1.7;
+    color: var(--color-ink-muted);
+  }
+
+  /* ── Links ────────────────────────────────────────── */
+  .build-links {
+    display: flex;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+  }
+
+  .build-link {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-standard);
+  }
+
+  .build-link:hover {
+    color: var(--color-accent-hover);
+  }
+</style>

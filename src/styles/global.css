@@ -26,6 +26,14 @@
   --color-accent-hover: #235840;   /* darkened for hover states */
   --color-telemetry:    #1e7a4a;   /* telemetry readouts — slightly brighter */
 
+  /* --- Domain colors (color = meaning, never decorative) --- */
+  --color-ld:           #b5642a;   /* Learning Design — amber */
+  --color-eng:          #0d7d7d;   /* Engineering & Building — teal */
+  --color-gov:          #574a93;   /* Leadership & Governance — indigo */
+  --color-ld-wash:      #f8ece1;   /* amber tint — in-progress notices, tag bg */
+  --color-eng-wash:     #e1f2f2;   /* teal tint */
+  --color-gov-wash:     #eeecf7;   /* indigo tint */
+
   /* --- Font families --- */
   --font-display: 'Fraunces', Georgia, serif;
   --font-body:    'Source Serif 4', Georgia, serif;

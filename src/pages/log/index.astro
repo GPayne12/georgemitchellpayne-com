@@ -1,0 +1,170 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const entries = await getCollection('log', ({ data }) => !data.draft);
+const sorted = entries.sort((a, b) => b.data.order - a.data.order);
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+}
+
+function entrySlug(id: string): string {
+  return id.replace(/\.(md|mdx)$/, '');
+}
+---
+
+<Layout
+  title="Log — George Mitchell Payne"
+  description="Build log: designing in public. Each session documented with objective, activity, and assessment."
+>
+  <div class="container">
+
+    <section class="log-header">
+      <p class="telemetry section-label">// log</p>
+      <h1 class="log-title">Build log</h1>
+      <p class="log-lead">
+        Designing in public. Each session documented: what I set out to do,
+        what I built, and what it proved.
+      </p>
+    </section>
+
+    <ul class="log-list" role="list">
+      {sorted.map(entry => (
+        <li class="log-row">
+          <a href={`/log/${entrySlug(entry.id)}`} class="log-link">
+            <div class="log-meta">
+              <span class="telemetry log-order">
+                session {String(entry.data.order).padStart(2, '0')}
+              </span>
+              <span class="log-date">{formatDate(entry.data.date)}</span>
+            </div>
+            <h2 class="log-entry-title">{entry.data.title}</h2>
+            {entry.data.assessment && (
+              <p class="log-assessment">{entry.data.assessment}</p>
+            )}
+            {entry.data.tags.length > 0 && (
+              <ul class="log-tags" role="list" aria-label="Tags">
+                {entry.data.tags.map(tag => (
+                  <li class="log-tag">{tag}</li>
+                ))}
+              </ul>
+            )}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+  </div>
+</Layout>
+
+<style>
+  /* ── Header ───────────────────────────────────────── */
+  .log-header {
+    padding-top: var(--space-4);
+    margin-bottom: var(--space-12);
+    max-width: var(--content-width);
+  }
+
+  .section-label {
+    margin-bottom: var(--space-4);
+  }
+
+  .log-title {
+    font-size: var(--text-4xl);
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: var(--space-4);
+  }
+
+  .log-lead {
+    font-size: var(--text-lg);
+    color: var(--color-ink-muted);
+    line-height: 1.65;
+    max-width: 44ch;
+  }
+
+  /* ── Log list ─────────────────────────────────────── */
+  .log-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .log-row {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .log-row:last-child {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .log-link {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding-block: var(--space-8);
+    text-decoration: none;
+    color: inherit;
+    max-width: var(--content-width);
+    transition: opacity var(--duration-fast) var(--ease-standard);
+  }
+
+  .log-link:hover {
+    opacity: 0.75;
+  }
+
+  /* ── Entry meta ───────────────────────────────────── */
+  .log-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .log-order {
+    font-size: var(--text-xs);
+  }
+
+  .log-date {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+  }
+
+  /* ── Entry content ────────────────────────────────── */
+  .log-entry-title {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--color-ink);
+  }
+
+  .log-assessment {
+    font-size: var(--text-sm);
+    color: var(--color-ink-muted);
+    line-height: 1.65;
+  }
+
+  /* ── Tags ─────────────────────────────────────────── */
+  .log-tags {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .log-tag {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 0.15em 0.55em;
+    border-radius: 3px;
+    letter-spacing: 0.02em;
+  }
+</style>
