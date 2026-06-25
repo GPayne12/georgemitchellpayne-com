@@ -1,182 +1,213 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const swatches = [
-  { label: '--color-bg',          value: '#faf9f7', border: true  },
-  { label: '--color-surface',     value: '#f0ede7', border: true  },
-  { label: '--color-border',      value: '#d4cfc7', border: true  },
-  { label: '--color-ink-muted',   value: '#5c5a55', border: false },
-  { label: '--color-ink',         value: '#1a1916', border: false },
-  { label: '--color-accent',      value: '#2d6a4f', border: false },
-  { label: '--color-telemetry',   value: '#1e7a4a', border: false },
-];
-
-const typeSteps = [
-  { step: '5xl',  label: 'text-5xl'  },
-  { step: '4xl',  label: 'text-4xl'  },
-  { step: '3xl',  label: 'text-3xl'  },
-  { step: '2xl',  label: 'text-2xl'  },
-  { step: 'xl',   label: 'text-xl'   },
-  { step: 'lg',   label: 'text-lg'   },
-  { step: 'base', label: 'text-base' },
-  { step: 'sm',   label: 'text-sm'   },
-  { step: 'xs',   label: 'text-xs'   },
-];
 ---
 
-<Layout title="Design System Preview — GMP">
-  <div class="container">
+<Layout title="Learning Engineer" description="George Mitchell Payne — learning engineer building learning systems with code and AI.">
 
-    <!-- ── Font roles ─────────────────────────────────── -->
-    <section class="preview-section">
-      <p class="telemetry label">// font-display · Fraunces</p>
-      <p class="font-display display-sample">I'm a learning engineer.</p>
-
-      <p class="telemetry label">// font-body · Source Serif 4</p>
-      <p class="body-sample">
-        I build the tools, curricula, and systems that accelerate how people learn
-        at work — then measure whether they actually worked. This is the body font:
-        calm, legible, built for reading.
-      </p>
-
-      <p class="telemetry label">// font-mono · JetBrains Mono (telemetry voice)</p>
-      <p class="mono-sample">
-        now_building: career-aggregator
-        &nbsp;·&nbsp; status: <span style="color: var(--color-telemetry);">live</span>
-        &nbsp;·&nbsp; commits_this_week: 14
-      </p>
-    </section>
-
-    <!-- ── Palette ────────────────────────────────────── -->
-    <section class="preview-section">
-      <p class="telemetry label">// palette</p>
-      <div class="swatch-row">
-        {swatches.map(({ label, value, border }) => (
-          <div class="swatch-item">
-            <div
-              class="swatch-chip"
-              style={`background:${value};${border ? 'border:1px solid var(--color-border);' : ''}`}
-            />
-            <span class="swatch-label">{label}</span>
-            <span class="swatch-hex">{value}</span>
-          </div>
-        ))}
+  <!-- ── Hero ───────────────────────────────────────── -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <h1 class="font-display hero-headline">
+          I'm a learning engineer.
+        </h1>
+        <p class="hero-body">
+          For the past 10 years, I have cultivated learning design expertise by building
+          hundreds of learning objects and assessments, revising over 100 distinct course
+          offerings, and producing learning solutions for high-profile clients, including
+          the United Nations. My expertise ranges from multimedia and video production to
+          data-driven learning design, to learning experience architecture and AI-assisted
+          coding. I have been building learning solutions for a decade. Now I build them
+          with code and AI.
+        </p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ── Type scale ─────────────────────────────────── -->
-    <section class="preview-section">
-      <p class="telemetry label">// type scale · fluid clamp</p>
-      <div class="scale-list">
-        {typeSteps.map(({ step, label }) => (
-          <div class="scale-row">
-            <span class="scale-token">--{label}</span>
-            <span style={`font-size:var(--text-${step});line-height:1.2;`}>
-              Learning engineer.
-            </span>
-          </div>
-        ))}
+  <!-- ── Audience doors ────────────────────────────── -->
+  <section class="doors" aria-label="Explore by audience">
+    <div class="container">
+      <div class="doors-grid">
+
+        <a href="/builds" class="door" aria-label="Explore builds — for engineering reviewers">
+          <p class="telemetry door-label">// for AI + engineering reviewers</p>
+          <h2 class="door-heading">Builds</h2>
+          <p class="door-body">
+            Every year for the last four years, I have woven AI into the practice of
+            learning design. My tools may be limited in my 9-5, but my GitHub tells
+            another story.
+          </p>
+          <span class="door-cta" aria-hidden="true">View builds →</span>
+        </a>
+
+        <a href="/practice" class="door" aria-label="Explore practice — for L&D leadership">
+          <p class="telemetry door-label">// for L&D leadership</p>
+          <h2 class="door-heading">Practice</h2>
+          <p class="door-body">
+            After 10 years of learning design experience, my short-term goal is to
+            bridge my experience as a learning architect into roles where I build
+            custom, scalable learning solutions that ship.
+          </p>
+          <span class="door-cta" aria-hidden="true">View practice →</span>
+        </a>
+
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ── Accessibility: focus & link demos ──────────── -->
-    <section class="preview-section">
-      <p class="telemetry label">// interactive states</p>
-      <p class="body-sample">
-        Focus a link with <kbd>Tab</kbd> to see the :focus-visible ring.
-        &nbsp;<a href="#">Example link</a> &nbsp;
-        <a href="/builds">Builds</a> &nbsp;
-        <a href="/about">About</a>
+  <!-- ── Now building (PLACEHOLDER — Phase 2 wires real GitHub data) ── -->
+  <section class="now-building" aria-label="Now building">
+    <div class="container">
+      <!-- PLACEHOLDER: static copy stands in until Phase 2 GitHub telemetry -->
+      <p class="telemetry now-label">// now building</p>
+      <p class="now-line">
+        <span class="now-key">site</span><span class="now-sep">:</span>
+        <span class="now-val">georgemitchellpayne.com</span>
+        <span class="now-dot">·</span>
+        <span class="now-key">phase</span><span class="now-sep">:</span>
+        <span class="now-val">01 — scaffold &amp; design system</span>
+        <span class="now-dot">·</span>
+        <span class="now-key">session</span><span class="now-sep">:</span>
+        <span class="now-val">04 of 04</span>
+        <span class="now-dot">·</span>
+        <span class="now-key">status</span><span class="now-sep">:</span>
+        <span class="now-val now-live">in-progress</span>
       </p>
-    </section>
+    </div>
+  </section>
 
-  </div>
 </Layout>
 
 <style>
-  .preview-section {
-    margin-bottom: var(--space-16);
+  /* ── Hero ─────────────────────────────────────────── */
+  .hero {
+    padding-top: var(--space-20);
+    padding-bottom: var(--space-16);
+    border-bottom: 1px solid var(--color-border);
   }
 
-  .label {
-    margin-bottom: var(--space-4);
+  .hero-inner {
+    max-width: 44rem;
   }
 
-  .display-sample {
+  .hero-headline {
     font-size: var(--text-5xl);
     line-height: 1.05;
-    margin-bottom: var(--space-12);
+    margin-bottom: var(--space-8);
   }
 
-  .body-sample {
+  .hero-body {
     font-size: var(--text-lg);
-    max-width: 52ch;
-    margin-bottom: var(--space-8);
+    line-height: 1.75;
+    color: var(--color-ink);
+    max-width: 38rem;
   }
 
-  .mono-sample {
-    font-family: var(--font-mono);
-    font-size: var(--text-sm);
-    color: var(--color-ink-muted);
-    margin-bottom: var(--space-8);
+  /* ── Doors ────────────────────────────────────────── */
+  .doors {
+    padding-block: var(--space-16);
+    border-bottom: 1px solid var(--color-border);
   }
 
-  /* Palette */
-  .swatch-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-4);
+  .doors-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
   }
 
-  .swatch-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-1);
-  }
-
-  .swatch-chip {
-    width: 4.5rem;
-    height: 4.5rem;
-    border-radius: 4px;
-  }
-
-  .swatch-label,
-  .swatch-hex {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    color: var(--color-ink-muted);
-    white-space: nowrap;
-  }
-
-  /* Type scale */
-  .scale-list {
+  .door {
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
-  }
-
-  .scale-row {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-4);
-  }
-
-  .scale-token {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--color-ink-muted);
-    width: 7rem;
-    flex-shrink: 0;
-  }
-
-  /* Keyboard label */
-  kbd {
-    display: inline-block;
-    padding: 1px 5px;
+    padding: var(--space-8);
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: 3px;
-    font-size: 0.85em;
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--color-ink);
+    transition: border-color var(--duration-base) var(--ease-standard),
+                background var(--duration-base) var(--ease-standard);
+  }
+
+  .door:hover {
+    border-color: var(--color-accent);
+    background: var(--color-bg);
+  }
+
+  .door-label {
+    font-size: var(--text-xs);
+  }
+
+  .door-heading {
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .door-body {
+    font-size: var(--text-base);
+    line-height: 1.65;
+    color: var(--color-ink-muted);
+    flex: 1;
+  }
+
+  .door-cta {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+    margin-top: var(--space-2);
+    transition: color var(--duration-fast) var(--ease-standard);
+  }
+
+  .door:hover .door-cta {
+    color: var(--color-accent-hover);
+  }
+
+  @media (max-width: 40em) {
+    .doors-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ── Now building ─────────────────────────────────── */
+  .now-building {
+    padding-block: var(--space-8);
+  }
+
+  .now-label {
+    margin-bottom: var(--space-2);
+  }
+
+  .now-line {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-ink-muted);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-1);
+    column-gap: var(--space-2);
+  }
+
+  .now-key {
+    color: var(--color-ink-muted);
+  }
+
+  .now-sep {
+    color: var(--color-border);
+  }
+
+  .now-val {
+    color: var(--color-ink);
+  }
+
+  .now-dot {
+    color: var(--color-border);
+    padding-inline: var(--space-1);
+  }
+
+  .now-live {
+    color: var(--color-telemetry);
   }
 </style>
