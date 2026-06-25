@@ -1,0 +1,29 @@
+---
+title: "Session 2: Design Tokens and Base Layout"
+date: 2026-06-24
+order: 2
+tags: ["build-log", "design-system", "astro", "accessibility"]
+draft: false
+objective: "Establish the visual system that every page inherits — tokens, layout shell, and accessibility baseline."
+activity: "Defined CSS custom properties for palette, type scale, and spacing. Built semantic Layout.astro with sticky nav, skip link, and footer. All pairs pass WCAG 2.2 AA contrast."
+assessment: "Zero JS on the base layout. Reduced-motion handled. Three font roles locked: Fraunces (display), Source Serif 4 (body), JetBrains Mono (telemetry)."
+---
+
+Session 2 is committed. The design system is up: tokens, layout shell, and a design system preview page at `/`.
+
+## What landed
+
+- **CSS custom properties** — full palette, type scale (fluid clamp), and spacing scale in `src/styles/global.css`
+- **Layout.astro** — semantic `<header>`, `<nav>`, `<main>`, `<footer>` with a sticky header and skip-to-content link
+- **Accessibility** — `:focus-visible` ring, `prefers-reduced-motion` reset, WCAG 2.2 AA across all color pairs
+
+## Contrast results
+
+| Pair | Ratio | Result |
+|---|---|---|
+| ink on bg | 16.71:1 | AA pass |
+| ink-muted on bg | 6.55:1 | AA pass |
+| accent on bg | 6.07:1 | AA pass |
+| telemetry on bg | 5.07:1 | AA pass |
+
+Next: content collection schemas (Session 3).

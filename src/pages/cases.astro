@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const cases = await getCollection('cases');
+const sorted = cases.sort((a, b) => a.data.order - b.data.order);
+---
+
+<Layout title="Cases — GMP">
+  <div class="container">
+    <p class="telemetry" style="margin-bottom: var(--space-4);">// cases · content collection pipeline test</p>
+    <h1 style="font-size: var(--text-3xl); margin-bottom: var(--space-12);">Cases</h1>
+
+    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--space-8);">
+      {sorted.map(c => (
+        <li style="border-top: 1px solid var(--color-border); padding-top: var(--space-6);">
+          <p class="telemetry" style="margin-bottom: var(--space-2);">
+            {String(c.data.order).padStart(2, '0')} · {c.data.domains.join(' / ')} · {c.data.tier} · {c.data.status}
+          </p>
+          <h2 style="font-size: var(--text-xl); font-weight: 600; margin-bottom: var(--space-3);">
+            {c.data.title}
+          </h2>
+          <p style="color: var(--color-ink-muted); max-width: 60ch;">
+            {c.data.situation}
+          </p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Layout>
