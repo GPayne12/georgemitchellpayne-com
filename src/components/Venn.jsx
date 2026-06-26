@@ -31,13 +31,58 @@ const DOMAIN_CASE_KEY = {
 };
 
 const R = 96;
+const VB_W = 400;
+const VB_H = 378;
+
+// Convert a mouse event to SVG viewBox coordinates
+function toSvgPoint(e) {
+  const rect = e.currentTarget.getBoundingClientRect();
+  return {
+    x: (e.clientX - rect.left) * (VB_W / rect.width),
+    y: (e.clientY - rect.top)  * (VB_H / rect.height),
+  };
+}
+
+// Return the id of the circle whose center is closest to (x, y),
+// or null if (x, y) is outside every circle.
+function nearestCircle(x, y) {
+  let best = null;
+  let min = Infinity;
+  for (const d of DOMAINS) {
+    const dist = Math.hypot(x - d.cx, y - d.cy);
+    if (dist < R && dist < min) { min = dist; best = d.id; }
+  }
+  return best;
+}
 
 export default function Venn({ cases = [] }) {
-  const [active, setActive] = useState(null);
+  const [hover,    setHover]    = useState(null); // follows cursor
+  const [selected, setSelected] = useState(null); // locked by click
+
+  // Selected takes precedence; hover is the fallback while nothing is locked.
+  const active = selected ?? hover;
   const activeDomain = DOMAINS.find(d => d.id === active);
-  const activeCases = active
+  const activeCases  = active
     ? cases.filter(c => c.domains.includes(DOMAIN_CASE_KEY[active]))
     : [];
+
+  function handleMove(e) {
+    const { x, y } = toSvgPoint(e);
+    const next = nearestCircle(x, y);
+    // Only update state when the value actually changes to avoid spurious renders.
+    setHover(prev => (prev === next ? prev : next));
+  }
+
+  function handleLeave() {
+    setHover(null);
+  }
+
+  function handleClick(e) {
+    const { x, y } = toSvgPoint(e);
+    const hit = nearestCircle(x, y);
+    // Click the same circle → deselect. Click another → select it. Click empty → deselect.
+    setSelected(prev => (prev === hit || hit === null) ? null : hit);
+  }
 
   return (
     <div className="venn-wrap">
@@ -46,7 +91,11 @@ export default function Venn({ cases = [] }) {
           viewBox="0 0 400 378"
           className="venn-svg"
           role="img"
-          aria-label="Three-circle Venn diagram showing Learning Design, Engineering & Building, and Leadership & Governance overlapping, with 'learning engineer' at the center intersection."
+          aria-label="Three-circle Venn diagram: Learning Design, Engineering & Building, and Leadership & Governance, with 'learning engineer' at the center intersection."
+          style={{ cursor: hover ? 'pointer' : 'default' }}
+          onMouseMove={handleMove}
+          onMouseLeave={handleLeave}
+          onClick={handleClick}
         >
           <title>The learning engineer Venn</title>
 
@@ -58,20 +107,12 @@ export default function Venn({ cases = [] }) {
               r={R}
               style={{
                 fill: d.color,
-                fillOpacity: active === d.id ? 0.16 : 0.07,
+                fillOpacity: selected === d.id ? 0.22 : active === d.id ? 0.15 : 0.07,
                 stroke: d.color,
-                strokeWidth: active === d.id ? 2 : 1.5,
+                strokeWidth: selected === d.id ? 2.5 : active === d.id ? 2 : 1.5,
                 strokeOpacity: 0.65,
-                cursor: 'pointer',
-                outline: 'none',
-                transition: 'fill-opacity 140ms ease, stroke-width 140ms ease',
+                transition: 'fill-opacity 100ms ease, stroke-width 100ms ease',
               }}
-              onMouseEnter={() => setActive(d.id)}
-              onMouseLeave={() => setActive(null)}
-              onFocus={() => setActive(d.id)}
-              onBlur={() => setActive(null)}
-              tabIndex={0}
-              aria-label={d.label.join(' ')}
             />
           ))}
 
@@ -85,8 +126,8 @@ export default function Venn({ cases = [] }) {
                 fontFamily: 'var(--font-mono)',
                 fontSize: '11',
                 letterSpacing: '0.03em',
-                opacity: active && active !== d.id ? 0.4 : 1,
-                transition: 'opacity 140ms ease',
+                opacity: active && active !== d.id ? 0.35 : 1,
+                transition: 'opacity 100ms ease',
               }}
             >
               <tspan x={d.labelX} dy="0">{d.label[0]}</tspan>
@@ -110,7 +151,7 @@ export default function Venn({ cases = [] }) {
           </text>
         </svg>
 
-        <p className="venn-hint">Hover a circle to explore each domain.</p>
+        <p className="venn-hint">Hover over a circle to explore cases in that domain.</p>
       </div>
 
       <div className="venn-panel" aria-live="polite" aria-atomic="true">
@@ -118,12 +159,17 @@ export default function Venn({ cases = [] }) {
           <>
             <p className="venn-panel-label" style={{ color: activeDomain.color }}>
               {activeDomain.label.join(' ')}
+              {selected && (
+                <span className="venn-lock-hint"> · click to deselect</span>
+              )}
             </p>
             {activeCases.length > 0 && (
               <ul className="venn-case-list">
                 {activeCases.map(c => (
                   <li key={c.slug}>
-                    <a href={`#${c.slug}`} className="venn-case-link">{c.title}</a>
+                    <a href={`/practice/${c.slug}`} className="venn-case-link">
+                      {c.title}
+                    </a>
                   </li>
                 ))}
               </ul>
