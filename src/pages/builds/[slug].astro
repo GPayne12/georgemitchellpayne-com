@@ -3,6 +3,11 @@ import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import GitHubTelemetry from '../../components/GitHubTelemetry.tsx';
 
+function isRealUrl(url: string | undefined): boolean {
+  if (!url) return false;
+  return !url.includes('localhost') && !url.includes('127.0.0.1');
+}
+
 export async function getStaticPaths() {
   const builds = await getCollection('builds');
   return builds.map(build => ({
@@ -15,7 +20,7 @@ const { build } = Astro.props;
 const { Content } = await render(build);
 ---
 
-<Layout title={`${build.data.title} — Builds — GMP`} description={build.data.summary}>
+<Layout title={`${build.data.title} — Builds — George Mitchell Payne`} description={build.data.summary}>
   <div class="container">
 
     <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -47,7 +52,7 @@ const { Content } = await render(build);
         <a href={build.data.repo} rel="noopener noreferrer" class="build-link">
           view repo →
         </a>
-        {build.data.demo && (
+        {isRealUrl(build.data.demo) && (
           <a href={build.data.demo} rel="noopener noreferrer" class="build-link">
             view demo →
           </a>
