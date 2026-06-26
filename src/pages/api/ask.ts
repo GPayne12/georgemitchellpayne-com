@@ -1,6 +1,7 @@
 export const prerender = false;
 
 import type { APIContext } from 'astro';
+import { env } from 'cloudflare:workers';
 
 const SYSTEM_PROMPT = `You are an AI assistant for the portfolio of George Mitchell Payne, a learning engineer.
 
@@ -31,10 +32,8 @@ George has published 5 case studies (A–E) drawn from his 10 years of practice.
 - Do not fabricate metrics, dates, client names, or outcomes that aren't stated above.
 - When relevant, point to a specific page on the site for more detail.`;
 
-export async function POST({ request, locals }: APIContext) {
-  // Prefer Cloudflare runtime env (production); fall back to import.meta.env (local dev)
-  const cfEnv = (locals as { runtime?: { env?: { ANTHROPIC_API_KEY?: string } } }).runtime?.env;
-  const apiKey = cfEnv?.ANTHROPIC_API_KEY ?? import.meta.env.ANTHROPIC_API_KEY;
+export async function POST({ request }: APIContext) {
+  const apiKey = (env as Record<string, string | undefined>).ANTHROPIC_API_KEY ?? import.meta.env.ANTHROPIC_API_KEY;
 
   if (!apiKey) {
     return new Response(JSON.stringify({ error: 'API key not configured.' }), {
