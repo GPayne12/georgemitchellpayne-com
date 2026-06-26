@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import GitHubActivity from '../components/GitHubActivity.astro';
+import NowBuilding from '../components/NowBuilding.tsx';
 ---
 
 <Layout title="Learning Engineer" description="George Mitchell Payne — learning engineer building learning systems with code and AI.">
@@ -56,7 +56,13 @@ import GitHubActivity from '../components/GitHubActivity.astro';
     </div>
   </section>
 
-  <GitHubActivity />
+  <!-- ── Now building — live GitHub telemetry ── -->
+  <section class="now-building" aria-label="Now building">
+    <div class="container">
+      <p class="telemetry now-label">// now building</p>
+      <NowBuilding client:only="react" />
+    </div>
+  </section>
 
 </Layout>
 
@@ -152,4 +158,12 @@ import GitHubActivity from '../components/GitHubActivity.astro';
     }
   }
 
+  /* ── Now building ─────────────────────────────────── */
+  .now-building {
+    padding-block: var(--space-8);
+  }
+
+  .now-label {
+    margin-bottom: var(--space-2);
+  }
 </style>

@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import GitHubTelemetry from '../components/GitHubTelemetry.tsx';
 
 const builds = await getCollection('builds');
 const sorted = builds.sort((a, b) => a.data.order - b.data.order);
@@ -54,6 +55,8 @@ function isRealUrl(url: string | undefined): boolean {
               <p class="decision-body">{b.data.decisionLog}</p>
             </div>
 
+            <GitHubTelemetry repo={b.data.repo} client:only="react" />
+
             <div class="build-links">
               <a
                 href={b.data.repo}
@@ -73,6 +76,9 @@ function isRealUrl(url: string | undefined): boolean {
                   Live demo →
                 </a>
               )}
+              <a href={`/builds/${b.data.slug}`} class="build-link">
+                detail →
+              </a>
             </div>
 
           </li>
@@ -164,13 +170,15 @@ function isRealUrl(url: string | undefined): boolean {
   }
 
   .status--live {
-    background: var(--color-eng-wash);
-    color: var(--color-eng);
+    background: color-mix(in srgb, var(--color-telemetry) 10%, transparent);
+    color: var(--color-telemetry);
+    border: 1px solid color-mix(in srgb, var(--color-telemetry) 25%, transparent);
   }
 
   .status--in-progress {
-    background: var(--color-ld-wash);
-    color: var(--color-ld);
+    background: var(--color-surface);
+    color: var(--color-ink-muted);
+    border: 1px solid var(--color-border);
   }
 
   .build-stack {

@@ -1,0 +1,188 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import GitHubTelemetry from '../../components/GitHubTelemetry.tsx';
+
+export async function getStaticPaths() {
+  const builds = await getCollection('builds');
+  return builds.map(build => ({
+    params: { slug: build.data.slug },
+    props: { build },
+  }));
+}
+
+const { build } = Astro.props;
+const { Content } = await render(build);
+---
+
+<Layout title={`${build.data.title} — Builds — GMP`} description={build.data.summary}>
+  <div class="container">
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/builds" class="breadcrumb-link">← builds</a>
+    </nav>
+
+    <header class="build-header">
+      <div class="build-meta">
+        <span class="telemetry build-order">
+          {String(build.data.order).padStart(2, '0')}
+        </span>
+        <span class={`build-status ${build.data.status === 'live' ? 'status-live' : 'status-wip'}`}>
+          {build.data.status}
+        </span>
+      </div>
+
+      <h1 class="build-title">{build.data.title}</h1>
+      <p class="build-summary">{build.data.summary}</p>
+
+      <ul class="stack-tags" role="list" aria-label="Stack">
+        {build.data.stack.map(tech => (
+          <li class="stack-tag">{tech}</li>
+        ))}
+      </ul>
+
+      <GitHubTelemetry repo={build.data.repo} client:only="react" />
+
+      <div class="build-links">
+        <a href={build.data.repo} rel="noopener noreferrer" class="build-link">
+          view repo →
+        </a>
+        {build.data.demo && (
+          <a href={build.data.demo} rel="noopener noreferrer" class="build-link">
+            view demo →
+          </a>
+        )}
+      </div>
+    </header>
+
+    <section class="decision-log" aria-label="Decision log">
+      <h2 class="section-eyebrow">
+        <span class="telemetry">// decision log</span>
+      </h2>
+      <div class="prose">
+        <p>{build.data.decisionLog}</p>
+        <Content />
+      </div>
+    </section>
+
+  </div>
+</Layout>
+
+<style>
+  .breadcrumb {
+    margin-bottom: var(--space-8);
+  }
+
+  .breadcrumb-link {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-ink-muted);
+    text-decoration: none;
+  }
+
+  .breadcrumb-link:hover {
+    color: var(--color-accent);
+  }
+
+  .build-header {
+    padding-bottom: var(--space-12);
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: var(--space-12);
+  }
+
+  .build-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+
+  .build-order {
+    color: var(--color-ink-muted);
+  }
+
+  .build-status {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    padding: 2px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+  }
+
+  .status-live {
+    color: var(--color-telemetry);
+    background: color-mix(in srgb, var(--color-telemetry) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-telemetry) 25%, transparent);
+  }
+
+  .status-wip {
+    color: var(--color-ink-muted);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+  }
+
+  .build-title {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-4);
+  }
+
+  .build-summary {
+    font-size: var(--text-lg);
+    color: var(--color-ink-muted);
+    max-width: 56ch;
+    line-height: 1.65;
+    margin-bottom: var(--space-5);
+  }
+
+  .stack-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+    padding: 0;
+    margin-bottom: var(--space-2);
+  }
+
+  .stack-tag {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+
+  .build-links {
+    display: flex;
+    gap: var(--space-5);
+    margin-top: var(--space-5);
+  }
+
+  .build-link {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    color: var(--color-accent);
+  }
+
+  .build-link:hover {
+    color: var(--color-accent-hover);
+  }
+
+  .section-eyebrow {
+    margin-bottom: var(--space-6);
+    font-size: inherit;
+    font-weight: normal;
+  }
+
+  .prose {
+    max-width: var(--content-width);
+  }
+
+  .prose p {
+    line-height: 1.75;
+    color: var(--color-ink-muted);
+    margin-bottom: var(--space-4);
+  }
+</style>
