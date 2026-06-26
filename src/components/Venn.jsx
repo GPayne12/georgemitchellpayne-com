@@ -32,7 +32,7 @@ const DOMAIN_CASE_KEY = {
 
 const R = 96;
 const VB_W = 400;
-const VB_H = 378;
+const VB_H = 386;
 
 // Convert a mouse event to SVG viewBox coordinates
 function toSvgPoint(e) {
@@ -88,7 +88,7 @@ export default function Venn({ cases = [] }) {
     <div className="venn-wrap">
       <div className="venn-left">
         <svg
-          viewBox="0 0 400 378"
+          viewBox="0 0 400 386"
           className="venn-svg"
           role="img"
           aria-label="Three-circle Venn diagram: Learning Design, Engineering & Building, and Leadership & Governance, with 'learning engineer' at the center intersection."
@@ -116,7 +116,9 @@ export default function Venn({ cases = [] }) {
             />
           ))}
 
-          {/* Domain labels */}
+          {/* Domain labels — y must be explicit on first tspan; without it
+              labels default to y=0, bleed above the viewBox, and cause
+              layout size to change during opacity transitions. */}
           {DOMAINS.map(d => (
             <text
               key={`lbl-${d.id}`}
@@ -130,7 +132,7 @@ export default function Venn({ cases = [] }) {
                 transition: 'opacity 100ms ease',
               }}
             >
-              <tspan x={d.labelX} dy="0">{d.label[0]}</tspan>
+              <tspan x={d.labelX} y={d.labelY}>{d.label[0]}</tspan>
               <tspan x={d.labelX} dy="15">{d.label[1]}</tspan>
             </text>
           ))}

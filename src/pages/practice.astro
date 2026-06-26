@@ -136,6 +136,8 @@ const domainLabels: Record<string, string> = {
     width: 100%;
     height: auto;
     display: block;
+    /* Clip to viewBox so text/stroke bleeds can't cause layout reflow */
+    overflow: hidden;
   }
 
   /* All SVG children are purely visual — events handled at container level */
