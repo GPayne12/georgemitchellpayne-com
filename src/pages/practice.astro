@@ -31,7 +31,7 @@ const domainLabels: Record<string, string> = {
 
     <!-- ── Venn ──────────────────────────────────────── -->
     <section class="venn-section" aria-label="Domain Venn diagram">
-      <Venn client:visible />
+      <Venn client:visible cases={sorted.map(c => ({ title: c.data.title, slug: c.data.slug, domains: c.data.domains }))} />
     </section>
 
     <!-- ── Cases ─────────────────────────────────────── -->
@@ -45,7 +45,7 @@ const domainLabels: Record<string, string> = {
       ) : (
         <ul class="cases-list" role="list">
           {sorted.map(c => (
-            <li class="case-row">
+            <li class="case-row" id={c.data.slug}>
               <div class="case-meta">
                 <span class="telemetry case-order">{String(c.data.order).padStart(2, '0')}</span>
                 <span class={`case-status status--${c.data.status}`}>
@@ -113,8 +113,14 @@ const domainLabels: Record<string, string> = {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-12);
-    align-items: center;
+    align-items: start;
     max-width: 56rem;
+  }
+
+  :global(.venn-left) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
   }
 
   :global(.venn-svg) {
@@ -123,8 +129,16 @@ const domainLabels: Record<string, string> = {
     display: block;
   }
 
+  :global(.venn-hint) {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-ink-muted);
+    opacity: 0.6;
+  }
+
   :global(.venn-panel) {
     min-height: 5rem;
+    padding-top: var(--space-3);
   }
 
   :global(.venn-panel-label) {
@@ -132,21 +146,30 @@ const domainLabels: Record<string, string> = {
     font-size: var(--text-sm);
     font-weight: 500;
     letter-spacing: 0.04em;
-    margin-bottom: var(--space-3);
+    margin-bottom: var(--space-4);
   }
 
-  :global(.venn-panel-desc) {
-    font-size: var(--text-base);
-    color: var(--color-ink-muted);
-    line-height: 1.65;
-    max-width: 32ch;
+  :global(.venn-case-list) {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
   }
 
-  :global(.venn-panel-hint) {
-    font-family: var(--font-mono);
+  :global(.venn-case-link) {
     font-size: var(--text-sm);
     color: var(--color-ink-muted);
-    opacity: 0.6;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+  }
+
+  :global(.venn-case-link:hover) {
+    color: var(--color-ink);
+    text-decoration: underline;
   }
 
   @media (max-width: 44em) {
