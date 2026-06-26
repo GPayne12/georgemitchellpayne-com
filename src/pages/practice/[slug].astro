@@ -1,0 +1,303 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const cases = await getCollection('cases');
+  const sorted = cases.sort((a, b) => a.data.order - b.data.order);
+  return sorted.map((c, i) => ({
+    params: { slug: c.data.slug },
+    props: {
+      c,
+      prev: sorted[i - 1] ?? null,
+      next: sorted[i + 1] ?? null,
+    },
+  }));
+}
+
+const { c, prev, next } = Astro.props;
+
+const DOMAIN_LABELS: Record<string, string> = {
+  'learning-design': 'Learning Design',
+  'engineering':     'Engineering',
+  'leadership':      'Leadership',
+};
+
+const SECTIONS = [
+  { key: 'situation',             label: '// situation' },
+  { key: 'constraint',            label: '// constraint' },
+  { key: 'decision',              label: '// decision' },
+  { key: 'artifact',              label: '// artifact' },
+  { key: 'measuredOutcome',       label: '// measured outcome' },
+  { key: 'engineeringTranslation',label: '// engineering translation' },
+] as const;
+---
+
+<Layout
+  title={`${c.data.title} — Practice — GMP`}
+  description={c.data.situation.slice(0, 155).trimEnd() + '…'}
+>
+  <div class="container">
+
+    <!-- ── Breadcrumb ──────────────────────────────── -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/practice" class="back-link">← practice</a>
+    </nav>
+
+    <!-- ── Header ─────────────────────────────────── -->
+    <header class="case-header">
+      <div class="case-meta">
+        <span class="telemetry case-order">{String(c.data.order).padStart(2, '0')}</span>
+        <span class={`case-tier tier--${c.data.tier}`}>{c.data.tier}</span>
+        {c.data.center && <span class="case-center-badge">center</span>}
+        <span class={`case-status status--${c.data.status}`}>
+          {c.data.status === 'complete' ? 'live' : 'in progress'}
+        </span>
+      </div>
+
+      <h1 class="case-title">{c.data.title}</h1>
+
+      <ul class="domain-list" role="list" aria-label="Domains">
+        {c.data.domains.map(d => (
+          <li class={`domain-tag is-${d.split('-')[0]}`}>
+            {DOMAIN_LABELS[d] ?? d}
+          </li>
+        ))}
+      </ul>
+    </header>
+
+    <!-- ── Case skeleton ──────────────────────────── -->
+    <article class="case-body" aria-label={c.data.title}>
+      {SECTIONS.map(({ key, label }) => (
+        <section class={`case-section case-section--${key}`}>
+          <h2 class="telemetry section-label">{label}</h2>
+          <p class="section-body">{c.data[key]}</p>
+        </section>
+      ))}
+    </article>
+
+    <!-- ── Case navigation ────────────────────────── -->
+    {(prev || next) && (
+      <nav class="case-nav" aria-label="Case navigation">
+        {prev ? (
+          <a href={`/practice/${prev.data.slug}`} class="case-nav-link case-nav-prev">
+            ← {prev.data.title}
+          </a>
+        ) : <span />}
+        {next && (
+          <a href={`/practice/${next.data.slug}`} class="case-nav-link case-nav-next">
+            {next.data.title} →
+          </a>
+        )}
+      </nav>
+    )}
+
+  </div>
+</Layout>
+
+<style>
+  /* ── Breadcrumb ───────────────────────────────────── */
+  .breadcrumb {
+    margin-bottom: var(--space-8);
+    padding-top: var(--space-2);
+  }
+
+  .back-link {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-ink-muted);
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-standard);
+  }
+  .back-link:hover {
+    color: var(--color-accent);
+  }
+
+  /* ── Header ───────────────────────────────────────── */
+  .case-header {
+    padding-bottom: var(--space-10);
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: var(--space-12);
+  }
+
+  .case-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+  }
+
+  .case-order {
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+  }
+
+  .case-tier {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.04em;
+    padding: 0.15em 0.55em;
+    border-radius: 3px;
+  }
+
+  .tier--flagship {
+    background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+    color: var(--color-accent);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 25%, transparent);
+  }
+
+  .tier--supporting {
+    background: var(--color-surface);
+    color: var(--color-ink-muted);
+    border: 1px solid var(--color-border);
+  }
+
+  .case-center-badge {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+    letter-spacing: 0.05em;
+  }
+
+  .case-status {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.04em;
+    padding: 0.15em 0.5em;
+    border-radius: 3px;
+  }
+
+  .status--complete {
+    background: var(--color-eng-wash);
+    color: var(--color-eng);
+  }
+
+  .status--in-progress {
+    background: var(--color-ld-wash);
+    color: var(--color-ld);
+  }
+
+  .case-title {
+    font-size: var(--text-4xl);
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: var(--space-6);
+    max-width: 24ch;
+  }
+
+  .domain-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .domain-tag {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.04em;
+    padding: 0.15em 0.6em;
+    border-radius: 3px;
+  }
+
+  .is-learning {
+    background: var(--color-ld-wash);
+    color: var(--color-ld);
+  }
+
+  .is-engineering {
+    background: var(--color-eng-wash);
+    color: var(--color-eng);
+  }
+
+  .is-leadership {
+    background: var(--color-gov-wash);
+    color: var(--color-gov);
+  }
+
+  /* ── Case body ────────────────────────────────────── */
+  .case-body {
+    max-width: var(--content-width);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: var(--space-16);
+  }
+
+  .case-section {
+    padding-block: var(--space-8);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .case-section:last-child {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .section-label {
+    font-size: var(--text-xs);
+    margin-bottom: var(--space-4);
+    display: block;
+  }
+
+  .section-body {
+    font-size: var(--text-base);
+    line-height: 1.8;
+    color: var(--color-ink-muted);
+    white-space: pre-line;
+  }
+
+  /* Engineering translation gets the surface treatment */
+  .case-section--engineeringTranslation {
+    background: var(--color-surface);
+    padding-inline: var(--space-6);
+    margin-inline: calc(var(--space-6) * -1);
+    border-radius: 4px;
+    border-top: none;
+    margin-top: var(--space-4);
+  }
+
+  .case-section--engineeringTranslation .section-body {
+    color: var(--color-ink);
+  }
+
+  /* ── Case navigation ──────────────────────────────── */
+  .case-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--color-border);
+    gap: var(--space-4);
+  }
+
+  .case-nav-link {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-ink-muted);
+    text-decoration: none;
+    max-width: 40ch;
+    line-height: 1.4;
+    transition: color var(--duration-fast) var(--ease-standard);
+  }
+
+  .case-nav-link:hover {
+    color: var(--color-accent);
+  }
+
+  .case-nav-next {
+    text-align: right;
+  }
+
+  @media (max-width: 36em) {
+    .case-nav {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .case-nav-next {
+      text-align: left;
+    }
+  }
+</style>

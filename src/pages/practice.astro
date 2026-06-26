@@ -56,15 +56,24 @@ const domainLabels: Record<string, string> = {
                 )}
               </div>
               <div class="case-body">
-                <h2 class="case-title">{c.data.title}</h2>
+                <h2 class="case-title">
+                  <a href={`/practice/${c.data.slug}`} class="case-title-link">
+                    {c.data.title}
+                  </a>
+                </h2>
                 <p class="case-situation">{c.data.situation}</p>
-                <ul class="case-domains" role="list" aria-label="Domains">
-                  {c.data.domains.map(d => (
-                    <li class={`domain-tag is-${d.split('-')[0]}`}>
-                      {domainLabels[d] ?? d}
-                    </li>
-                  ))}
-                </ul>
+                <div class="case-footer">
+                  <ul class="case-domains" role="list" aria-label="Domains">
+                    {c.data.domains.map(d => (
+                      <li class={`domain-tag is-${d.split('-')[0]}`}>
+                        {domainLabels[d] ?? d}
+                      </li>
+                    ))}
+                  </ul>
+                  <a href={`/practice/${c.data.slug}`} class="case-read-link" aria-label={`Read full case: ${c.data.title}`}>
+                    read case →
+                  </a>
+                </div>
               </div>
             </li>
           ))}
@@ -254,6 +263,16 @@ const domainLabels: Record<string, string> = {
     margin-bottom: var(--space-3);
   }
 
+  .case-title-link {
+    color: var(--color-ink);
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-standard);
+  }
+
+  .case-title-link:hover {
+    color: var(--color-accent);
+  }
+
   .case-situation {
     font-size: var(--text-base);
     color: var(--color-ink-muted);
@@ -262,12 +281,34 @@ const domainLabels: Record<string, string> = {
     max-width: 60ch;
   }
 
+  .case-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
   .case-domains {
     list-style: none;
     padding: 0;
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-2);
+  }
+
+  .case-read-link {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: color var(--duration-fast) var(--ease-standard);
+  }
+
+  .case-read-link:hover {
+    color: var(--color-accent);
   }
 
   .domain-tag {
