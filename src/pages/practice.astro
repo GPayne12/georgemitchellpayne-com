@@ -130,6 +130,7 @@ const domainLabels: Record<string, string> = {
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
+    min-width: 0; /* prevent SVG column from expanding beyond 1fr */
   }
 
   :global(.venn-svg) {
@@ -156,6 +157,7 @@ const domainLabels: Record<string, string> = {
   :global(.venn-panel) {
     min-height: 5rem;
     padding-top: var(--space-3);
+    min-width: 0; /* allow nowrap case titles to ellipsis rather than blow out the column */
   }
 
   :global(.venn-panel-label) {
