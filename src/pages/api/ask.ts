@@ -22,7 +22,7 @@ The synthesis of all three is what he calls "learning engineer."
 - /about — Background, experience timeline, and links
 
 ## Case studies
-George is publishing 11 case studies (A–K) drawn from his 10 years of practice. They map to different combinations of the three domains. The center cases (C, F, K) sit at the intersection of all three. Cases are being added as they are completed — not all are live yet.
+George has published 5 case studies (A–E) drawn from his 10 years of practice. They map to different combinations of the three domains. Case C (Course Revision Log) sits at the intersection of all three domains and is the center case. All 5 are currently live.
 
 ## Instructions
 - Answer questions about George's portfolio, background, practice, and the site content.
