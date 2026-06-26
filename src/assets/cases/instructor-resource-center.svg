@@ -1,0 +1,146 @@
+<svg viewBox="0 0 640 330" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Instructor Resource Center: role-permissioned content architecture with adoption rates by faculty type">
+  <style>
+    .d-title   { font: 600 11px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink,#1a1916); letter-spacing:.03em; }
+    .d-sub     { font: 400 9px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink-muted,#5c5a55); letter-spacing:.02em; }
+    .d-eyebrow { font: 400 9px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-telemetry,#1e7a4a); letter-spacing:.06em; }
+    .d-meta    { font: 400 8px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink-muted,#5c5a55); letter-spacing:.02em; }
+    .d-pct     { font: 600 11px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink,#1a1916); }
+    .row-hdr   { fill: var(--color-surface,#f0ede7); stroke: var(--color-border,#d4cfc7); stroke-width:1; }
+    .col-hdr   { fill: var(--color-surface,#f0ede7); stroke: var(--color-border,#d4cfc7); stroke-width:1; }
+    .cell-full { fill: var(--color-eng-wash,#e1f2f2); stroke: var(--color-eng,#0d7d7d); stroke-width:1; }
+    .cell-none { fill: var(--color-bg,#faf9f7); stroke: var(--color-border,#d4cfc7); stroke-width:1; }
+    .cell-lock { fill: var(--color-gov-wash,#eeecf7); stroke: var(--color-gov,#574a93); stroke-width:1; }
+    .dot-full  { fill: var(--color-eng,#0d7d7d); }
+    .dot-lock  { fill: var(--color-gov,#574a93); }
+    .line      { stroke: var(--color-border,#d4cfc7); stroke-width:1.5; }
+  </style>
+
+  <!-- header -->
+  <text class="d-title" x="20" y="16">INSTRUCTOR RESOURCE CENTER — PERMISSION ARCHITECTURE</text>
+  <text class="d-meta"  x="20" y="30">Canvas LMS  ·  cohort-based provisioning  ·  yearly maintenance cycle</text>
+  <line class="line" x1="20" y1="40" x2="620" y2="40"/>
+
+  <!-- layout:
+       Row headers (user types): x 20–174
+       7 content section columns: x 178–618 (each col width 64px, gap 2px)
+       Rows: y 56–282 (4 rows × 52px + 3 gaps 2px)
+  -->
+
+  <!-- column headers (content sections) -->
+  <!-- cols at x: 178, 244, 310, 376, 442, 508, 554 — let me use 62px wide cols -->
+
+  <text class="d-eyebrow" x="20" y="54">// user type</text>
+  <text class="d-sub" x="178" y="48" text-anchor="middle" dominant-baseline="middle" transform="rotate(-30,178,48)">Prog. Admin</text>
+  <text class="d-sub" x="242" y="48" text-anchor="middle" dominant-baseline="middle" transform="rotate(-30,242,48)">Start Here</text>
+  <text class="d-sub" x="306" y="48" text-anchor="middle" dominant-baseline="middle" transform="rotate(-30,306,48)">Course Dev</text>
+  <text class="d-sub" x="370" y="48" text-anchor="middle" dominant-baseline="middle" transform="rotate(-30,370,48)">Pre-Facilit.</text>
+  <text class="d-sub" x="434" y="48" text-anchor="middle" dominant-baseline="middle" transform="rotate(-30,434,48)">Facilitation</text>
+  <text class="d-sub" x="498" y="48" text-anchor="middle" dominant-baseline="middle" transform="rotate(-30,498,48)">Completion</text>
+  <text class="d-sub" x="562" y="48" text-anchor="middle" dominant-baseline="middle" transform="rotate(-30,562,48)">Course Docs</text>
+  <text class="d-sub" x="614" y="54" text-anchor="end" dominant-baseline="middle">Adoption</text>
+
+  <!-- ── ROW 1: Program Admins (y 62–112) ── -->
+  <rect class="row-hdr" x="20" y="62" width="154" height="48" rx="3"/>
+  <text class="d-title" x="97"  y="82"  text-anchor="middle" dominant-baseline="middle">Program</text>
+  <text class="d-title" x="97"  y="97"  text-anchor="middle" dominant-baseline="middle">Admins  ×4</text>
+
+  <!-- Admin row: lock | full | full | full | full | full | full -->
+  <rect class="cell-lock" x="178" y="62" width="60" height="48" rx="2"/>
+  <text class="d-sub" x="208" y="86" text-anchor="middle" dominant-baseline="middle" style="fill:var(--color-gov,#574a93)">owner</text>
+
+  <rect class="cell-full" x="242" y="62" width="60" height="48" rx="2"/>
+  <circle class="dot-full" cx="272" cy="86" r="6"/>
+
+  <rect class="cell-full" x="306" y="62" width="60" height="48" rx="2"/>
+  <circle class="dot-full" cx="336" cy="86" r="6"/>
+
+  <rect class="cell-full" x="370" y="62" width="60" height="48" rx="2"/>
+  <circle class="dot-full" cx="400" cy="86" r="6"/>
+
+  <rect class="cell-full" x="434" y="62" width="60" height="48" rx="2"/>
+  <circle class="dot-full" cx="464" cy="86" r="6"/>
+
+  <rect class="cell-full" x="498" y="62" width="60" height="48" rx="2"/>
+  <circle class="dot-full" cx="528" cy="86" r="6"/>
+
+  <rect class="cell-full" x="562" y="62" width="60" height="48" rx="2"/>
+  <circle class="dot-full" cx="592" cy="86" r="6"/>
+
+  <text class="d-pct" x="635" y="86" text-anchor="end" dominant-baseline="middle">100%</text>
+
+  <!-- ── ROW 2: Revising/Lead Faculty (y 114–164) ── -->
+  <rect class="row-hdr" x="20" y="114" width="154" height="48" rx="3"/>
+  <text class="d-title" x="97" y="134" text-anchor="middle" dominant-baseline="middle">Revising /</text>
+  <text class="d-title" x="97" y="149" text-anchor="middle" dominant-baseline="middle">Lead Faculty  ×28</text>
+
+  <!-- no access to Prog Admin, full to rest -->
+  <rect class="cell-none" x="178" y="114" width="60" height="48" rx="2"/>
+  <text class="d-sub" x="208" y="138" text-anchor="middle" dominant-baseline="middle">—</text>
+
+  <rect class="cell-full" x="242" y="114" width="60" height="48" rx="2"/>
+  <circle class="dot-full" cx="272" cy="138" r="6"/>
+
+  <rect class="cell-full" x="306" y="114" width="60" height="48" rx="2"/>
+  <circle class="dot-full" cx="336" cy="138" r="6"/>
+
+  <rect class="cell-full" x="370" y="114" width="60" height="48" rx="2"/>
+  <circle class="dot-full" cx="400" cy="138" r="6"/>
+
+  <rect class="cell-full" x="434" y="114" width="60" height="48" rx="2"/>
+  <circle class="dot-full" cx="464" cy="138" r="6"/>
+
+  <rect class="cell-full" x="498" y="114" width="60" height="48" rx="2"/>
+  <circle class="dot-full" cx="528" cy="138" r="6"/>
+
+  <rect class="cell-full" x="562" y="114" width="60" height="48" rx="2"/>
+  <circle class="dot-full" cx="592" cy="138" r="6"/>
+
+  <text class="d-pct" x="635" y="138" text-anchor="end" dominant-baseline="middle">82%</text>
+
+  <!-- ── ROW 3: Practitioner Instructors (y 166–216) ── -->
+  <rect class="row-hdr" x="20" y="166" width="154" height="48" rx="3"/>
+  <text class="d-title" x="97" y="186" text-anchor="middle" dominant-baseline="middle">Practitioner</text>
+  <text class="d-title" x="97" y="201" text-anchor="middle" dominant-baseline="middle">Instructors  ×100+</text>
+
+  <!-- no access to Prog Admin or Course Dev -->
+  <rect class="cell-none" x="178" y="166" width="60" height="48" rx="2"/>
+  <text class="d-sub" x="208" y="190" text-anchor="middle" dominant-baseline="middle">—</text>
+
+  <rect class="cell-full" x="242" y="166" width="60" height="48" rx="2"/>
+  <circle class="dot-full" cx="272" cy="190" r="6"/>
+
+  <rect class="cell-none" x="306" y="166" width="60" height="48" rx="2"/>
+  <text class="d-sub" x="336" y="190" text-anchor="middle" dominant-baseline="middle">—</text>
+
+  <rect class="cell-full" x="370" y="166" width="60" height="48" rx="2"/>
+  <circle class="dot-full" cx="400" cy="190" r="6"/>
+
+  <rect class="cell-full" x="434" y="166" width="60" height="48" rx="2"/>
+  <circle class="dot-full" cx="464" cy="190" r="6"/>
+
+  <rect class="cell-full" x="498" y="166" width="60" height="48" rx="2"/>
+  <circle class="dot-full" cx="528" cy="190" r="6"/>
+
+  <rect class="cell-full" x="562" y="166" width="60" height="48" rx="2"/>
+  <circle class="dot-full" cx="592" cy="190" r="6"/>
+
+  <text class="d-pct" x="635" y="190" text-anchor="end" dominant-baseline="middle">38%</text>
+
+  <!-- legend -->
+  <line class="line" x1="20" y1="230" x2="620" y2="230"/>
+
+  <rect class="cell-full" x="20" y="240" width="14" height="14" rx="2"/>
+  <text class="d-meta" x="40" y="247" dominant-baseline="middle">full access</text>
+
+  <rect class="cell-lock" x="120" y="240" width="14" height="14" rx="2"/>
+  <text class="d-meta" x="140" y="247" dominant-baseline="middle">owner-only (unpublished to faculty)</text>
+
+  <rect class="cell-none" x="340" y="240" width="14" height="14" rx="2"/>
+  <text class="d-meta" x="360" y="247" dominant-baseline="middle">no access</text>
+
+  <!-- footer metrics -->
+  <line class="line" x1="20" y1="264" x2="620" y2="264"/>
+  <text class="d-meta" x="20" y="278">Launched 2024  ·  5 new faculty onboarded through IRC  ·  25% reduction in onboarding time</text>
+  <text class="d-meta" x="20" y="291">33% ↑ CRL entries since launch  ·  56% ↑ Practitioner Instructor entries  ·  100+ hours logged</text>
+  <text class="d-meta" x="20" y="304">Pre-Development Survey deployed Summer 2026  ·  Maintenance: yearly cycle + light touch-ups</text>
+</svg>

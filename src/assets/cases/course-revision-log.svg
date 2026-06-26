@@ -1,0 +1,122 @@
+<svg viewBox="0 0 640 300" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Course Revision Log: status state machine and year-over-year request volume">
+  <style>
+    .d-title   { font: 600 11px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink,#1a1916); letter-spacing:.03em; }
+    .d-sub     { font: 400 9px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink-muted,#5c5a55); letter-spacing:.02em; }
+    .d-eyebrow { font: 400 9px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-telemetry,#1e7a4a); letter-spacing:.06em; }
+    .d-meta    { font: 400 8px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink-muted,#5c5a55); letter-spacing:.02em; }
+    .d-stat    { font: 600 22px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink,#1a1916); }
+    .d-bar-lbl { font: 400 9px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink-muted,#5c5a55); letter-spacing:.02em; }
+    .state-new { fill: var(--color-ld-wash,#f8ece1); stroke: var(--color-ld,#b5642a); stroke-width:1.5; }
+    .state-ok  { fill: var(--color-eng-wash,#e1f2f2); stroke: var(--color-eng,#0d7d7d); stroke-width:1; }
+    .state-def { fill: var(--color-surface,#f0ede7); stroke: var(--color-border,#d4cfc7); stroke-width:1; }
+    .state-q   { fill: var(--color-gov-wash,#eeecf7); stroke: var(--color-gov,#574a93); stroke-width:1; }
+    .bar       { fill: var(--color-eng,#0d7d7d); opacity:.25; }
+    .bar-hi    { fill: var(--color-eng,#0d7d7d); opacity:.55; }
+    .line      { stroke: var(--color-border,#d4cfc7); stroke-width:1.5; }
+    .divider   { stroke: var(--color-border,#d4cfc7); stroke-width:1; stroke-dasharray:4 4; }
+    .arr       { fill: var(--color-border,#d4cfc7); }
+    .arr-ok    { fill: var(--color-eng,#0d7d7d); }
+  </style>
+
+  <!-- header -->
+  <text class="d-title" x="20" y="16">COURSE REVISION LOG — REQUEST TRACKER</text>
+  <text class="d-meta"  x="20" y="30">Jan 2022 – present  ·  Canvas iFrame  ·  Instructor Resources (hidden from students)</text>
+  <line class="line" x1="20" y1="40" x2="620" y2="40"/>
+
+  <!-- divider between left (state machine) and right (chart) -->
+  <line class="divider" x1="340" y1="48" x2="340" y2="280"/>
+
+  <!-- ── LEFT: State Machine (x 20–320) ── -->
+  <text class="d-eyebrow" x="20" y="56">// request status workflow</text>
+
+  <!-- NEW (entry state) -->
+  <rect class="state-new" x="108" y="66" width="104" height="38" rx="3"/>
+  <text class="d-title" x="160" y="85" text-anchor="middle" dominant-baseline="middle">NEW</text>
+
+  <!-- arrow down to branch -->
+  <line class="line" x1="160" y1="104" x2="160" y2="124"/>
+  <polygon class="arr" points="156,124 160,132 164,124"/>
+
+  <!-- branch node (invisible point) -->
+  <!-- 4 outgoing states arranged 2x2 -->
+
+  <!-- COMPLETE -->
+  <rect class="state-ok"  x="20"  y="136" width="124" height="36" rx="3"/>
+  <text class="d-title" x="82"  y="150" text-anchor="middle" dominant-baseline="middle" style="fill:var(--color-eng,#0d7d7d)">Complete</text>
+
+  <!-- DEFERRED -->
+  <rect class="state-def" x="176" y="136" width="124" height="36" rx="3"/>
+  <text class="d-title" x="238" y="154" text-anchor="middle" dominant-baseline="middle">Deferred</text>
+
+  <!-- QUESTION -->
+  <rect class="state-q"   x="20"  y="192" width="124" height="36" rx="3"/>
+  <text class="d-title" x="82"  y="210" text-anchor="middle" dominant-baseline="middle" style="fill:var(--color-gov,#574a93)">Question</text>
+
+  <!-- PENDING -->
+  <rect class="state-def" x="176" y="192" width="124" height="36" rx="3"/>
+  <text class="d-title" x="238" y="210" text-anchor="middle" dominant-baseline="middle">Pending</text>
+
+  <!-- branch lines from y=132 to each state -->
+  <line class="line" x1="82"  y1="132" x2="82"  y2="136"/>
+  <line class="line" x1="238" y1="132" x2="238" y2="136"/>
+  <line class="line" x1="82"  y1="188" x2="82"  y2="192"/>
+  <line class="line" x1="238" y1="172" x2="238" y2="192"/>
+  <line class="line" x1="82"  y1="132" x2="238" y2="132"/>
+
+  <!-- re-entry arrow from Deferred / Question / Pending back to New -->
+  <line class="line" x1="300" y1="154" x2="315" y2="154"/>
+  <line class="line" x1="315" y1="85"  x2="315" y2="210"/>
+  <line class="line" x1="300" y1="85"  x2="315" y2="85"/>
+  <polygon class="arr" points="215,81 212,85 215,89"/>
+
+  <text class="d-sub" x="318" y="149" dominant-baseline="middle">re-open</text>
+
+  <!-- stats row -->
+  <line class="line" x1="20" y1="252" x2="320" y2="252"/>
+  <text class="d-meta" x="20"  y="265">98% ↓ lost / duplicated requests</text>
+  <text class="d-meta" x="20"  y="278">88% faculty adoption  ·  10–25h saved / revision cycle</text>
+
+  <!-- ── RIGHT: Volume Chart (x 360–620) ── -->
+  <text class="d-eyebrow" x="360" y="56">// requests logged  ·  year over year</text>
+
+  <!-- chart area: x 370–610, y 66–230 -->
+  <!-- baseline y=230, chart height 164px -->
+  <!-- max value 176, scale: 164/176 ≈ 0.932 px/unit -->
+
+  <!-- Y gridlines + labels -->
+  <line class="divider" x1="370" y1="76"  x2="610" y2="76"/>
+  <text class="d-bar-lbl" x="365" y="76" text-anchor="end" dominant-baseline="middle">200</text>
+  <line class="divider" x1="370" y1="122" x2="610" y2="122"/>
+  <text class="d-bar-lbl" x="365" y="122" text-anchor="end" dominant-baseline="middle">150</text>
+  <line class="divider" x1="370" y1="168" x2="610" y2="168"/>
+  <text class="d-bar-lbl" x="365" y="168" text-anchor="end" dominant-baseline="middle">100</text>
+  <line class="divider" x1="370" y1="214" x2="610" y2="214"/>
+  <text class="d-bar-lbl" x="365" y="214" text-anchor="end" dominant-baseline="middle">50</text>
+
+  <!-- baseline -->
+  <line class="line"    x1="370" y1="230" x2="610" y2="230"/>
+
+  <!-- Y1: 112 → height = 112 × 0.932 = 104px → bar top = 230-104 = 126 -->
+  <rect class="bar"    x="388" y="125" width="56" height="105" rx="2"/>
+  <text class="d-stat" x="416" y="115" text-anchor="middle">112</text>
+  <text class="d-bar-lbl" x="416" y="244" text-anchor="middle">Year 1</text>
+
+  <!-- Y2: 146 → height = 146 × 0.932 = 136px → bar top = 230-136 = 94 -->
+  <rect class="bar"    x="462" y="93"  width="56" height="137" rx="2"/>
+  <text class="d-stat" x="490" y="83" text-anchor="middle">146</text>
+  <text class="d-bar-lbl" x="490" y="244" text-anchor="middle">Year 2</text>
+
+  <!-- Y3: 176 → height = 176 × 0.932 = 164px → bar top = 230-164 = 66 -->
+  <rect class="bar-hi" x="536" y="66"  width="56" height="164" rx="2"/>
+  <text class="d-stat" x="564" y="56" text-anchor="middle">176</text>
+  <text class="d-bar-lbl" x="564" y="244" text-anchor="middle">Year 3</text>
+
+  <!-- trend line -->
+  <line style="stroke:var(--color-eng,#0d7d7d);stroke-width:1.5;opacity:.6" x1="416" y1="177" x2="490" y2="161"/>
+  <line style="stroke:var(--color-eng,#0d7d7d);stroke-width:1.5;opacity:.6" x1="490" y1="161" x2="564" y2="148"/>
+
+  <!-- program scope note -->
+  <line class="line" x1="360" y1="252" x2="620" y2="252"/>
+  <text class="d-meta" x="360" y="265">33-course carousel  ·  29 content + 4 practicum courses</text>
+  <text class="d-meta" x="360" y="278">4 admins  ·  28 revising/lead faculty  ·  100+ practitioner instructors</text>
+</svg>

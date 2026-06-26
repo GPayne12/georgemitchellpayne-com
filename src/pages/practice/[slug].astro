@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
+const artifactSvgs = import.meta.glob('/src/assets/cases/*.svg', { query: '?raw', import: 'default' });
+
 export async function getStaticPaths() {
   const cases = await getCollection('cases');
   const sorted = cases.sort((a, b) => a.data.order - b.data.order);
@@ -16,6 +18,11 @@ export async function getStaticPaths() {
 }
 
 const { c, prev, next } = Astro.props;
+
+const svgKey = `/src/assets/cases/${c.data.slug}.svg`;
+const artifactSvg: string | null = artifactSvgs[svgKey]
+  ? await (artifactSvgs[svgKey] as () => Promise<string>)()
+  : null;
 
 const DOMAIN_LABELS: Record<string, string> = {
   'learning-design': 'Learning Design',
@@ -71,7 +78,11 @@ const SECTIONS = [
       {SECTIONS.map(({ key, label }) => (
         <section class={`case-section case-section--${key}`}>
           <h2 class="telemetry section-label">{label}</h2>
-          <p class="section-body">{c.data[key]}</p>
+          {key === 'artifact' && artifactSvg ? (
+            <div class="artifact-diagram" set:html={artifactSvg} />
+          ) : (
+            <p class="section-body">{c.data[key]}</p>
+          )}
         </section>
       ))}
     </article>
@@ -260,6 +271,20 @@ const SECTIONS = [
 
   .case-section--engineeringTranslation .section-body {
     color: var(--color-ink);
+  }
+
+  /* ── Artifact diagram ─────────────────────────────── */
+  .artifact-diagram {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .artifact-diagram svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-width: 640px;
   }
 
   /* ── Case navigation ──────────────────────────────── */

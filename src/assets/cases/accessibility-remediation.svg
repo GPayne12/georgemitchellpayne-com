@@ -1,0 +1,128 @@
+<svg viewBox="0 0 640 320" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="WCAG 2.2 remediation pipeline and compliance tracking across two years">
+  <style>
+    .d-title   { font: 600 11px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink,#1a1916); letter-spacing:.03em; }
+    .d-sub     { font: 400 9px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink-muted,#5c5a55); letter-spacing:.02em; }
+    .d-eyebrow { font: 400 9px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-telemetry,#1e7a4a); letter-spacing:.06em; }
+    .d-meta    { font: 400 8px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink-muted,#5c5a55); letter-spacing:.02em; }
+    .d-stat    { font: 600 18px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink,#1a1916); }
+    .d-pct     { font: 600 13px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink,#1a1916); }
+    .box       { fill: var(--color-surface,#f0ede7); stroke: var(--color-border,#d4cfc7); stroke-width:1; }
+    .box-in    { fill: var(--color-ld-wash,#f8ece1); stroke: var(--color-ld,#b5642a); stroke-width:1.5; }
+    .box-ok    { fill: var(--color-eng-wash,#e1f2f2); stroke: var(--color-eng,#0d7d7d); stroke-width:1; }
+    .box-ret   { fill: var(--color-gov-wash,#eeecf7); stroke: var(--color-gov,#574a93); stroke-width:1; }
+    .track     { fill: var(--color-eng,#0d7d7d); opacity:.18; }
+    .track-hi  { fill: var(--color-eng,#0d7d7d); opacity:.45; }
+    .line      { stroke: var(--color-border,#d4cfc7); stroke-width:1.5; }
+    .divider   { stroke: var(--color-border,#d4cfc7); stroke-width:1; stroke-dasharray:4 4; }
+    .arr       { fill: var(--color-border,#d4cfc7); }
+    .compliance-line { stroke: var(--color-eng,#0d7d7d); stroke-width:2; fill: none; stroke-linejoin:round; }
+  </style>
+
+  <!-- header -->
+  <text class="d-title" x="20" y="16">WCAG 2.2 REMEDIATION PIPELINE</text>
+  <text class="d-meta"  x="20" y="30">Sept 2021 – Sept 2023  ·  6 coordinating teams  ·  33-course carousel</text>
+  <line class="line" x1="20" y1="40" x2="620" y2="40"/>
+
+  <!-- panel divider -->
+  <line class="divider" x1="336" y1="48" x2="336" y2="278"/>
+
+  <!-- ── LEFT: Pipeline (x 20–316) ── -->
+  <text class="d-eyebrow" x="20" y="56">// remediation pipeline</text>
+
+  <!-- Input box -->
+  <rect class="box-in" x="96" y="66" width="124" height="46" rx="3"/>
+  <text class="d-stat"  x="158" y="84"  text-anchor="middle" dominant-baseline="middle">330+</text>
+  <text class="d-sub"   x="158" y="101" text-anchor="middle" dominant-baseline="middle">multimedia pieces</text>
+
+  <!-- arrow down to triage -->
+  <line class="line" x1="158" y1="112" x2="158" y2="130"/>
+  <polygon class="arr" points="154,130 158,138 162,130"/>
+
+  <!-- Triage box -->
+  <rect class="box"     x="56"  y="140" width="204" height="44" rx="3"/>
+  <text class="d-title" x="158" y="158" text-anchor="middle" dominant-baseline="middle">4-STATE TRIAGE</text>
+  <text class="d-sub"   x="158" y="174" text-anchor="middle" dominant-baseline="middle">Retain  ·  Modify  ·  Retire  ·  Scope</text>
+
+  <!-- arrow down to split -->
+  <line class="line" x1="158" y1="184" x2="158" y2="204"/>
+
+  <!-- branch to two outcomes -->
+  <line class="line" x1="60"  y1="204" x2="258" y2="204"/>
+
+  <line class="line" x1="60"  y1="204" x2="60"  y2="218"/>
+  <polygon class="arr" points="56,218 60,226 64,218"/>
+  <line class="line" x1="258" y1="204" x2="258" y2="218"/>
+  <polygon class="arr" points="254,218 258,226 262,218"/>
+
+  <!-- Retained -->
+  <rect class="box-ok"  x="20"  y="228" width="80" height="44" rx="3"/>
+  <text class="d-stat"  x="60"  y="246" text-anchor="middle" dominant-baseline="middle" style="font-size:16px">252</text>
+  <text class="d-sub"   x="60"  y="262" text-anchor="middle" dominant-baseline="middle">retained</text>
+
+  <!-- Retired -->
+  <rect class="box-ret" x="218" y="228" width="80" height="44" rx="3"/>
+  <text class="d-stat"  x="258" y="246" text-anchor="middle" dominant-baseline="middle" style="font-size:16px;fill:var(--color-gov,#574a93)">~78</text>
+  <text class="d-sub"   x="258" y="262" text-anchor="middle" dominant-baseline="middle">retired</text>
+
+  <!-- 3 document artifacts -->
+  <text class="d-eyebrow" x="20" y="294">// guiding documents</text>
+  <text class="d-meta"    x="20" y="306">Media Manifest  ·  Rights & Permissions  ·  Credits Page (HTML)</text>
+
+  <!-- ── RIGHT: Compliance Tracking (x 356–620) ── -->
+  <text class="d-eyebrow" x="356" y="56">// wcag compliance  ·  % of portfolio</text>
+
+  <!-- Chart area: x 380–610, y 66–240 -->
+  <!-- max 100%, height 174, scale 1.74 px/% -->
+  <!-- gridlines at 25/50/75/100% -->
+
+  <line class="divider" x1="380" y1="66"  x2="610" y2="66"/>
+  <text class="d-sub" x="375" y="66"  text-anchor="end" dominant-baseline="middle">100%</text>
+
+  <line class="divider" x1="380" y1="109" x2="610" y2="109"/>
+  <text class="d-sub" x="375" y="109" text-anchor="end" dominant-baseline="middle">75%</text>
+
+  <line class="divider" x1="380" y1="153" x2="610" y2="153"/>
+  <text class="d-sub" x="375" y="153" text-anchor="end" dominant-baseline="middle">50%</text>
+
+  <line class="divider" x1="380" y1="196" x2="610" y2="196"/>
+  <text class="d-sub" x="375" y="196" text-anchor="end" dominant-baseline="middle">25%</text>
+
+  <!-- baseline -->
+  <line class="line"    x1="380" y1="240" x2="610" y2="240"/>
+
+  <!-- x-axis labels: Start / +6mo / Year 1 / Year 2 -->
+  <text class="d-meta" x="380" y="254" text-anchor="middle">Start</text>
+  <text class="d-meta" x="457" y="254" text-anchor="middle">+6 mo</text>
+  <text class="d-meta" x="534" y="254" text-anchor="middle">Year 1</text>
+  <text class="d-meta" x="610" y="254" text-anchor="middle">Year 2</text>
+
+  <!-- compliance points:
+       Start: ~30% uncompliant → call it 0% compliant (pre-project baseline)  → y=240
+       +6mo: 35% → y = 240 - 35×1.74 = 240-61 = 179
+       Year1: 75% → y = 240 - 75×1.74 = 240-131 = 109
+       Year2: 96% → y = 240 - 96×1.74 = 240-167 = 73
+  -->
+
+  <!-- area fill (approximate) -->
+  <polygon style="fill:var(--color-eng,#0d7d7d);opacity:.08" points="380,240 457,179 534,109 610,73 610,240 380,240"/>
+
+  <!-- compliance line -->
+  <polyline class="compliance-line" points="380,240 457,179 534,109 610,73"/>
+
+  <!-- data point dots -->
+  <circle cx="380" cy="240" r="4" style="fill:var(--color-eng,#0d7d7d);opacity:.5"/>
+  <circle cx="457" cy="179" r="4" style="fill:var(--color-eng,#0d7d7d);opacity:.6"/>
+  <circle cx="534" cy="109" r="5" style="fill:var(--color-eng,#0d7d7d);opacity:.7"/>
+  <circle cx="610" cy="73"  r="5" style="fill:var(--color-eng,#0d7d7d)"/>
+
+  <!-- labels on dots -->
+  <text class="d-pct" x="380" y="228" text-anchor="middle">&lt;40%</text>
+  <text class="d-pct" x="457" y="167" text-anchor="middle">35%</text>
+  <text class="d-pct" x="534" y="97"  text-anchor="middle">75%</text>
+  <text class="d-pct" x="610" y="61"  text-anchor="middle">96%</text>
+
+  <!-- standard upgrade note -->
+  <line class="line" x1="356" y1="268" x2="620" y2="268"/>
+  <text class="d-meta" x="356" y="281">WCAG 2.1 AA → WCAG 2.2 AA  ·  License compliance: 2 months early</text>
+  <text class="d-meta" x="356" y="294">Thousands of underlying stock assets reviewed across 6 teams</text>
+</svg>
