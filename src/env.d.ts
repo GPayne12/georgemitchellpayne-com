@@ -1,10 +1,6 @@
 /// <reference types="astro/client" />
 
-interface Env {
-  ANTHROPIC_API_KEY: string;
-}
-
-type Runtime = import('@astrojs/cloudflare').Runtime<Env>;
+type Runtime = import('@astrojs/cloudflare').Runtime<Record<string, string>>;
 
 declare namespace App {
   interface Locals extends Runtime {}
