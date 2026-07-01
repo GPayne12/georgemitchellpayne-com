@@ -8,10 +8,16 @@
 // Fix: after `astro build`, find the one line where createLocals(context) is called
 // and immediately follow it with `locals.cfEnv = env;`.
 
-import { readFileSync, writeFileSync } from 'fs';
+import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { resolve } from 'path';
 
 const entryPath = resolve('dist/server/entry.mjs');
+
+if (!existsSync(entryPath)) {
+  console.log('patch-cloudflare-entry: no dist/server/entry.mjs (static-only build), skipping.');
+  process.exit(0);
+}
+
 let src = readFileSync(entryPath, 'utf8');
 
 const NEEDLE = 'const locals = createLocals(context);';
