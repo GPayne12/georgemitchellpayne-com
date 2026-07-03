@@ -1,7 +1,7 @@
 ---
 title: "ACLS Training Simulator"
 slug: "defib-trainer"
-order: 3
+order: 4
 repo: "https://github.com/GPayne12/defib-trainer"
 demo: "http://localhost:8002"
 stack: ["Vanilla JS", "HTML/CSS", "No build step"]

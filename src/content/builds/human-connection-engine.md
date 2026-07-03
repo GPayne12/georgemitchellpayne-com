@@ -1,7 +1,7 @@
 ---
 title: "Human Connection Engine"
 slug: "human-connection-engine"
-order: 2
+order: 3
 repo: "https://github.com/GPayne12/human-connection-engine"
 demo: "http://localhost:5174"
 stack: ["React", "TypeScript", "Vite", "Dexie.js / IndexedDB", "Web Crypto API"]

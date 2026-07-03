@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import GitHubTelemetry from '../components/GitHubTelemetry.tsx';
 
 const builds = await getCollection('builds');
 const sorted = builds.sort((a, b) => a.data.order - b.data.order);
@@ -54,8 +53,6 @@ function isRealUrl(url: string | undefined): boolean {
               <p class="telemetry decision-label">// decision log</p>
               <p class="decision-body">{b.data.decisionLog}</p>
             </div>
-
-            <GitHubTelemetry repo={b.data.repo} client:only="react" />
 
             <div class="build-links">
               <a
