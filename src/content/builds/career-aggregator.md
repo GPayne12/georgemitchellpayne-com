@@ -15,5 +15,3 @@ decisionLog: "Chose SQLite over Postgres to eliminate infrastructure overhead
   Scrapers run on APScheduler inside the same process to avoid a separate
   queue service."
 ---
-
-<!-- PLACEHOLDER — full decision log pending -->

@@ -18,5 +18,3 @@ decisionLog: "No backend, no account: relationship data lives in IndexedDB
   story of how a relationship progressed rather than letting it be silently
   edited away."
 ---
-
-<!-- PLACEHOLDER — full decision log pending -->
