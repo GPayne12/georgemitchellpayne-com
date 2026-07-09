@@ -34,7 +34,7 @@ The tools I was building were immediately useful, but they were also a playful s
 
 Coupled with a growing realization that my portfolio website was running my job search aground, I took some time to plan the working environment in chat. By May 26, I had run a full environment audit on my MacBook Pro and written down the goal: unify my two Macs into one Claude instance, then add phone control. The founding document of what became the hub.
 
-The next day's status assessment was blunt: the "centralized Claude environment hub" plan — linking all my machines and activities — had stalled before Phase 1. No directory structure, no API, no tunnel. Claude Code was freshly installed and unused.
+The next day's status assessment was blunt: the "centralized Claude environment hub" plan — linking all my machines and activities — had stalled before Phase 1. No directory structure, no API, no tunnel. Claude Code was freshly installed and unused, since I had been working exclusively in the browser — I had assumed all the instances were consistently and collectively up-to-date. The answer was no, and I had no time to waste. I needed to be able to work at the speed of thought on any machine in my environment.
 
 The recommendation I adopted that day set the working method for everything since — I design, AI builds: Claude Code generates the production code, I execute on the Mac. Same day, the job application assistant gained ATS gap analysis, per-role bullet groups, a strategy card, and a resume preview. The method worked on first contact.
 
