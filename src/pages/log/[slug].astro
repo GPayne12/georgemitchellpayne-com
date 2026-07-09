@@ -4,13 +4,23 @@ import Layout from '../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
   const entries = await getCollection('log', ({ data }) => !data.draft);
-  return entries.map(entry => ({
-    params: { slug: entry.id.replace(/\.(md|mdx)$/, '') },
-    props: { entry },
+  const sorted = entries.sort((a, b) => a.data.order - b.data.order);
+  const entrySlug = (id: string) => id.replace(/\.(md|mdx)$/, '');
+  return sorted.map((entry, i) => ({
+    params: { slug: entrySlug(entry.id) },
+    props: {
+      entry,
+      prev: i > 0
+        ? { title: sorted[i - 1].data.title, slug: entrySlug(sorted[i - 1].id) }
+        : null,
+      next: i < sorted.length - 1
+        ? { title: sorted[i + 1].data.title, slug: entrySlug(sorted[i + 1].id) }
+        : null,
+    },
   }));
 }
 
-const { entry } = Astro.props;
+const { entry, prev, next } = Astro.props;
 const { Content } = await render(entry);
 
 function formatDate(date: Date): string {
@@ -74,6 +84,26 @@ function formatDate(date: Date): string {
       <div class="entry-body prose">
         <Content />
       </div>
+
+      <!-- ── Previous / next navigation ──────────────── -->
+      {(prev || next) && (
+        <nav class="entry-nav" aria-label="Log entry navigation">
+          {prev ? (
+            <a href={`/log/${prev.slug}`} class="entry-nav-link nav-prev">
+              <span class="telemetry nav-label">← previous</span>
+              <span class="nav-title">{prev.title}</span>
+            </a>
+          ) : (
+            <span class="entry-nav-spacer" />
+          )}
+          {next && (
+            <a href={`/log/${next.slug}`} class="entry-nav-link nav-next">
+              <span class="telemetry nav-label">next →</span>
+              <span class="nav-title">{next.title}</span>
+            </a>
+          )}
+        </nav>
+      )}
 
     </article>
   </div>
@@ -248,5 +278,46 @@ function formatDate(date: Date): string {
 
   .prose :global(tr:last-child td) {
     border-bottom: none;
+  }
+
+  /* ── Previous / next navigation ───────────────────── */
+  .entry-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-8);
+    margin-top: var(--space-12);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .entry-nav-link {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    text-decoration: none;
+    max-width: 45%;
+    transition: opacity var(--duration-fast) var(--ease-standard);
+  }
+
+  .entry-nav-link:hover {
+    opacity: 0.75;
+  }
+
+  .nav-next {
+    margin-left: auto;
+    text-align: right;
+    align-items: flex-end;
+  }
+
+  .nav-label {
+    font-size: var(--text-xs);
+  }
+
+  .nav-title {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-ink);
+    line-height: 1.4;
   }
 </style>
