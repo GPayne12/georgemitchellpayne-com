@@ -5,6 +5,8 @@ import Venn from '../components/Venn.jsx';
 
 const cases = await getCollection('cases');
 const sorted = cases.sort((a, b) => a.data.order - b.data.order);
+// List reads reverse-chronologically (newest case first); the Venn keeps numeric order.
+const newestFirst = [...sorted].reverse();
 
 const domainLabels: Record<string, string> = {
   'learning-design': 'Learning Design',
@@ -44,7 +46,7 @@ const domainLabels: Record<string, string> = {
         </p>
       ) : (
         <ul class="cases-list" role="list">
-          {sorted.map(c => (
+          {newestFirst.map(c => (
             <li class="case-row" id={c.data.slug}>
               <div class="case-meta">
                 <span class="telemetry case-order">{String(c.data.order).padStart(2, '0')}</span>
