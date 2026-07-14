@@ -6,6 +6,7 @@ domains: ["leadership", "learning-design"]
 tier: "supporting"
 center: false
 status: "complete"
+timeline: "2021"
 situation: |
   In 2019 I joined Learning Design Solutions, an instructional design department inside Pearson Online Learning Services. Within days I'd hit an early goal — moving from a single learning ecosystem to many — and for nearly three years I built courses across a nationally recognized cohort of research and specialized universities, each with its own program offerings. That breadth became a leadership opening when a long-standing partnership reached the end of its contract, declined to renew, and had to be sunset. When the Lead Instructional Designer went on leave, the wind-down fell to me: more than a decade of files and documentation to review, tag, and package per the separation agreement.
 constraint: |

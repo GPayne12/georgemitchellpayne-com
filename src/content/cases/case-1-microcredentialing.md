@@ -6,6 +6,7 @@ domains: ["learning-design", "leadership"]
 tier: "flagship"
 center: false
 status: "complete"
+timeline: "2018–2020"
 situation: |
   My first full-time instructional design role put me on-site at an online college people called "the 100-year-old startup" — an institution that had reinvented itself repeatedly and kept a relentless appetite for experimentation. Already embedded in community-college and corporate upskilling, the college was weighing a sharper strategic question: with more upskilling moving in-house through Coursera and edX, should we compete differently? Microcredentialing and learning pathways were the bet.
 constraint: |

@@ -6,6 +6,7 @@ domains: ["engineering", "leadership", "learning-design"]
 tier: "flagship"
 center: true
 status: "complete"
+timeline: "2022"
 situation: |
   Tracking course-development concerns, considerations, and requests is how instructional design stays accountable to its stakeholders. When I joined Pearson, the legacy process was to log revision notes after the fact in a Word document or spreadsheet. Promoted to Lead Instructional Designer, I inherited a directive: act on a faculty survey collected just before my predecessor left, which asked for greater transparency in the revision process and a way to record findings collectively.
 constraint: |

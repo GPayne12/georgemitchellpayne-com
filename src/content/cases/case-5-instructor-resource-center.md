@@ -6,6 +6,7 @@ domains: ["learning-design", "leadership"]
 tier: "supporting"
 center: false
 status: "complete"
+timeline: "2023–ongoing"
 situation: |
   After acting on the program's first and only faculty survey, I turned it into a yearly recurring feedback mechanism, with targeted questions to scope upcoming development — faculty assignment awareness, planned time away, expected textbook updates, and multimedia expectations. Year one's big takeaway was the Course Revision Log (Case 3). Year two's, drawn from 100+ logged entries, was faculty decentralization: Revising Faculty prepared courses, Lead Faculty oversaw live cohorts, and Practitioner Instructors graded and gave student feedback — three siloed groups who couldn't see across development, cohort prep, and instruction.
 constraint: |

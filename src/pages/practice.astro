@@ -48,9 +48,9 @@ const domainLabels: Record<string, string> = {
             <li class="case-row" id={c.data.slug}>
               <div class="case-meta">
                 <span class="telemetry case-order">{String(c.data.order).padStart(2, '0')}</span>
-                <span class={`case-status status--${c.data.status}`}>
-                  {c.data.status === 'complete' ? 'live' : 'in progress'}
-                </span>
+                {c.data.timeline && (
+                  <span class="telemetry case-timeline">{c.data.timeline}</span>
+                )}
                 {c.data.center && (
                   <span class="case-center-badge">center</span>
                 )}
@@ -246,23 +246,10 @@ const domainLabels: Record<string, string> = {
     color: var(--color-ink-muted);
   }
 
-  .case-status {
-    font-family: var(--font-mono);
+  .case-timeline {
     font-size: var(--text-xs);
+    color: var(--color-ink-muted);
     letter-spacing: 0.04em;
-    padding: 0.15em 0.5em;
-    border-radius: 3px;
-    width: fit-content;
-  }
-
-  .status--complete {
-    background: var(--color-eng-wash);
-    color: var(--color-eng);
-  }
-
-  .status--in-progress {
-    background: var(--color-ld-wash);
-    color: var(--color-ld);
   }
 
   .case-center-badge {

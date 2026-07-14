@@ -11,6 +11,7 @@ const cases = defineCollection({
     tier: z.enum(['flagship', 'supporting']),
     center: z.boolean().default(false),
     status: z.enum(['complete', 'in-progress']).default('in-progress'),
+    timeline: z.string().optional(),
     situation: z.string(),
     constraint: z.string(),
     decision: z.string(),

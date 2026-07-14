@@ -6,6 +6,7 @@ domains: ["engineering", "learning-design", "leadership"]
 tier: "flagship"
 center: true
 status: "complete"
+timeline: "2023–ongoing"
 situation: |
   With the accessibility remediation well past halfway, new pain points emerged around learner engagement and data collection design. Formal data collection had never gone beyond a single end-of-course Survey Monkey survey, deployed at the beginning of the last week of class — a legacy tool with little applicability across the partner portfolio and invisible to all partners simultaneously. Canvas's built-in tools, Rubrics and Course Analytics, had never been enabled and configured to deliver consistent results. And the program had never had an overarching multimedia strategy since inception — the last attempt predated the current LMS by more than a decade.
 constraint: |

@@ -6,6 +6,7 @@ domains: ["learning-design", "engineering"]
 tier: "supporting"
 center: false
 status: "complete"
+timeline: "2021–2023"
 situation: |
   When I joined Pearson in 2019, the WCAG 2.1 accessibility standards for online course design were barely a year old, and Learning Design teams were already rolling them across the partnership portfolio. I came up to speed at the course level, applying the frameworks during consultations across several programs at once. Three years later I was promoted into the Lead position for a program that now had to meet WCAG 2.2 — and multimedia was the least compliant component. Upwards of 60% of multimedia pieces weren't window/browser responsive, and more than 70% contained stock images that were poorly tracked, missing alt text, or out of license compliance heading into a private-equity acquisition. Every one of those problems was on the clock for my first months as Lead.
 constraint: |
