@@ -1,0 +1,102 @@
+<svg viewBox="0 0 640 300" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Learning analytics: three fragmented data sources unified into one reporting layer feeding dashboards, and check-your-understanding instrumentation growth year over year">
+  <style>
+    .d-title   { font: 600 11px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink,#1a1916); letter-spacing:.03em; }
+    .d-sub     { font: 400 9px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink-muted,#5c5a55); letter-spacing:.02em; }
+    .d-eyebrow { font: 400 9px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-telemetry,#1e7a4a); letter-spacing:.06em; }
+    .d-meta    { font: 400 8px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink-muted,#5c5a55); letter-spacing:.02em; }
+    .d-stat    { font: 600 22px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink,#1a1916); }
+    .d-bar-lbl { font: 400 9px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink-muted,#5c5a55); letter-spacing:.02em; }
+    .src-gov   { fill: var(--color-gov-wash,#eeecf7); stroke: var(--color-gov,#574a93); stroke-width:1; }
+    .src-ld    { fill: var(--color-ld-wash,#f8ece1); stroke: var(--color-ld,#b5642a); stroke-width:1; }
+    .src-eng   { fill: var(--color-eng-wash,#e1f2f2); stroke: var(--color-eng,#0d7d7d); stroke-width:1; }
+    .unified   { fill: var(--color-eng-wash,#e1f2f2); stroke: var(--color-eng,#0d7d7d); stroke-width:1.5; }
+    .node-def  { fill: var(--color-surface,#f0ede7); stroke: var(--color-border,#d4cfc7); stroke-width:1; }
+    .bar       { fill: var(--color-eng,#0d7d7d); opacity:.25; }
+    .bar-hi    { fill: var(--color-eng,#0d7d7d); opacity:.55; }
+    .line      { stroke: var(--color-border,#d4cfc7); stroke-width:1.5; }
+    .divider   { stroke: var(--color-border,#d4cfc7); stroke-width:1; stroke-dasharray:4 4; }
+    .arr       { fill: var(--color-border,#d4cfc7); }
+  </style>
+
+  <!-- header -->
+  <text class="d-title" x="20" y="16">LEARNING DATA STACK — UNIFIED REPORTING LAYER</text>
+  <text class="d-meta"  x="20" y="30">2023 – present  ·  33-course carousel  ·  Qualtrics + Canvas + instrumented multimedia</text>
+  <line class="line" x1="20" y1="40" x2="620" y2="40"/>
+
+  <!-- divider between left (pipeline) and right (chart) -->
+  <line class="divider" x1="340" y1="48" x2="340" y2="280"/>
+
+  <!-- ── LEFT: Unification pipeline (x 20–320) ── -->
+  <text class="d-eyebrow" x="20" y="56">// fragmented sources → one layer</text>
+
+  <!-- SURVEYS -->
+  <rect class="src-gov" x="20" y="64" width="130" height="44" rx="3"/>
+  <text class="d-title" x="30" y="82" style="fill:var(--color-gov,#574a93)">SURVEYS</text>
+  <text class="d-sub"   x="30" y="97">33 courses → 1 layer</text>
+
+  <!-- GRADEBOOK -->
+  <rect class="src-ld" x="20" y="118" width="130" height="44" rx="3"/>
+  <text class="d-title" x="30" y="136" style="fill:var(--color-ld,#b5642a)">GRADEBOOK</text>
+  <text class="d-sub"   x="30" y="151">28 courses → 1 format</text>
+
+  <!-- MULTIMEDIA -->
+  <rect class="src-eng" x="20" y="172" width="130" height="44" rx="3"/>
+  <text class="d-title" x="30" y="190" style="fill:var(--color-eng,#0d7d7d)">MULTIMEDIA</text>
+  <text class="d-sub"   x="30" y="205">19 courses → 1 layer</text>
+
+  <!-- merge elbows: sources → unified -->
+  <line class="line" x1="150" y1="86"  x2="160" y2="86"/>
+  <line class="line" x1="150" y1="140" x2="160" y2="140"/>
+  <line class="line" x1="150" y1="194" x2="160" y2="194"/>
+  <line class="line" x1="160" y1="86"  x2="160" y2="194"/>
+  <line class="line" x1="160" y1="140" x2="164" y2="140"/>
+  <polygon class="arr" points="164,136 172,140 164,144"/>
+
+  <!-- UNIFIED REPORTING LAYER -->
+  <rect class="unified" x="172" y="112" width="140" height="56" rx="3"/>
+  <text class="d-title" x="242" y="134" text-anchor="middle" style="fill:var(--color-eng,#0d7d7d)">UNIFIED</text>
+  <text class="d-title" x="242" y="150" text-anchor="middle" style="fill:var(--color-eng,#0d7d7d)">REPORTING LAYER</text>
+
+  <!-- arrow down to dashboards -->
+  <line class="line" x1="242" y1="168" x2="242" y2="188"/>
+  <polygon class="arr" points="238,188 242,196 246,188"/>
+
+  <!-- DASHBOARDS -->
+  <rect class="node-def" x="172" y="196" width="140" height="44" rx="3"/>
+  <text class="d-title" x="242" y="214" text-anchor="middle">DASHBOARDS</text>
+  <text class="d-sub"   x="242" y="229" text-anchor="middle">program-level · Q2 2026</text>
+
+  <!-- stats row -->
+  <line class="line" x1="20" y1="252" x2="320" y2="252"/>
+  <text class="d-meta" x="20" y="265">reporting cadence: once-per-term → continuous</text>
+  <text class="d-meta" x="20" y="278">stalled: Canvas analytics → LD pipeline (partner-only)</text>
+
+  <!-- ── RIGHT: CYU instrumentation chart (x 360–620) ── -->
+  <text class="d-eyebrow" x="360" y="56">// cyu coverage · year over year</text>
+
+  <!-- chart area: x 370–610, y 80–230; max 60, scale 150/60 = 2.5 px/unit -->
+  <line class="divider" x1="370" y1="80"  x2="610" y2="80"/>
+  <text class="d-bar-lbl" x="365" y="80" text-anchor="end" dominant-baseline="middle">60</text>
+  <line class="divider" x1="370" y1="130" x2="610" y2="130"/>
+  <text class="d-bar-lbl" x="365" y="130" text-anchor="end" dominant-baseline="middle">40</text>
+  <line class="divider" x1="370" y1="180" x2="610" y2="180"/>
+  <text class="d-bar-lbl" x="365" y="180" text-anchor="end" dominant-baseline="middle">20</text>
+
+  <!-- baseline -->
+  <line class="line" x1="370" y1="230" x2="610" y2="230"/>
+
+  <!-- Year 1: 22 pieces → h = 22 × 2.5 = 55px → top = 175 -->
+  <rect class="bar"    x="395" y="175" width="64" height="55" rx="2"/>
+  <text class="d-stat" x="427" y="165" text-anchor="middle">22</text>
+  <text class="d-bar-lbl" x="427" y="244" text-anchor="middle">Year 1 · 8 courses</text>
+
+  <!-- Year 2: 57+ pieces → h = 57 × 2.5 ≈ 143px → top = 87 -->
+  <rect class="bar-hi" x="535" y="87"  width="64" height="143" rx="2"/>
+  <text class="d-stat" x="567" y="77" text-anchor="middle">57+</text>
+  <text class="d-bar-lbl" x="567" y="244" text-anchor="middle">Year 2 · 19 courses</text>
+
+  <!-- scope note -->
+  <line class="line" x1="360" y1="252" x2="620" y2="252"/>
+  <text class="d-meta" x="360" y="265">252+ pieces  ·  158 interactive  ·  94 video-based</text>
+  <text class="d-meta" x="360" y="278">36% of interactive pieces carry an embedded check</text>
+</svg>
