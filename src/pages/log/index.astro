@@ -60,8 +60,8 @@ function excerpt(body: string | undefined): string {
             {entry.data.assessment && (
               <p class="log-assessment">{entry.data.assessment}</p>
             )}
-            {excerpt(entry.body) && (
-              <p class="log-excerpt">{excerpt(entry.body)}</p>
+            {(entry.data.excerpt ?? excerpt(entry.body)) && (
+              <p class="log-excerpt">{entry.data.excerpt ?? excerpt(entry.body)}</p>
             )}
             {entry.data.tags.length > 0 && (
               <ul class="log-tags" role="list" aria-label="Tags">

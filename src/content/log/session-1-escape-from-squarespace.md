@@ -7,6 +7,7 @@ draft: false
 objective: "Execute the June 11 verdict: leave the rented templates behind and stand up a portfolio scaffold I own end to end — a site built to showcase real work, designed in public."
 activity: "Ran the Phase 1 runbook from the Phase 0 Worksheet. Scaffolded Astro 7 with React islands, strict TypeScript, and static output. Activated security hooks, opened the public repo, and deployed to Cloudflare at georgemitchellpayne.com."
 assessment: "Thirteen days from verdict to a live site on my own domain. The template era — WordPress, Weebly, Squarespace — is over. The scaffold is mine, public, and ready to hold real cases, real artifacts, real decisions."
+excerpt: "After months of context building for my digital twin — and after a few interviews and dozens of rejections and ghostings — I ask AI to review my portfolio website…"
 ---
 
 The escape was decided on June 11, two weeks before this session. After months of context building for my digital twin — and after a few interviews and dozens of rejections and ghostings — I asked the AI to review my personal portfolio website and assess how it supported my career journey. I pointed out that more and more of the jobs I wanted required a healthy cross-section of work samples or case examples. It was a rhetorical question: my entire approach to digital portfolio management was preventing me from being seriously considered for the positions I wanted. I decided right then and there that it was time to ditch Squarespace for my own space.

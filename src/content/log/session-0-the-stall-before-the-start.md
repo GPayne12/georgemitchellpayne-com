@@ -7,6 +7,7 @@ draft: false
 objective: "Document the ten weeks before the first commit — the browser era, the first repos, and the plans that led to the development of my working learning ecosystem."
 activity: "Built context for a digital twin in Claude Projects. Built a job search automation app through chat-driven workflow. Initialized the first two repos. Audited the environment and found the hub plan (linking all my machines and activities) stalled at zero."
 assessment: "The honest starting line: a vision document, two repos, and a plan that had not survived contact with reality. The fix was a working method — I design, AI builds. No more planning."
+excerpt: "Before the first commit on this site, there were ten weeks of work worth recounting. This entry reconstructs them, because the stall is part of the story."
 ---
 
 Before the first commit on this site, there were ten weeks of work that left almost no trace on disk. This entry reconstructs them, because the stall is part of the story.

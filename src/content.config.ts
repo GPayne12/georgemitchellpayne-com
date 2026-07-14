@@ -46,6 +46,7 @@ const log = defineCollection({
     objective: z.string().optional(),
     activity: z.string().optional(),
     assessment: z.string().optional(),
+    excerpt: z.string().optional(),
   }),
 });
 
