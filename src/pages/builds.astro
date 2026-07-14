@@ -29,14 +29,24 @@ function isRealUrl(url: string | undefined): boolean {
     {sorted.length === 0 ? (
       <p class="builds-empty">Builds coming soon.</p>
     ) : (
-      <ul class="builds-list" role="list">
+      <ul class="builds-grid" role="list">
         {sorted.map(b => (
-          <li class="build-row">
+          <li class="build-card">
+
+            <img
+              class="build-icon"
+              src={`/icons/${b.data.slug}.svg`}
+              alt=""
+              width="28"
+              height="28"
+              loading="lazy"
+            />
 
             <div class="build-header">
               <div class="build-title-row">
                 <h2 class="build-title">{b.data.title}</h2>
                 <span class={`build-status status--${b.data.status}`}>
+                  <span class="pulse" aria-hidden="true"></span>
                   {b.data.status === 'live' ? 'live' : 'in progress'}
                 </span>
               </div>
@@ -118,23 +128,42 @@ function isRealUrl(url: string | undefined): boolean {
     color: var(--color-ink-muted);
   }
 
-  /* ── Build list ───────────────────────────────────── */
-  .builds-list {
+  /* ── Card grid — two columns, dashboard-style ─────── */
+  .builds-grid {
     list-style: none;
     padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    margin-bottom: var(--space-12);
   }
 
-  .build-row {
-    padding-block: var(--space-10);
-    border-top: 1px solid var(--color-border);
+  @media (min-width: 760px) {
+    .builds-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .build-card {
+    position: relative;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: var(--space-6);
     display: flex;
     flex-direction: column;
-    gap: var(--space-5);
-    max-width: var(--content-width);
+    gap: var(--space-4);
   }
 
-  .build-row:last-child {
-    border-bottom: 1px solid var(--color-border);
+  /* ── Project favicon, top right ───────────────────── */
+  .build-icon {
+    position: absolute;
+    top: var(--space-6);
+    right: var(--space-6);
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
   }
 
   /* ── Build header ─────────────────────────────────── */
@@ -142,28 +171,41 @@ function isRealUrl(url: string | undefined): boolean {
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
+    /* keep the title clear of the absolutely-positioned icon */
+    padding-right: calc(28px + var(--space-4));
   }
 
   .build-title-row {
     display: flex;
-    align-items: baseline;
-    gap: var(--space-4);
+    align-items: center;
+    gap: var(--space-3);
     flex-wrap: wrap;
   }
 
   .build-title {
-    font-size: var(--text-2xl);
+    font-size: var(--text-xl);
     font-weight: 600;
     line-height: 1.2;
   }
 
   .build-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     font-family: var(--font-mono);
     font-size: var(--text-xs);
     letter-spacing: 0.04em;
-    padding: 0.15em 0.55em;
-    border-radius: 3px;
+    padding: 0.2em 0.75em;
+    border-radius: 100px;
     white-space: nowrap;
+  }
+
+  .build-status .pulse {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-ink-muted);
+    flex-shrink: 0;
   }
 
   .status--live {
@@ -172,10 +214,26 @@ function isRealUrl(url: string | undefined): boolean {
     border: 1px solid color-mix(in srgb, var(--color-telemetry) 25%, transparent);
   }
 
+  .status--live .pulse {
+    background: var(--color-telemetry);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+
   .status--in-progress {
-    background: var(--color-surface);
+    background: var(--color-bg);
     color: var(--color-ink-muted);
     border: 1px solid var(--color-border);
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-telemetry) 50%, transparent); }
+    50% { opacity: 0.6; box-shadow: 0 0 0 4px transparent; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .status--live .pulse {
+      animation: none;
+    }
   }
 
   .build-stack {
@@ -190,7 +248,7 @@ function isRealUrl(url: string | undefined): boolean {
     font-family: var(--font-mono);
     font-size: var(--text-xs);
     color: var(--color-ink-muted);
-    background: var(--color-surface);
+    background: var(--color-bg);
     border: 1px solid var(--color-border);
     padding: 0.15em 0.55em;
     border-radius: 3px;
@@ -199,16 +257,16 @@ function isRealUrl(url: string | undefined): boolean {
 
   /* ── Summary & decision log ───────────────────────── */
   .build-summary {
-    font-size: var(--text-base);
+    font-size: var(--text-sm);
     line-height: 1.7;
     color: var(--color-ink);
   }
 
   .decision-log {
-    background: var(--color-surface);
+    background: var(--color-bg);
     border: 1px solid var(--color-border);
-    border-radius: 4px;
-    padding: var(--space-5) var(--space-6);
+    border-radius: 6px;
+    padding: var(--space-4) var(--space-5);
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
@@ -230,6 +288,7 @@ function isRealUrl(url: string | undefined): boolean {
     display: flex;
     gap: var(--space-6);
     flex-wrap: wrap;
+    margin-top: auto;
   }
 
   .build-link {
