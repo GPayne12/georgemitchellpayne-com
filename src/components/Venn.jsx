@@ -87,6 +87,8 @@ export default function Venn({ cases = [] }) {
   return (
     <div className="venn-wrap">
       <div className="venn-left">
+        <p className="venn-hint">Select an area of the diagram to explore the cases in that domain.</p>
+
         <svg
           viewBox="0 0 400 386"
           className="venn-svg"
@@ -152,8 +154,6 @@ export default function Venn({ cases = [] }) {
             <tspan x={200} dy="14">engineer</tspan>
           </text>
         </svg>
-
-        <p className="venn-hint">Hover over a circle to explore cases in that domain.</p>
       </div>
 
       <div className="venn-panel" aria-live="polite" aria-atomic="true">
