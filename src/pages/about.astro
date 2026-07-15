@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { positioningLead, expertiseRange } from '../data/positioning.ts';
 
 const timeline = [
   {
@@ -74,12 +75,7 @@ const timeline = [
 
     <section class="about-narrative">
       <p class="narrative-body">
-        I'm a learning engineer. For the past 10 years, I have cultivated learning design
-        expertise by building hundreds of learning objects and assessments, revising over
-        100 distinct course offerings, and producing learning solutions for high-profile
-        clients, including the United Nations. My expertise ranges from multimedia and
-        video production to data-driven learning design, to learning experience architecture
-        and AI-assisted coding.
+        I'm a learning engineer. {positioningLead} {expertiseRange}
       </p>
       <p class="narrative-body">
         Every year for the last four years, I have woven AI into the practice of learning
