@@ -70,6 +70,17 @@ const { Content } = await render(build);
       </div>
     </section>
 
+    {build.data.whatBroke && (
+      <section class="decision-log" aria-label="What broke">
+        <h2 class="section-eyebrow">
+          <span class="telemetry">// what broke</span>
+        </h2>
+        <div class="prose">
+          <p>{build.data.whatBroke}</p>
+        </div>
+      </section>
+    )}
+
   </div>
 </Layout>
 

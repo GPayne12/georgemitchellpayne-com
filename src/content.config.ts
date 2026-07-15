@@ -33,6 +33,7 @@ const builds = defineCollection({
     status: z.enum(['live', 'in-progress']),
     summary: z.string(),
     decisionLog: z.string(),
+    whatBroke: z.string().optional(),
   }),
 });
 
