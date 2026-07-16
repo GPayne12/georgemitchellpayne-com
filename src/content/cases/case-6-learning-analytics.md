@@ -1,5 +1,5 @@
 ---
-title: "Learning Analytics Infrastructuralization: Instrumenting a 33-Course Program"
+title: "Learning Analytics Infrastructuralization: Instrumenting Data Pipelines"
 slug: "learning-analytics"
 order: 6
 domains: ["engineering", "learning-design", "leadership"]
