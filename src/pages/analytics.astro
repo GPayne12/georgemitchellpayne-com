@@ -19,41 +19,48 @@ import AnalyticsPanel from '../components/AnalyticsPanel.tsx';
       <p class="telemetry section-label">// analytics</p>
       <h1>The site instruments itself</h1>
       <p class="analytics-lead">
-        My analytics case study describes building xAPI infrastructure across a
-        33-course portfolio. This page is the same discipline at personal scale:
-        every page here emits a real xAPI statement to a Learning Record Store,
-        and this dashboard reads the aggregates back. The numbers are small
-        because they are real — the pipeline is the exhibit, the counts are just
-        proof it runs.
+        My analytics case study describes building learning experience
+        infrastructure across an entire online program. This page is the same
+        discipline at personal scale: every page here emits a real xAPI
+        statement to a Learning Record Store, and this dashboard reads the
+        aggregates back.
+      </p>
+      <p class="analytics-aside">
+        The numbers are small because they are real — the pipeline is the
+        exhibit, the counts are just proof it runs.
       </p>
     </section>
 
-    <section aria-label="Pipeline">
-      <p class="telemetry section-label">// the pipeline</p>
-      <ol class="pipeline" role="list">
-        <li><span class="step-name">page view</span> your browser sends a minimal beacon — path and an anonymous session id, nothing else</li>
-        <li><span class="step-name">proxy route</span> a rate-limited Worker endpoint validates the beacon and constructs the xAPI statement server-side</li>
-        <li><span class="step-name">LRS</span> the statement lands in a Learning Record Store — the standard plumbing of learning analytics</li>
-        <li><span class="step-name">readback</span> a second route queries the LRS, aggregates, and caches for ten minutes</li>
-        <li><span class="step-name">this page</span> renders whatever the pipeline has actually collected</li>
-      </ol>
-    </section>
+    <div class="analytics-columns">
+      <div class="analytics-main">
+        <section aria-label="Pipeline">
+          <p class="telemetry section-label">// the pipeline</p>
+          <ol class="pipeline" role="list">
+            <li><span class="step-name">page view</span> your browser sends a minimal beacon — path and an anonymous session id, nothing else</li>
+            <li><span class="step-name">proxy route</span> a rate-limited Worker endpoint validates the beacon and constructs the xAPI statement server-side</li>
+            <li><span class="step-name">LRS</span> the statement lands in a Learning Record Store — the standard plumbing of learning analytics</li>
+            <li><span class="step-name">readback</span> a second route queries the LRS, aggregates, and caches for ten minutes</li>
+            <li><span class="step-name">this page</span> renders whatever the pipeline has actually collected</li>
+          </ol>
+        </section>
 
-    <section aria-label="Live data">
-      <p class="telemetry section-label">// live readout</p>
-      <AnalyticsPanel client:load />
-    </section>
+        <section aria-label="Methodology and limits">
+          <p class="telemetry section-label">// methodology &amp; limits</p>
+          <ul class="limits" role="list">
+            <li>Anonymous by design: no cookies, no fingerprinting, no IP storage — a random per-tab session id only.</li>
+            <li>Do Not Track is honored; localhost visits are excluded so the data is real visitors only.</li>
+            <li>Statements are constructed server-side from a fixed schema; the write route is rate-limited. Bots can still inflate view counts — that limit is disclosed here rather than hidden.</li>
+            <li>Aggregates are cached ten minutes; the readout can trail reality by that much.</li>
+            <li>The portfolio-scale version of this work is <a href="/practice/learning-analytics">Case 6 — Learning Analytics Infrastructuralization</a>.</li>
+          </ul>
+        </section>
+      </div>
 
-    <section aria-label="Methodology and limits">
-      <p class="telemetry section-label">// methodology &amp; limits</p>
-      <ul class="limits" role="list">
-        <li>Anonymous by design: no cookies, no fingerprinting, no IP storage — a random per-tab session id only.</li>
-        <li>Do Not Track is honored; localhost visits are excluded so the data is real visitors only.</li>
-        <li>Statements are constructed server-side from a fixed schema; the write route is rate-limited. Bots can still inflate view counts — that limit is disclosed here rather than hidden.</li>
-        <li>Aggregates are cached ten minutes; the readout can trail reality by that much.</li>
-        <li>The portfolio-scale version of this work is <a href="/practice/learning-analytics">Case 6 — Learning Analytics Infrastructuralization</a>.</li>
-      </ul>
-    </section>
+      <aside class="analytics-readout" aria-label="Live data">
+        <p class="telemetry section-label">// live readout</p>
+        <AnalyticsPanel client:load />
+      </aside>
+    </div>
   </div>
 </Layout>
 
@@ -69,6 +76,38 @@ import AnalyticsPanel from '../components/AnalyticsPanel.tsx';
   .analytics-lead {
     max-width: 60ch;
     color: var(--color-ink);
+  }
+  .analytics-aside {
+    max-width: 60ch;
+    margin-top: 0.75rem;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: var(--text-sm);
+    color: var(--color-ink-muted);
+  }
+  .analytics-aside::before {
+    content: '// ';
+    color: var(--color-telemetry);
+  }
+  .analytics-columns {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 28rem);
+    gap: 3rem;
+    align-items: start;
+  }
+  .analytics-readout {
+    position: sticky;
+    top: 2rem;
+  }
+  @media (max-width: 56rem) {
+    .analytics-columns {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+    }
+    .analytics-readout {
+      position: static;
+      order: -1; /* readout first when stacked — the data is the draw */
+      margin-block-end: 2.5rem;
+    }
   }
   section {
     margin-block-end: 2.5rem;
