@@ -1,0 +1,103 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AnalyticsPanel from '../components/AnalyticsPanel.tsx';
+
+// Revived by handoff item 11 (George: yes, 2026-07-17) as the site expression
+// of the Efficacy & Analytics pillar. Architecture: A + SaaS LRS (George's
+// call, same day) — the site's first server endpoint since the Session 4 cut.
+//
+// Copy vetted by George 2026-07-17 (Claude-drafted same day). Changes to
+// the prose come from George.
+---
+
+<Layout
+  title="Analytics — George Mitchell Payne"
+  description="The portfolio instruments itself: a live xAPI pipeline from these pages to a Learning Record Store, shown with its real numbers."
+>
+  <div class="container">
+    <section class="analytics-header">
+      <p class="telemetry section-label">// analytics</p>
+      <h1>The site instruments itself</h1>
+      <p class="analytics-lead">
+        My analytics case study describes building xAPI infrastructure across a
+        33-course portfolio. This page is the same discipline at personal scale:
+        every page here emits a real xAPI statement to a Learning Record Store,
+        and this dashboard reads the aggregates back. The numbers are small
+        because they are real — the pipeline is the exhibit, the counts are just
+        proof it runs.
+      </p>
+    </section>
+
+    <section aria-label="Pipeline">
+      <p class="telemetry section-label">// the pipeline</p>
+      <ol class="pipeline" role="list">
+        <li><span class="step-name">page view</span> your browser sends a minimal beacon — path and an anonymous session id, nothing else</li>
+        <li><span class="step-name">proxy route</span> a rate-limited Worker endpoint validates the beacon and constructs the xAPI statement server-side</li>
+        <li><span class="step-name">LRS</span> the statement lands in a Learning Record Store — the standard plumbing of learning analytics</li>
+        <li><span class="step-name">readback</span> a second route queries the LRS, aggregates, and caches for ten minutes</li>
+        <li><span class="step-name">this page</span> renders whatever the pipeline has actually collected</li>
+      </ol>
+    </section>
+
+    <section aria-label="Live data">
+      <p class="telemetry section-label">// live readout</p>
+      <AnalyticsPanel client:load />
+    </section>
+
+    <section aria-label="Methodology and limits">
+      <p class="telemetry section-label">// methodology &amp; limits</p>
+      <ul class="limits" role="list">
+        <li>Anonymous by design: no cookies, no fingerprinting, no IP storage — a random per-tab session id only.</li>
+        <li>Do Not Track is honored; localhost visits are excluded so the data is real visitors only.</li>
+        <li>Statements are constructed server-side from a fixed schema; the write route is rate-limited. Bots can still inflate view counts — that limit is disclosed here rather than hidden.</li>
+        <li>Aggregates are cached ten minutes; the readout can trail reality by that much.</li>
+        <li>The portfolio-scale version of this work is <a href="/practice/learning-analytics">Case 6 — Learning Analytics Infrastructuralization</a>.</li>
+      </ul>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .analytics-header {
+    padding-block: 3rem 1rem;
+  }
+  .analytics-header h1 {
+    font-size: var(--text-xl);
+    color: var(--color-ink);
+    margin: 0.5rem 0 1rem;
+  }
+  .analytics-lead {
+    max-width: 60ch;
+    color: var(--color-ink);
+  }
+  section {
+    margin-block-end: 2.5rem;
+  }
+  .pipeline {
+    margin: 0;
+    padding: 0;
+    max-width: 60ch;
+  }
+  .pipeline li {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+  .step-name {
+    display: inline-block;
+    min-width: 7.5rem;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    color: var(--color-telemetry);
+  }
+  .limits {
+    margin: 0;
+    padding: 0;
+    max-width: 65ch;
+  }
+  .limits li {
+    padding: 0.35rem 0;
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+</style>

@@ -17,10 +17,11 @@ const canonicalURL = new URL(currentPath, Astro.site);
 const ogImageURL = new URL('/og-card.png', Astro.site);
 
 const navLinks = [
-  { href: '/builds',   label: 'Builds' },
-  { href: '/log',      label: 'Log' },
-  { href: '/practice', label: 'Practice' },
-  { href: '/about',    label: 'About' },
+  { href: '/builds',    label: 'Builds' },
+  { href: '/log',       label: 'Log' },
+  { href: '/practice',  label: 'Practice' },
+  { href: '/analytics', label: 'Analytics' },
+  { href: '/about',     label: 'About' },
 ];
 ---
 
@@ -121,5 +122,28 @@ const navLinks = [
         </div>
       </footer>
     </div>
+
+    <!-- xAPI page-view beacon (/analytics pipeline). Anonymous session id only;
+         honors Do Not Track; production hostname only so the data is real
+         visitors, never dev noise. Statement is built server-side in /api/xapi. -->
+    <script is:inline>
+      (function () {
+        if (location.hostname !== 'www.georgemitchellpayne.com') return;
+        if (navigator.doNotTrack === '1') return;
+        var id = sessionStorage.getItem('xapi-session');
+        if (!id) {
+          id = Array.from(crypto.getRandomValues(new Uint8Array(8)))
+            .map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+          sessionStorage.setItem('xapi-session', id);
+        }
+        var payload = JSON.stringify({ page: location.pathname, session: id });
+        fetch('/api/xapi', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: payload,
+          keepalive: true,
+        }).catch(function () {});
+      })();
+    </script>
   </body>
 </html>
