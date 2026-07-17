@@ -35,3 +35,31 @@ if (!src.includes(NEEDLE)) {
 
 writeFileSync(entryPath, src.replace(NEEDLE, PATCH), 'utf8');
 console.log('patch-cloudflare-entry: injected locals.cfEnv = env into entry.mjs');
+
+// Second patch: pin the SESSION KV binding to the account's existing namespace.
+// The adapter emits {"binding":"SESSION"} with no id, which makes wrangler try
+// to auto-provision "georgemitchellpayne-com-session" — and fail with code
+// 10014 because that namespace already exists (created in the ask-widget era).
+// Binding the known id skips provisioning entirely. Sessions are unused by the
+// site; the binding just has to resolve.
+const SESSION_KV_ID = '1f5cecf95ce143c2aa9c5e2ee2111f33';
+const wranglerPath = resolve('dist/server/wrangler.json');
+
+if (existsSync(wranglerPath)) {
+  const config = JSON.parse(readFileSync(wranglerPath, 'utf8'));
+  const session = (config.kv_namespaces ?? []).find((ns) => ns.binding === 'SESSION');
+  let touched = false;
+  if (session && !session.id) {
+    session.id = SESSION_KV_ID;
+    touched = true;
+  }
+  const preview = (config.previews?.kv_namespaces ?? []).find((ns) => ns.binding === 'SESSION');
+  if (preview && !preview.id) {
+    preview.id = SESSION_KV_ID;
+    touched = true;
+  }
+  if (touched) {
+    writeFileSync(wranglerPath, JSON.stringify(config), 'utf8');
+    console.log('patch-cloudflare-entry: pinned SESSION KV binding to existing namespace');
+  }
+}
