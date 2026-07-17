@@ -26,7 +26,7 @@ May 20: two repositories initialized the same day.
 
 I was busy building up my first applications when I realized I didn't know what I was doing — and I didn't want to mess up in a way that discouraged me from practicing. So before continuing, I built up a series of security protocols for the kind of work I was doing.
 
-- **security-hooks-setup** — a pre-push hook that blocks credentials, build artifacts, and secrets from ever leaving the machine. The first repo I ever created was a security control: guardrails before anything else.
+- **[security-hooks-setup](https://github.com/GPayne12/security-hooks-setup)** — a pre-push hook that blocks credentials, build artifacts, and secrets from ever leaving the machine. The first repo I ever created was a security control: guardrails before anything else.
 - **job-application-assistant** — the job search app, ported from chat sessions into a real Vite + React codebase.
 
 The tools I built were immediately useful, but they also provided me a safe space to test front-end and back-end ideas rapidly.
