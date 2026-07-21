@@ -57,8 +57,8 @@ function excerpt(body: string | undefined): string {
               <span class="log-date">{formatDate(entry.data.date)}</span>
             </div>
             <h2 class="log-entry-title">{entry.data.title}</h2>
-            {entry.data.assessment && (
-              <p class="log-assessment">{entry.data.assessment}</p>
+            {(entry.data.cardAssessment ?? entry.data.assessment) && (
+              <p class="log-assessment">{entry.data.cardAssessment ?? entry.data.assessment}</p>
             )}
             {(entry.data.excerpt ?? excerpt(entry.body)) && (
               <p class="log-excerpt">{entry.data.excerpt ?? excerpt(entry.body)}</p>
