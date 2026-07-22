@@ -24,6 +24,10 @@ const BORDER = 'var(--color-border)';
 const SURFACE = 'var(--color-surface)';
 const MONO = 'var(--font-mono, ui-monospace, monospace)';
 
+// The root route arrives as the bare path "/"; annotate it so the row reads as
+// the homepage without altering the underlying key or the honest URL scheme.
+const pageLabel = (page: string) => (page === '/' ? '/ (home)' : page);
+
 const s: Record<string, React.CSSProperties> = {
   state: { fontFamily: MONO, fontSize: 'var(--text-sm)', color: MUTED },
   tiles: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(9.5rem, 1fr))', gap: '1rem', margin: '1.5rem 0' },
@@ -170,7 +174,7 @@ export default function AnalyticsPanel() {
       <div>
         {topPages.map((p) => (
           <div key={p.page} style={s.barRow} title={`${p.page} — ${p.count} statements`}>
-            <span style={s.barPath}>{p.page}</span>
+            <span style={s.barPath}>{pageLabel(p.page)}</span>
             <span style={s.barTrack}>
               <span style={{ ...s.barFill, width: `${(p.count / maxPage) * 100}%` }} />
             </span>
@@ -186,7 +190,7 @@ export default function AnalyticsPanel() {
           <thead><tr><th style={s.th} scope="col">page</th><th style={s.th} scope="col">statements</th></tr></thead>
           <tbody>
             {byPage.map((p) => (
-              <tr key={p.page}><td style={{ ...s.td, fontFamily: MONO }}>{p.page}</td><td style={s.td}>{p.count}</td></tr>
+              <tr key={p.page}><td style={{ ...s.td, fontFamily: MONO }}>{pageLabel(p.page)}</td><td style={s.td}>{p.count}</td></tr>
             ))}
           </tbody>
         </table>
