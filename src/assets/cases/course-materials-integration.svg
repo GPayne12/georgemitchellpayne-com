@@ -1,0 +1,130 @@
+<svg viewBox="0 0 640 300" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Course materials integration: the reading-list lifecycle state machine across Leganto/Alma and Canvas with three integration failure-modes annotated, and setup time saved per role each cycle">
+  <style>
+    .d-title   { font: 600 11px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink,#1a1916); letter-spacing:.03em; }
+    .d-sub     { font: 400 9px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink-muted,#5c5a55); letter-spacing:.02em; }
+    .d-eyebrow { font: 400 9px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-telemetry,#1e7a4a); letter-spacing:.06em; }
+    .d-meta    { font: 400 8px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink-muted,#5c5a55); letter-spacing:.02em; }
+    .d-stat    { font: 600 22px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink,#1a1916); }
+    .d-bar-lbl { font: 400 8px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink-muted,#5c5a55); letter-spacing:.02em; }
+    .d-num     { font: 600 8px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink-muted,#5c5a55); letter-spacing:.02em; }
+    .step-ld   { fill: var(--color-ld-wash,#f8ece1);  stroke: var(--color-ld,#b5642a);  stroke-width:1; }
+    .step-gov  { fill: var(--color-gov-wash,#eeecf7); stroke: var(--color-gov,#574a93); stroke-width:1; }
+    .step-eng  { fill: var(--color-eng-wash,#e1f2f2); stroke: var(--color-eng,#0d7d7d); stroke-width:1; }
+    .step-def  { fill: var(--color-surface,#f0ede7);  stroke: var(--color-border,#d4cfc7); stroke-width:1; }
+    .bar       { fill: var(--color-eng,#0d7d7d); opacity:.25; }
+    .bar-hi    { fill: var(--color-eng,#0d7d7d); opacity:.55; }
+    .line      { stroke: var(--color-border,#d4cfc7); stroke-width:1.5; }
+    .divider   { stroke: var(--color-border,#d4cfc7); stroke-width:1; stroke-dasharray:4 4; }
+    .warn      { stroke: var(--color-ld,#b5642a); stroke-width:1; stroke-dasharray:3 3; opacity:.7; }
+    .arr       { fill: var(--color-border,#d4cfc7); }
+  </style>
+
+  <!-- header -->
+  <text class="d-title" x="20" y="16">COURSE MATERIALS — LEGANTO/ALMA ↔ CANVAS</text>
+  <text class="d-meta"  x="20" y="30">Feb 2024 – Mar 2026  ·  334 / 451 items  ·  centralized reference-management integration</text>
+  <line class="line" x1="20" y1="40" x2="620" y2="40"/>
+
+  <!-- divider between left (lifecycle) and right (chart) -->
+  <line class="divider" x1="340" y1="48" x2="340" y2="280"/>
+
+  <!-- ── LEFT: reading-list lifecycle state machine (x 20–320) ── -->
+  <text class="d-eyebrow" x="20" y="56">// reading-list lifecycle</text>
+
+  <!-- 01 parent list review -->
+  <text class="d-num" x="46" y="74" text-anchor="end">01</text>
+  <rect class="step-ld"  x="52" y="60" width="176" height="21" rx="3"/>
+  <text class="d-sub" x="140" y="71" text-anchor="middle" dominant-baseline="middle" style="fill:var(--color-ld,#b5642a)">review parent list · consult</text>
+
+  <!-- 02 faculty sign-off -->
+  <text class="d-num" x="46" y="104" text-anchor="end">02</text>
+  <rect class="step-gov" x="52" y="90" width="176" height="21" rx="3"/>
+  <text class="d-sub" x="140" y="101" text-anchor="middle" dominant-baseline="middle" style="fill:var(--color-gov,#574a93)">final faculty sign-off</text>
+
+  <!-- 03 duplicate per section -->
+  <text class="d-num" x="46" y="134" text-anchor="end">03</text>
+  <rect class="step-eng" x="52" y="120" width="176" height="21" rx="3"/>
+  <text class="d-sub" x="140" y="131" text-anchor="middle" dominant-baseline="middle" style="fill:var(--color-eng,#0d7d7d)">duplicate parent → each section</text>
+
+  <!-- 04 lead + practitioner review -->
+  <text class="d-num" x="46" y="164" text-anchor="end">04</text>
+  <rect class="step-gov" x="52" y="150" width="176" height="21" rx="3"/>
+  <text class="d-sub" x="140" y="161" text-anchor="middle" dominant-baseline="middle" style="fill:var(--color-gov,#574a93)">lead + practitioner review</text>
+
+  <!-- 05 course launch -->
+  <text class="d-num" x="46" y="194" text-anchor="end">05</text>
+  <rect class="step-eng" x="52" y="180" width="176" height="21" rx="3"/>
+  <text class="d-sub" x="140" y="191" text-anchor="middle" dominant-baseline="middle" style="fill:var(--color-eng,#0d7d7d)">course launch</text>
+
+  <!-- 06 remove on completion -->
+  <text class="d-num" x="46" y="224" text-anchor="end">06</text>
+  <rect class="step-def" x="52" y="210" width="176" height="21" rx="3"/>
+  <text class="d-sub" x="140" y="221" text-anchor="middle" dominant-baseline="middle">remove list on completion</text>
+
+  <!-- flow arrows between steps -->
+  <line class="line" x1="140" y1="81"  x2="140" y2="86"/><polygon class="arr" points="136,86 140,90 144,86"/>
+  <line class="line" x1="140" y1="111" x2="140" y2="116"/><polygon class="arr" points="136,116 140,120 144,116"/>
+  <line class="line" x1="140" y1="141" x2="140" y2="146"/><polygon class="arr" points="136,146 140,150 144,146"/>
+  <line class="line" x1="140" y1="171" x2="140" y2="176"/><polygon class="arr" points="136,176 140,180 144,176"/>
+  <line class="line" x1="140" y1="201" x2="140" y2="206"/><polygon class="arr" points="136,206 140,210 144,206"/>
+
+  <!-- integration failure-mode annotations (the three scars) -->
+  <line class="warn" x1="228" y1="70" x2="238" y2="70"/>
+  <text class="d-sub"  x="240" y="68" style="fill:var(--color-ld,#b5642a)">⚠ LTI naming</text>
+  <text class="d-meta" x="240" y="78">~1,000 fixes</text>
+
+  <line class="warn" x1="228" y1="130" x2="238" y2="130"/>
+  <text class="d-sub"  x="240" y="128" style="fill:var(--color-eng,#0d7d7d)">⚠ parent-course</text>
+  <text class="d-meta" x="240" y="138">lock-out (months)</text>
+
+  <line class="warn" x1="228" y1="220" x2="238" y2="220"/>
+  <text class="d-sub"  x="240" y="218">orphaned lists</text>
+  <text class="d-meta" x="240" y="228">→ manual cull</text>
+
+  <!-- left stats row -->
+  <line class="line" x1="20" y1="252" x2="320" y2="252"/>
+  <text class="d-meta" x="20" y="265">100% of materials fully accessible</text>
+  <text class="d-meta" x="20" y="278">82% on schedule  ·  6 course exceptions</text>
+
+  <!-- ── RIGHT: setup time saved per role (x 360–620) ── -->
+  <text class="d-eyebrow" x="360" y="56">// setup time saved · up to (hrs)</text>
+
+  <!-- gridlines: max 12, area y 80–230 (12.5 px/hr) -->
+  <line class="divider" x1="372" y1="80"  x2="610" y2="80"/>
+  <text class="d-bar-lbl" x="367" y="80"  text-anchor="end" dominant-baseline="middle">12</text>
+  <line class="divider" x1="372" y1="130" x2="610" y2="130"/>
+  <text class="d-bar-lbl" x="367" y="130" text-anchor="end" dominant-baseline="middle">8</text>
+  <line class="divider" x1="372" y1="180" x2="610" y2="180"/>
+  <text class="d-bar-lbl" x="367" y="180" text-anchor="end" dominant-baseline="middle">4</text>
+
+  <!-- baseline -->
+  <line class="line" x1="372" y1="230" x2="610" y2="230"/>
+
+  <!-- b1 practitioner instructor: 1h → 13px → top 217 -->
+  <rect class="bar" x="383" y="217" width="44" height="13" rx="2"/>
+  <text class="d-stat"    x="405" y="209" text-anchor="middle">1</text>
+  <text class="d-bar-lbl" x="405" y="241" text-anchor="middle">Pract.</text>
+  <text class="d-bar-lbl" x="405" y="250" text-anchor="middle">/term</text>
+
+  <!-- b2 learning designer: 4h → 50px → top 180 -->
+  <rect class="bar" x="443" y="180" width="44" height="50" rx="2"/>
+  <text class="d-stat"    x="465" y="172" text-anchor="middle">4</text>
+  <text class="d-bar-lbl" x="465" y="241" text-anchor="middle">LD</text>
+  <text class="d-bar-lbl" x="465" y="250" text-anchor="middle">/cycle</text>
+
+  <!-- b3 lead learning designer: 10h → 125px → top 105 -->
+  <rect class="bar" x="503" y="105" width="44" height="125" rx="2"/>
+  <text class="d-stat"    x="525" y="97" text-anchor="middle">10</text>
+  <text class="d-bar-lbl" x="525" y="241" text-anchor="middle">Lead LD</text>
+  <text class="d-bar-lbl" x="525" y="250" text-anchor="middle">/cycle</text>
+
+  <!-- b4 course reserves: 12h → 150px → top 80 (max) -->
+  <rect class="bar-hi" x="563" y="80" width="44" height="150" rx="2"/>
+  <text class="d-stat"    x="585" y="72" text-anchor="middle">12</text>
+  <text class="d-bar-lbl" x="585" y="241" text-anchor="middle">Reserves</text>
+  <text class="d-bar-lbl" x="585" y="250" text-anchor="middle">/term</text>
+
+  <!-- right scope note -->
+  <line class="line" x1="360" y1="252" x2="620" y2="252"/>
+  <text class="d-meta" x="360" y="265">334 deployed / 451 managed across the program</text>
+  <text class="d-meta" x="360" y="278">textbooks · articles · video · templates · forms</text>
+</svg>
