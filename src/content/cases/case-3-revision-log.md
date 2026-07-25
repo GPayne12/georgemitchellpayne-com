@@ -8,7 +8,7 @@ center: true
 status: "complete"
 timeline: "2022"
 situation: |
-  Tracking course-development concerns, considerations, and requests is how instructional design stays accountable to its stakeholders. When I joined Pearson, the legacy process was to log revision notes after the fact in a Word document or spreadsheet. Promoted to Lead Instructional Designer, I inherited a directive: act on a faculty survey collected just before my predecessor left, which asked for greater transparency in the revision process and a way to record findings collectively.
+  Tracking course-development concerns, considerations, and requests is how instructional design stays accountable to its stakeholders. When I joined the organization, the legacy process was to log revision notes after the fact in a Word document or spreadsheet. Promoted to Lead Instructional Designer, I inherited a directive: act on a faculty survey collected just before my predecessor left, which asked for greater transparency in the revision process and a way to record findings collectively.
 constraint: |
   Time. The survey went out before my promotion, so by the time I owned the results the clock was already running. The goal was to capture substantive written feedback from faculty at the moment of concern — but where most program-wide initiatives take a year to mature, the revision log wasn't expected to produce meaningful data for at least a year after launch.
 decision: |
