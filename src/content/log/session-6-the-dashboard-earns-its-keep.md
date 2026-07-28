@@ -1,7 +1,7 @@
 ---
-title: "Session 5: The Dashboard Earns Its Keep"
+title: "Session 6: The Dashboard Earns Its Keep"
 date: 2026-07-04
-order: 5
+order: 6
 tags: ["build-log", "tooling", "dev-dashboard", "builds"]
 draft: true
 objective: "Grow the dev dashboard from a bootstrap into a daily driver, and bring the Builds page up to date with what the hub had actually produced."
