@@ -3,7 +3,7 @@ title: "Session 5: The Dashboard Earns Its Keep"
 date: 2026-07-04
 order: 5
 tags: ["build-log", "tooling", "dev-dashboard", "builds"]
-draft: false
+draft: true
 objective: "Grow the dev dashboard from a bootstrap into a daily driver, and bring the Builds page up to date with what the hub had actually produced."
 activity: "Dashboard now persists spawned dev servers and picked up defib-trainer. Builds page gained human-connection-engine and defib-trainer cards. Polish pass: favicon, project icons, dev-layout pane banners. Gitignored backups/ so nightly tarballs can never push."
 assessment: "Tooling week. The dashboard stopped being a demo and started being how I work, and the Builds page caught up with reality. The working environment finally feels like mine."

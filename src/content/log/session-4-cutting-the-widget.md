@@ -1,9 +1,15 @@
 ---
+# DRAFT — pulled from public 2026-07-28 for a writing pass (draft: true).
+# Session 4 needs a stronger voice/structure pass and may be split into
+# multiple parts (the cut / the security day / the hub bootstrap read as
+# three distinct beats). Do not flip draft: false until George vets copy.
+# Note: repo is public — this comment block and all committed wording are
+# world-readable even while draft: true.
 title: "Session 4: Cutting the Widget, Hardening the Hub"
 date: 2026-06-30
 order: 4
 tags: ["build-log", "scope", "security", "hub"]
-draft: false
+draft: true
 objective: "Close out the site sprint's loose end — the ask-the-portfolio widget — and turn the two-machine setup into a hardened, documented hub."
 activity: "Removed and archived the ask widget. Remediated every finding from the dual-Mac security assessment; both machines now pass 7/7 audit checks. Published claude-security-layers and claude-code-dual-mac to GitHub. Committed the hub's initial operating layer: meta docs, handoff structure, scaffolding scripts, and the first pieces of local-api and dev-dashboard."
 assessment: "The first real scope cut. The widget was the wrong kind of play for visitors — edging on gimmicky — and if the wrong bot found it, it could cost a fortune in tokens. Cutting it bought a security layer and a hub skeleton instead."
