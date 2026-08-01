@@ -1,0 +1,283 @@
+---
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import { curriculum } from '../../data/curriculum';
+
+export async function getStaticPaths() {
+  const courses = await getCollection('coursework');
+  // Only finished courses get a page — the rest have nothing to say yet.
+  return courses
+    .filter(c => c.data.status === 'complete')
+    .map(course => ({
+      params: { slug: course.data.slug },
+      props: { course },
+    }));
+}
+
+const { course } = Astro.props;
+const { Content } = await render(course);
+const c = course.data;
+
+const dateFmt = new Intl.DateTimeFormat('en-US', {
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+
+const meta = [
+  c.completedOn ? `completed ${dateFmt.format(c.completedOn)}` : c.term,
+  c.credits ? `${c.credits} credits` : null,
+  c.group,
+].filter(Boolean);
+---
+
+<Layout title={`${c.title} — Coursework — George Mitchell Payne`} description={c.summary}>
+  <div class="container">
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/coursework" class="breadcrumb-link">← coursework</a>
+    </nav>
+
+    <header class="course-header">
+      {c.badge && (
+        <Image
+          class="badge"
+          src={c.badge}
+          alt={c.badgeAlt ?? `Completion badge for ${c.title}`}
+          width={128}
+          height={128}
+          loading="eager"
+        />
+      )}
+
+      <div class="header-text">
+        <p class="telemetry course-code">{c.code}</p>
+        <h1 class="course-title">{c.title}</h1>
+        <p class="course-meta">{meta.join(' · ')}</p>
+        <p class="course-program">{curriculum.program}</p>
+      </div>
+    </header>
+
+    <p class="course-summary">{c.summary}</p>
+
+    {c.reflection && (
+      <blockquote class="reflection">
+        <p class="telemetry reflection-label">// what it was worth</p>
+        <p class="reflection-body">{c.reflection}</p>
+      </blockquote>
+    )}
+
+    {c.skills.length > 0 && (
+      <ul class="skill-tags" role="list" aria-label="Skills">
+        {c.skills.map(s => <li class="skill-tag">{s}</li>)}
+      </ul>
+    )}
+
+    {c.courses.length > 0 && (
+      <section class="lessons" aria-labelledby="lessons-heading">
+        <h2 id="lessons-heading" class="lessons-heading">Courses</h2>
+        <ol class="lesson-list">
+          {c.courses.map(l => <li>{l}</li>)}
+        </ol>
+        {c.assessment && <p class="assessment">Assessed by: {c.assessment}</p>}
+      </section>
+    )}
+
+    <div class="course-body">
+      <Content />
+    </div>
+
+    {c.verifyUrl && (
+      <p class="verify">
+        <a href={c.verifyUrl} class="course-link" rel="noopener noreferrer">
+          verify credential →
+        </a>
+      </p>
+    )}
+
+  </div>
+</Layout>
+
+<style>
+  .breadcrumb {
+    padding-top: var(--space-4);
+    margin-bottom: var(--space-8);
+  }
+
+  .breadcrumb-link {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-ink-muted);
+    text-decoration: none;
+  }
+
+  .breadcrumb-link:hover {
+    color: var(--color-accent);
+  }
+
+  .course-header {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-6);
+    max-width: var(--content-width);
+  }
+
+  .badge {
+    width: 128px;
+    height: 128px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .header-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    min-width: 0;
+  }
+
+  .course-code {
+    font-size: var(--text-xs);
+    letter-spacing: 0.06em;
+  }
+
+  .course-title {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    line-height: 1.15;
+  }
+
+  .course-meta,
+  .course-program {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+    letter-spacing: 0.02em;
+  }
+
+  .course-summary {
+    font-size: var(--text-lg);
+    line-height: 1.65;
+    color: var(--color-ink-muted);
+    max-width: var(--content-width);
+    margin-bottom: var(--space-6);
+  }
+
+  .reflection {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-left: 2px solid var(--color-telemetry);
+    border-radius: 6px;
+    padding: var(--space-5) var(--space-6);
+    max-width: var(--content-width);
+    margin-bottom: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .reflection-label {
+    font-size: var(--text-xs);
+    margin: 0;
+  }
+
+  .reflection-body {
+    font-size: var(--text-base);
+    line-height: 1.7;
+  }
+
+  .skill-tags {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-8);
+  }
+
+  .skill-tag {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 0.15em 0.55em;
+    border-radius: 3px;
+    letter-spacing: 0.02em;
+  }
+
+  .lessons {
+    max-width: var(--content-width);
+    margin-bottom: var(--space-8);
+  }
+
+  .lessons-heading {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    margin-bottom: var(--space-3);
+  }
+
+  .lesson-list {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+    margin: 0 0 var(--space-4) var(--space-5);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    line-height: 1.5;
+  }
+
+  .assessment {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+  }
+
+  .course-body {
+    max-width: var(--content-width);
+    margin-bottom: var(--space-8);
+  }
+
+  .course-body :global(h2) {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-3);
+  }
+
+  .course-body :global(p) {
+    font-size: var(--text-base);
+    line-height: 1.75;
+    margin-bottom: var(--space-4);
+  }
+
+  .course-body :global(ul),
+  .course-body :global(ol) {
+    margin: 0 0 var(--space-4) var(--space-6);
+    line-height: 1.75;
+  }
+
+  .course-body :global(a) {
+    color: var(--color-accent);
+  }
+
+  .verify {
+    margin-bottom: var(--space-12);
+  }
+
+  .course-link {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .course-link:hover {
+    color: var(--color-accent-hover);
+  }
+</style>
