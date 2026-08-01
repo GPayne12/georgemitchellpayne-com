@@ -47,7 +47,10 @@ const timeline = [
   },
   {
     period: '2013 – 2015',
-    role: 'Master of Public Administration & Master of Arts of International Education Management',
+    role: [
+      'Master of Public Administration',
+      'Master of Arts of International Education Management',
+    ],
     org: 'Middlebury Institute of International Studies',
     note: '',
   },
@@ -102,10 +105,11 @@ const timeline = [
           <li class="timeline-item">
             <span class="timeline-period">{period}</span>
             <span class="timeline-content">
-              <span class="timeline-role">{role}</span>
-              {' · '}
+              {(Array.isArray(role) ? role : [role]).map(r => (
+                <span class="timeline-role">{r}</span>
+              ))}
               <span class="timeline-org">{org}</span>
-              {note && <span class="timeline-note"> — {note}</span>}
+              {note && <span class="timeline-note">{note}</span>}
             </span>
           </li>
         ))}
@@ -209,15 +213,25 @@ const timeline = [
     padding-top: 0.2em;
   }
 
+  /* Each part of an entry gets its own line; a single entry may carry
+     more than one role (two degrees earned at the same school). */
+  .timeline-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
   .timeline-role {
     font-size: var(--text-base);
     font-weight: 600;
     color: var(--color-ink);
+    line-height: 1.35;
   }
 
   .timeline-org {
     font-size: var(--text-base);
     color: var(--color-ink-muted);
+    line-height: 1.4;
   }
 
   .timeline-note {
