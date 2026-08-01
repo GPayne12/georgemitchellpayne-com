@@ -1,30 +1,39 @@
 ---
-# DRAFT — split from old Session 4 on 2026-07-28; draft: true, not public.
-# Prose here is George's own, redistributed — NO new authored reflection added.
-# Needs George's voice pass before draft: false. Repo is public: this block and
-# all committed wording are world-readable even while draft.
-# Writing prompts (George): (1) name the decisive moment you killed the widget;
-# (2) 'gimmicky' to whom — name the visitor; (3) land or cut the Conversation-
-# Designer tease; (7) pick one vantage — retrospect or in-the-moment.
 title: "Session 4: Cutting the Widget"
 date: 2026-06-30
 order: 4
-tags: ["build-log", "scope"]
-draft: true
-objective: "Close out the site sprint's loose end — the ask-the-portfolio widget."
-activity: "Removed and archived the ask widget."
-assessment: "The first real scope cut. The widget was the wrong kind of play for visitors — edging on gimmicky — and if the wrong bot found it, it could cost a fortune in tokens."
+tags: ["build-log", "scope", "ai-collaboration"]
+draft: false
+objective: "Close out the site sprint's loose end — the ask-the-portfolio widget — and decide whether it belonged on the site at all."
+activity: "Removed and archived the ask widget after a few days in the build, and traced how it got there in the first place."
+assessment: "The first real scope cut. The widget felt like a gimmick to me before a single visitor saw it, and the visitors I value most would have read it as a verdict on my practice before they ever reached the evidence."
+excerpt: "The flashiest thing I had built came out of the site this week. No one else ever saw it."
 ---
-
 
 This session is remembered for what came out of the site, not what went in.
 
+## Everything finally had a home
+
+I built this site from the ground up with the Phase 0 Worksheet — Positioning, Assets, Voice — and by this point so much of what I had accomplished was finally being dumped into it, because there had never been a place to put it before. The tools I use to communicate my value slotted in as supports to the story: the Builds page could show my works in progress, the Log could carry my voice, the Practice page could finally display some of my greatest professional milestones.
+
+I let that momentum carry me. Once everything had a home, I wanted a conversation about it. I wanted someone to ask me questions about the site. Question it. Question me.
+
+And the momentum carried me one step further, into a conversation with Claude about a widget.
+
+## The build
+
+The ask-the-portfolio widget was the flashiest thing I'd built: a chat box wired to the Anthropic API, and it took three iterations of environment plumbing just to get it running on Cloudflare. The draw was obvious — a prospective employer could ask it questions about me and get direct answers.
+
+I don't know that the idea was truly mine. I let the AI build it out as a potential opportunity, and we began to slot it in.
+
+It lasted maybe a few days.
+
 ## The cut
 
-The ask-the-portfolio widget was the flashiest thing I'd built: a chat box wired to the Anthropic API, and it took three iterations of environment plumbing just to get it running on Cloudflare.
+It gave me such an uneasy feeling. I love a little well-designed piece of code, and this one didn't feel like one. It felt like a gimmick — to me, first, before anyone else had the chance to judge it.
 
-Translating my own theories and systems of design into my digital working environment was instinctual. Inspiring portfolio website visitors to want to work with me was something else entirely. The plan was for interactivity to take many forms for visitors, but to layer them in appropriately. I thought the Ask Widget could provide a distinct interactivity for visitors seeking targeted information, but after playing with usage limits, usage credits, and model throttling, I learned not only was it the wrong kind of play for visitors — edging on gimmicky — but it might cost me a fortune in tokens if the wrong bot found it.
+I could see it landing that way for others, too: visitors who don't like the feel of AI interactions that lack depth. The visitors I value most would notice. They would question my practice before they even landed on the right page — before they reached a single case study, before any artifact had the chance to make its own argument. For a site built on the premise that the proof is in the thing I made, I had put a chat box in front of the proof.
 
-I decided to remove the widget, but it may make a comeback in another capacity.
+The final decision came while I was working through tokens, API calls, usage limits and model throttling, when Claude explained that the widget could be hijacked by a bot and cost me. That settled it. I removed it and archived it, knowing it was a small sacrifice in the operationalization of the website.
 
-But now that I'm reading up on the role and responsibilities of Conversation Designers…
+No one even got to try it. No one noticed. But it's still worth noting.
