@@ -1,7 +1,7 @@
 ---
-title: "Session 4: Cutting the Widget"
-date: 2026-06-30
-order: 4
+title: "Session 5: Cutting the Widget"
+date: 2026-06-29
+order: 5
 tags: ["build-log", "scope", "ai-collaboration"]
 draft: false
 objective: "Close out the site sprint's loose end — the ask-the-portfolio widget — and decide whether it belonged on the site at all."

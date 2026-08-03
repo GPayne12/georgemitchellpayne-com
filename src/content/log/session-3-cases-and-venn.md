@@ -34,4 +34,4 @@ Taking a step back, I have been producing mind maps of my own professional devel
 
 The seven cases since the launch of the website satisfy the requirements of the interactive Venn diagram on the [Practice page](/practice), but the diagram-as-device will undoubtedly continue to communicate more effectively with each successive case study published.
 
-Next: the ask-the-portfolio widget - and a lesson in scope.
+Next: a day of hardening in the open - then the ask-the-portfolio widget, and a lesson in scope.
