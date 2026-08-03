@@ -14,8 +14,9 @@ export const curriculum = {
   institution: 'Quantic School of Business and Technology — Class of September 2027',
   /** Shown under the title. One or two sentences, plain. */
   blurb:
-    'Fifty-eight weeks, eight core courses, a specialization period and a capstone. ' +
-    'The whole curriculum from day one — including everything I have not yet taken.',
+    'Fifty-eight weeks, eight core concentrations, a specialization period ' +
+    'and a capstone. The whole curriculum from day one — including everything ' +
+    'I have not yet taken.',
   /** Optional. Set to 0 to hide the credit readout entirely. */
   creditGoal: 0,
   /** Milestones from the cohort schedule. Rendered in the progress rail. */
