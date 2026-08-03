@@ -15,8 +15,7 @@ export const curriculum = {
   /** Shown under the title. One or two sentences, plain. */
   blurb:
     'Fifty-eight weeks, eight core courses, a specialization period and a capstone. ' +
-    'The whole curriculum is here from day one — including everything I have not ' +
-    'taken yet — so progress is legible rather than curated.',
+    'The whole curriculum from day one — including everything I have not yet taken.',
   /** Optional. Set to 0 to hide the credit readout entirely. */
   creditGoal: 0,
   /** Milestones from the cohort schedule. Rendered in the progress rail. */
