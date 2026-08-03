@@ -14,7 +14,7 @@ The phone node was the icing on the cake for the hub. If all my machines are to 
 
 ## What landed
 
-- **GMobile** — the iPhone became a hub node. Its automation path isn't an open shell: it runs through a restricted SSH handler that only executes an allowlist of verbs, with its own enrollment script and an end-to-end test to prove the path works.
+- **GMobile** — the iPhone became a hub node over two separate paths. The automation path isn't an open shell: it runs through a restricted SSH handler that only executes an allowlist of verbs, with its own enrollment script and an end-to-end test to prove it works. A second, separately enrolled path opens a full interactive session for hands-on work.
 - **A hardening day** — a full-system diagnostic from the desktop, doctor-script fixes across the hub, a phone-loss runbook (what to revoke if the phone disappears), documented network ACLs, backups now replicated to the laptop over a single-purpose key, and audit logs that rotate themselves.
 - **School Drop shortcut** — a restricted key enrolled as the backend for an iPhone shortcut, so one tap from the browser's share menu drops an article straight into the hub's school folders.
 - **Housekeeping that compounds** — the weekly security audit now covers both machines and the security-layers checks in one pass; the Dev Dashboard got its own build entry on this site.
