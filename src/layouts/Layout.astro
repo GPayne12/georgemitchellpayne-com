@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Insignia from '../components/Insignia.astro';
 
 interface Props {
   title?: string;
@@ -83,7 +84,10 @@ const navLinks = [
     <div class="site-wrapper">
       <header class="site-header">
         <nav class="site-nav container" aria-label="Site navigation">
-          <a href="/" class="nav-home" aria-label="George Mitchell Payne — home">George Mitchell Payne</a>
+          <a href="/" class="nav-home" aria-label="George Mitchell Payne — home">
+            <Insignia size={22} dense class="nav-mark" />
+            <span>George Mitchell Payne</span>
+          </a>
           <ul class="nav-links" role="list">
             {navLinks.map(({ href, label }) => (
               <li>

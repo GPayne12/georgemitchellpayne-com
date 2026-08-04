@@ -1,0 +1,90 @@
+---
+/**
+ * The learning-engineer insignia — the Practice Venn reduced to a mark.
+ *
+ * Geometry is deliberately identical to src/components/Venn.jsx (r=96 circles
+ * at 155,158 / 245,158 / 200,238) so the brand mark and the interactive
+ * diagram read as the same object. Only the viewBox is tightened: the Venn's
+ * 0 0 400 386 leaves room for domain labels, which a mark does not carry.
+ */
+interface Props {
+  /** Rendered edge length in px. The mark is square. */
+  size?: number;
+  /** Accessible name. Omit when the mark is decorative beside real text. */
+  label?: string;
+  /** Heavier strokes and denser fills, so the mark holds up when small. */
+  dense?: boolean;
+  /** Sit on the text baseline and scale with the font, for use in a sentence. */
+  inline?: boolean;
+  class?: string;
+}
+
+const { size = 120, label, dense = false, inline = false, class: className = '' } = Astro.props;
+
+const R = 96;
+const CIRCLES = [
+  { cx: 155, cy: 158, color: 'var(--color-ld)' },
+  { cx: 245, cy: 158, color: 'var(--color-eng)' },
+  { cx: 200, cy: 238, color: 'var(--color-gov)' },
+];
+
+/*
+ * The default (non-dense) values are lifted from Venn.jsx's resting state
+ * (fillOpacity 0.07, strokeWidth 1.5, strokeOpacity 0.65) so a large mark is
+ * indistinguishable from the interactive diagram. The scales line up too: the
+ * Venn is a 400-unit viewBox drawn at ~424px (1.06), this is a 296-unit box
+ * drawn at 310px (1.047), so an identical stroke-width lands within 0.1px.
+ *
+ * `dense` exists because those values disappear below ~40px.
+ */
+const fillOpacity = dense ? 0.3 : 0.07;
+const strokeWidth = dense ? 8 : 1.5;
+const strokeOpacity = dense ? 0.85 : 0.65;
+---
+
+<svg
+  class:list={['insignia', inline && 'is-inline', className]}
+  viewBox="52 50 296 296"
+  width={size}
+  height={size}
+  role={label ? 'img' : undefined}
+  aria-label={label}
+  title={label}
+  aria-hidden={label ? undefined : 'true'}
+  focusable="false"
+>
+  {
+    CIRCLES.map(c => (
+      <circle
+        cx={c.cx}
+        cy={c.cy}
+        r={R}
+        fill={c.color}
+        fill-opacity={fillOpacity}
+        stroke={c.color}
+        stroke-opacity={strokeOpacity}
+        stroke-width={strokeWidth}
+      />
+    ))
+  }
+</svg>
+
+<style>
+  .insignia {
+    display: block;
+    height: auto;
+    max-width: 100%;
+  }
+
+  /* Named inside a sentence: sized in em so it tracks the surrounding type.
+     The nudge centres the mark on the cap-height midline rather than the
+     baseline. For the body serif that midline sits ~0.33em up, so a 1em mark
+     needs its bottom edge 0.17em below the baseline (0.5em - 0.33em). */
+  .insignia.is-inline {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.17em;
+    margin-inline: 0.12em;
+  }
+</style>

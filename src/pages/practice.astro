@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Venn from '../components/Venn.jsx';
+import Insignia from '../components/Insignia.astro';
 
 const cases = await getCollection('cases');
 const sorted = cases.sort((a, b) => a.data.order - b.data.order);
@@ -26,8 +27,9 @@ const domainLabels: Record<string, string> = {
       <p class="telemetry section-label">// practice</p>
       <h1 class="practice-title">The learning engineer</h1>
       <p class="practice-lead">
-        A learning engineer sits at the intersection of three disciplines.
-        Each case study maps to one or more domains. The center cases are the pivot proof.
+        A learning engineer sits at the intersection of three disciplines. Each
+        case study maps to one or more domains. The center cases are the pivot
+        proof. Center cases are represented below with <span class="symbol-note">the <Insignia inline dense size={20} label="center-case insignia" /> symbol.</span>
       </p>
     </section>
 
@@ -54,7 +56,12 @@ const domainLabels: Record<string, string> = {
                   <span class="telemetry case-timeline">{c.data.timeline}</span>
                 )}
                 {c.data.center && (
-                  <span class="case-center-badge">center</span>
+                  <Insignia
+                    size={34}
+                    dense
+                    class="case-center-mark"
+                    label="Center case: spans all three domains"
+                  />
                 )}
               </div>
               <div class="case-body">
@@ -254,11 +261,15 @@ const domainLabels: Record<string, string> = {
     letter-spacing: 0.04em;
   }
 
-  .case-center-badge {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    color: var(--color-ink-muted);
-    letter-spacing: 0.05em;
+  /* Keeps the mark from being orphaned onto a line of its own. */
+  .symbol-note {
+    white-space: nowrap;
+  }
+
+  /* Replaces the former text badge: a center case is one whose work spans all
+     three domains, so it carries the full insignia. */
+  :global(.case-center-mark) {
+    margin-top: var(--space-1);
   }
 
   .case-title {

@@ -1,4 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" fill="#000000"/>
-  <text x="32" y="34" text-anchor="middle" dominant-baseline="central" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="48" fill="#ffffff">G</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="52 50 296 296">
+  <!-- No background rect: everything outside the three-circle union is
+       transparent, so the browser's own chrome shows through and the mark
+       reads as a silhouette rather than a square tile.
+
+       Inside the union, every region is a solid colour rather than an alpha
+       blend. That is deliberate twice over: translucent fills composited to
+       grey mud at 16px, and over a transparent background they would also
+       blend with whatever chrome colour sits behind them, which is not
+       predictable. Solid values render identically on any theme. -->
+  <defs>
+    <clipPath id="ld"><circle cx="155" cy="158" r="96"/></clipPath>
+    <clipPath id="eng"><circle cx="245" cy="158" r="96"/></clipPath>
+  </defs>
+
+  <!-- single domains -->
+  <circle cx="155" cy="158" r="96" fill="#b5642a"/>
+  <circle cx="245" cy="158" r="96" fill="#0d7d7d"/>
+  <circle cx="200" cy="238" r="96" fill="#574a93"/>
+
+  <!-- pairwise overlaps -->
+  <g clip-path="url(#ld)"><circle cx="245" cy="158" r="96" fill="#4f5c43"/></g>
+  <g clip-path="url(#ld)"><circle cx="200" cy="238" r="96" fill="#6f4750"/></g>
+  <g clip-path="url(#eng)"><circle cx="200" cy="238" r="96" fill="#2a5273"/></g>
+
+  <!-- all three: the learning engineer -->
+  <g clip-path="url(#ld)">
+    <g clip-path="url(#eng)">
+      <circle cx="200" cy="238" r="96" fill="#2b2f33"/>
+    </g>
+  </g>
 </svg>

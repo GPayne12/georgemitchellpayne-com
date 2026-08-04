@@ -1,6 +1,9 @@
 // Single source of truth for the locked positioning text.
-// Rendered verbatim on the homepage hero and the About narrative — edit here only,
-// so the two pages can never drift apart again.
+// `positioningLead` is rendered verbatim on both the homepage hero and the About
+// narrative — edit here only, so the two pages can never drift apart again.
+// `expertiseRange` is About-only as of 2026-08-04: George cut it from the
+// homepage paragraph. It stays exported rather than inlined so About keeps a
+// single source, and so the homepage can pick it back up unchanged.
 //
 // Rule (2026-07-15): do not name the United Nations (or any client as a proper noun
 // beyond named employers) until a dedicated case study for that project exists.

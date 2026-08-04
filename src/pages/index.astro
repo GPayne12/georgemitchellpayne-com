@@ -1,7 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import NowBuilding from '../components/NowBuilding.tsx';
-import { positioningLead, expertiseRange } from '../data/positioning.ts';
+import Insignia from '../components/Insignia.astro';
+import { positioningLead } from '../data/positioning.ts';
 ---
 
 <Layout title="George Mitchell Payne — Learning Engineer" description="George Mitchell Payne — learning engineer building learning systems with code and AI.">
@@ -14,9 +15,14 @@ import { positioningLead, expertiseRange } from '../data/positioning.ts';
           The learning engineer.
         </h1>
         <p class="hero-body">
-          {positioningLead} {expertiseRange} I have been building learning solutions
+          {positioningLead} I have been building learning solutions
           for a decade. Now I build them with code and AI.
         </p>
+        <Insignia
+          size={310}
+          class="hero-insignia"
+          label="Insignia: three overlapping circles for learning design, engineering, and leadership."
+        />
       </div>
     </div>
   </section>
@@ -70,8 +76,40 @@ import { positioningLead, expertiseRange } from '../data/positioning.ts';
     border-bottom: 1px solid var(--color-border);
   }
 
+  /* Same two columns and gap as .doors-grid below, so column 2 is exactly the
+     Practice card's column and the mark can centre over it. No max-width, or
+     the tracks would stop matching. */
   .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--space-6);
+  }
+
+  /* Spans both columns: at --text-5xl (60px) the headline needs ~660px and a
+     single column is only ~540px, so confining it here would wrap it. */
+  .hero-headline {
+    grid-column: 1 / -1;
+    grid-row: 1;
     max-width: 44rem;
+  }
+
+  .hero-body {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  /* The mark occupies column 2 across both rows, so it can ride up alongside
+     the headline. Its top edge is placed on the headline's optical centre:
+     half a line box (--text-5xl x 1.05 / 2 = x 0.525), less the mark's own
+     internal padding — the viewBox carries ~11.25 of 296 units above the
+     circles so the strokes cannot clip, and that offset has to come back out
+     or the circles would sit low by ~12px. */
+  :global(.hero-insignia) {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    justify-self: center;
+    align-self: start;
+    margin-top: calc(var(--text-5xl) * 0.525 - 310px * 0.038);
   }
 
   .hero-headline {
@@ -151,6 +189,24 @@ import { positioningLead, expertiseRange } from '../data/positioning.ts';
   @media (max-width: 40em) {
     .doors-grid {
       grid-template-columns: 1fr;
+    }
+
+    /* Mark drops below the paragraph, aligned to the text edge. The headline
+       overlap is desktop-only, so the offset is cleared here. */
+    .hero-inner {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-headline {
+      grid-column: 1;
+    }
+
+    :global(.hero-insignia) {
+      grid-column: 1;
+      grid-row: 3;
+      width: 240px;
+      justify-self: start;
+      margin-top: var(--space-8);
     }
   }
 
