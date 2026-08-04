@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 const DOMAINS = [
   {
@@ -58,6 +58,7 @@ function nearestCircle(x, y) {
 export default function Venn({ cases = [] }) {
   const [hover,    setHover]    = useState(null); // follows cursor
   const [selected, setSelected] = useState(null); // locked by click
+  const panelRef = useRef(null);
 
   // Selected takes precedence; hover is the fallback while nothing is locked.
   const active = selected ?? hover;
@@ -65,6 +66,15 @@ export default function Venn({ cases = [] }) {
   const activeCases  = active
     ? cases.filter(c => c.domains.includes(DOMAIN_CASE_KEY[active]))
     : [];
+
+  // On a click-driven selection the result panel can land below the fold
+  // (mobile stacks it under the diagram); bring it into view. `block: 'nearest'`
+  // is a no-op when it's already fully visible, so this is harmless on desktop.
+  useEffect(() => {
+    if (selected) {
+      panelRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, [selected]);
 
   function handleMove(e) {
     const { x, y } = toSvgPoint(e);
@@ -156,7 +166,7 @@ export default function Venn({ cases = [] }) {
         </svg>
       </div>
 
-      <div className="venn-panel" aria-live="polite" aria-atomic="true">
+      <div className="venn-panel" ref={panelRef} aria-live="polite" aria-atomic="true">
         {activeDomain && (
           <>
             <p className="venn-panel-label" style={{ color: activeDomain.color }}>

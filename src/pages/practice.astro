@@ -148,6 +148,8 @@ const domainLabels: Record<string, string> = {
     display: block;
     /* Clip to viewBox so text/stroke bleeds can't cause layout reflow */
     overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
   }
 
   /* All SVG children are purely visual — events handled at container level */
