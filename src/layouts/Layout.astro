@@ -22,7 +22,7 @@ const navLinks = [
   { href: '/log',        label: 'Log' },
   { href: '/practice',   label: 'Practice' },
   { href: '/builds',     label: 'Builds' },
-  { href: '/coursework', label: 'Coursework' },
+  { href: '/coursework', label: 'Coursework', wrapBeforeMobile: true },
   { href: '/analytics',  label: 'Analytics' },
 ];
 ---
@@ -89,15 +89,18 @@ const navLinks = [
             <span>George Mitchell Payne</span>
           </a>
           <ul class="nav-links" role="list">
-            {navLinks.map(({ href, label }) => (
-              <li>
-                <a
-                  href={href}
-                  aria-current={currentPath === href ? 'page' : undefined}
-                >
-                  {label}
-                </a>
-              </li>
+            {navLinks.map(({ href, label, wrapBeforeMobile }) => (
+              <>
+                {wrapBeforeMobile && <li class="nav-break" aria-hidden="true"></li>}
+                <li>
+                  <a
+                    href={href}
+                    aria-current={currentPath === href ? 'page' : undefined}
+                  >
+                    {label}
+                  </a>
+                </li>
+              </>
             ))}
           </ul>
         </nav>
