@@ -14,7 +14,7 @@ This session is remembered for what came out of the site, not what went in.
 
 ## Everything finally had a home
 
-I built this site from the ground up with the Phase 0 Worksheet — Positioning, Assets, Voice — and by this point so much of what I had accomplished was finally being dumped into it, because there had never been a place to put it before. The tools I use to communicate my value slotted in as supports to the story: the Builds page could show my works in progress, the Log could carry my voice, the Practice page could finally display some of my greatest professional milestones.
+I built this site from the ground up with the [Phase 0 Worksheet](/log/session-1-escape-from-squarespace) — Positioning, Assets, Voice — and by this point so much of what I had accomplished was finally being dumped into it, because there had never been a place to put it before. The tools I use to communicate my value slotted in as supports to the story: the Builds page could show my works in progress, the Log could carry my voice, the Practice page could finally display some of my greatest professional milestones.
 
 I let that momentum carry me. Once everything had a home, I wanted a conversation about it. I wanted someone to ask me questions about the site. Question it. Question me.
 
@@ -32,7 +32,7 @@ It lasted maybe a few days.
 
 It gave me such an uneasy feeling. I love a little well-designed piece of code, and this one didn't feel like one. It felt like a gimmick — to me, first, before anyone else had the chance to judge it.
 
-I could see it landing that way for others, too: visitors who don't like the feel of AI interactions that lack depth. The visitors I value most would notice. They would question my practice before they even landed on the right page — before they reached a single case study, before any artifact had the chance to make its own argument. For a site built on the premise that the proof is in the thing I made, I had put a chat box in front of the proof.
+I could see it landing that way for others, too: visitors who don't like the feel of AI interactions that lack depth. The visitors I value most would notice. They would question my practice before they even landed on the right page — before they reached a single case study, before any artifact had the chance to make its own argument. For a site built on the premise that [the proof is in the thing I made](/log/session-3-cases-and-venn), I had put a chat box in front of the proof.
 
 The final decision came while I was working through tokens, API calls, usage limits and model throttling, when Claude explained that the widget could be hijacked by a bot and cost me. That settled it. I removed it and archived it, knowing it was a small sacrifice in the operationalization of the website.
 
