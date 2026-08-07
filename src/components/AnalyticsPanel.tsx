@@ -15,6 +15,7 @@ type Aggregates = {
   last7?: number;
   byPage?: { page: string; count: number }[];
   byDay?: { date: string; count: number }[];
+  bySource?: { source: string; count: number }[];
 };
 
 const TELEMETRY = 'var(--color-telemetry)';
@@ -138,13 +139,14 @@ export default function AnalyticsPanel() {
       </p>
     );
 
-  const { total = 0, last7 = 0, capped, firstStatement, byPage = [], byDay = [] } = data;
+  const { total = 0, last7 = 0, capped, firstStatement, byPage = [], byDay = [], bySource = [] } = data;
 
   if (total === 0)
     return <p style={s.state}>// pipeline live — zero statements collected so far. Honest zero.</p>;
 
   const maxPage = Math.max(...byPage.map((p) => p.count), 1);
   const topPages = byPage.slice(0, 10);
+  const maxSource = Math.max(...bySource.map((p) => p.count), 1);
 
   return (
     <div>
@@ -182,6 +184,23 @@ export default function AnalyticsPanel() {
           </div>
         ))}
       </div>
+
+      {bySource.length > 0 && (
+        <>
+          <p style={s.sectionLabel}>// statements by source</p>
+          <div>
+            {bySource.map((p) => (
+              <div key={p.source} style={s.barRow} title={`${p.source} — ${p.count} statements`}>
+                <span style={s.barPath}>{p.source}</span>
+                <span style={s.barTrack}>
+                  <span style={{ ...s.barFill, width: `${(p.count / maxSource) * 100}%` }} />
+                </span>
+                <span style={s.barCount}>{p.count}</span>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
 
       <details style={s.tableWrap}>
         <summary style={{ ...s.sectionLabel, cursor: 'pointer', margin: 0 }}>// data as table</summary>

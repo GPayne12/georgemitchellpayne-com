@@ -9,6 +9,8 @@ export const prerender = false;
 const SITE = 'https://www.georgemitchellpayne.com';
 const PAGE_RE = /^\/([a-z0-9-]+\/?){0,4}$/;
 const SESSION_RE = /^[a-f0-9]{16}$/;
+const SOURCE_RE = /^[a-z0-9-]{1,24}$/;
+const SOURCE_EXTENSION = `${SITE}/xapi/extensions/source`;
 
 // Per-IP rate limit, in-isolate. Resets when the isolate recycles — good
 // enough to blunt casual flooding; the /analytics page discloses the limit.
@@ -40,15 +42,22 @@ export const POST: APIRoute = async ({ request, locals }) => {
     return new Response(JSON.stringify({ error: 'rate limited' }), { status: 429 });
   }
 
-  let page: string, session: string;
+  let page: string, session: string, source: string | undefined;
   try {
     const body = await request.json();
     page = body.page;
     session = body.session;
+    source = body.source;
   } catch {
     return new Response(JSON.stringify({ error: 'bad request' }), { status: 400 });
   }
   if (typeof page !== 'string' || !PAGE_RE.test(page) || typeof session !== 'string' || !SESSION_RE.test(session)) {
+    return new Response(JSON.stringify({ error: 'bad request' }), { status: 400 });
+  }
+  // Optional campaign/referral tag (e.g. a QR code's ?src=). Same fixed-schema
+  // rule as the rest of the statement: reject rather than silently drop, so a
+  // tampered value can't smuggle anything unexpected into the LRS.
+  if (source !== undefined && (typeof source !== 'string' || !SOURCE_RE.test(source))) {
     return new Response(JSON.stringify({ error: 'bad request' }), { status: 400 });
   }
 
@@ -66,6 +75,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
       id: `${SITE}${page === '/' ? '/' : page.replace(/\/$/, '')}`,
       definition: { type: 'http://activitystrea.ms/schema/1.0/page' },
     },
+    ...(source ? { context: { extensions: { [SOURCE_EXTENSION]: source } } } : {}),
     timestamp: new Date().toISOString(),
   };
 

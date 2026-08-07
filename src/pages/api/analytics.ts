@@ -7,17 +7,20 @@ import type { APIRoute } from 'astro';
 export const prerender = false;
 
 const SITE = 'https://www.georgemitchellpayne.com';
+const SOURCE_EXTENSION = `${SITE}/xapi/extensions/source`;
 const CACHE_TTL = 600;
 const MAX_PAGES = 8; // paging cap: at most ~2000 statements per aggregation
 
 type Statement = {
   timestamp: string;
   object?: { objectType?: string; id?: string };
+  context?: { extensions?: Record<string, unknown> };
 };
 
 function aggregate(statements: Statement[]) {
   const byPage = new Map<string, number>();
   const byDay = new Map<string, number>();
+  const bySource = new Map<string, number>();
   let first: string | null = null;
   let total = 0;
 
@@ -32,6 +35,9 @@ function aggregate(statements: Statement[]) {
     const day = s.timestamp?.slice(0, 10);
     if (day) byDay.set(day, (byDay.get(day) ?? 0) + 1);
     if (s.timestamp && (!first || s.timestamp < first)) first = s.timestamp;
+    // Landing source (e.g. the conference QR's ?src=), when the beacon sent one.
+    const source = s.context?.extensions?.[SOURCE_EXTENSION];
+    if (typeof source === 'string') bySource.set(source, (bySource.get(source) ?? 0) + 1);
   }
 
   const weekAgo = new Date(Date.now() - 7 * 86_400_000).toISOString().slice(0, 10);
@@ -45,6 +51,7 @@ function aggregate(statements: Statement[]) {
     last7,
     byPage: [...byPage.entries()].map(([page, count]) => ({ page, count })).sort((a, b) => b.count - a.count),
     byDay: [...byDay.entries()].map(([date, count]) => ({ date, count })).sort((a, b) => (a.date < b.date ? -1 : 1)),
+    bySource: [...bySource.entries()].map(([source, count]) => ({ source, count })).sort((a, b) => b.count - a.count),
   };
 }
 

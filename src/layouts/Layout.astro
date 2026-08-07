@@ -133,7 +133,9 @@ const navLinks = [
 
     <!-- xAPI page-view beacon (/analytics pipeline). Anonymous session id only;
          honors Do Not Track; production hostname only so the data is real
-         visitors, never dev noise. Statement is built server-side in /api/xapi. -->
+         visitors, never dev noise. Statement is built server-side in /api/xapi.
+         A landing ?src= (e.g. the conference QR code) is sticky for the tab's
+         session, so every page view that session is attributed the same way. -->
     <script is:inline>
       (function () {
         if (location.hostname !== 'www.georgemitchellpayne.com') return;
@@ -144,7 +146,12 @@ const navLinks = [
             .map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
           sessionStorage.setItem('xapi-session', id);
         }
-        var payload = JSON.stringify({ page: location.pathname, session: id });
+        var srcParam = new URLSearchParams(location.search).get('src');
+        if (srcParam && /^[a-z0-9-]{1,24}$/.test(srcParam)) {
+          sessionStorage.setItem('xapi-source', srcParam);
+        }
+        var source = sessionStorage.getItem('xapi-source');
+        var payload = JSON.stringify({ page: location.pathname, session: id, source: source || undefined });
         fetch('/api/xapi', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
