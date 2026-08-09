@@ -4,11 +4,13 @@
  *
  * Geometry is deliberately identical to src/components/Venn.jsx (r=96 circles
  * at 155,158 / 245,158 / 200,238) so the brand mark and the interactive
- * diagram read as the same object. Only the viewBox is tightened: the Venn's
- * 0 0 400 386 leaves room for domain labels, which a mark does not carry.
+ * diagram read as the same object. There are two viewBoxes:
+ *   - default `52 50 296 296` — tightened to the circles, for use as a mark.
+ *   - `labels` `0 0 400 386` — the Venn's own box, which reserves the margin
+ *     the domain labels sit in.
  */
 interface Props {
-  /** Rendered edge length in px. The mark is square. */
+  /** Rendered edge length in px. The mark is square unless `labels` is set. */
   size?: number;
   /** Accessible name. Omit when the mark is decorative beside real text. */
   label?: string;
@@ -16,16 +18,40 @@ interface Props {
   dense?: boolean;
   /** Sit on the text baseline and scale with the font, for use in a sentence. */
   inline?: boolean;
+  /**
+   * Draw the Venn's domain and centre labels. The type is sized in user units,
+   * so it only stays legible from roughly 400px wide up — do not set this on
+   * the nav or inline marks.
+   */
+  labels?: boolean;
   class?: string;
 }
 
-const { size = 120, label, dense = false, inline = false, class: className = '' } = Astro.props;
+const {
+  size = 120,
+  label,
+  dense = false,
+  inline = false,
+  labels = false,
+  class: className = '',
+} = Astro.props;
 
 const R = 96;
 const CIRCLES = [
   { cx: 155, cy: 158, color: 'var(--color-ld)' },
   { cx: 245, cy: 158, color: 'var(--color-eng)' },
   { cx: 200, cy: 238, color: 'var(--color-gov)' },
+];
+
+/*
+ * Copy, placement and type scale are taken verbatim from Venn.jsx's DOMAINS so
+ * the homepage mark and the Practice diagram carry the same labels. Venn hard-
+ * codes the hexes; here they stay as tokens, which resolve to the same values.
+ */
+const LABELS = [
+  { lines: ['Learning', 'Design'],         color: 'var(--color-ld)',  x: 80,  y: 46 },
+  { lines: ['Engineering', '& Building'],  color: 'var(--color-eng)', x: 320, y: 46 },
+  { lines: ['Leadership', '& Governance'], color: 'var(--color-gov)', x: 200, y: 362 },
 ];
 
 /*
@@ -40,13 +66,17 @@ const CIRCLES = [
 const fillOpacity = dense ? 0.3 : 0.07;
 const strokeWidth = dense ? 8 : 1.5;
 const strokeOpacity = dense ? 0.85 : 0.65;
+
+/* Labelled, the box is the Venn's 400x386 and no longer square. */
+const viewBox = labels ? '0 0 400 386' : '52 50 296 296';
+const height = labels ? Math.round((size * 386) / 400) : size;
 ---
 
 <svg
   class:list={['insignia', inline && 'is-inline', className]}
-  viewBox="52 50 296 296"
+  viewBox={viewBox}
   width={size}
-  height={size}
+  height={height}
   role={label ? 'img' : undefined}
   aria-label={label}
   title={label}
@@ -67,6 +97,24 @@ const strokeOpacity = dense ? 0.85 : 0.65;
       />
     ))
   }
+  {
+    labels && (
+      <Fragment>
+        {/* y must be explicit on the first tspan; without it the label defaults
+            to y=0 and bleeds above the viewBox. */}
+        {LABELS.map(l => (
+          <text class="insignia-label" text-anchor="middle" fill={l.color}>
+            <tspan x={l.x} y={l.y}>{l.lines[0]}</tspan>
+            <tspan x={l.x} dy="15">{l.lines[1]}</tspan>
+          </text>
+        ))}
+        <text class="insignia-center" text-anchor="middle">
+          <tspan x={200} y={186}>learning</tspan>
+          <tspan x={200} dy="14">engineer</tspan>
+        </text>
+      </Fragment>
+    )
+  }
 </svg>
 
 <style>
@@ -86,5 +134,21 @@ const strokeOpacity = dense ? 0.85 : 0.65;
     height: 1em;
     vertical-align: -0.17em;
     margin-inline: 0.12em;
+  }
+
+  /* px inside an SVG resolves to user units, so these track the viewBox and
+     match Venn.jsx's fontSize 11 / 10 exactly. */
+  .insignia-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.03em;
+  }
+
+  .insignia-center {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    fill: var(--color-ink);
   }
 </style>

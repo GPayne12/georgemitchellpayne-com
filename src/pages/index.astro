@@ -19,9 +19,10 @@ import { positioningLead } from '../data/positioning.ts';
           for a decade. Now I build them with code and AI.
         </p>
         <Insignia
-          size={310}
+          labels
+          size={420}
           class="hero-insignia"
-          label="Insignia: three overlapping circles for learning design, engineering, and leadership."
+          label="Three-circle Venn diagram: Learning Design, Engineering & Building, and Leadership & Governance, with 'learning engineer' at the center intersection."
         />
       </div>
     </div>
@@ -99,17 +100,24 @@ import { positioningLead } from '../data/positioning.ts';
   }
 
   /* The mark occupies column 2 across both rows, so it can ride up alongside
-     the headline. Its top edge is placed on the headline's optical centre:
-     half a line box (--text-5xl x 1.05 / 2 = x 0.525), less the mark's own
-     internal padding — the viewBox carries ~11.25 of 296 units above the
-     circles so the strokes cannot clip, and that offset has to come back out
-     or the circles would sit low by ~12px. */
+     the headline. Before it carried labels its top edge sat on the headline's
+     optical centre, but the domain labels are type, and type set level with the
+     headline reads as a second column of the same sentence. So the anchor is
+     now the headline's line box (--text-5xl x 1.05) plus a gap: the labels
+     start below the headline's descenders, not beside them.
+
+     The subtraction is the mark's own internal padding. The labelled viewBox is
+     400x386 and the "Learning Design" cap line tops out around y=38, so ~0.095
+     of the width sits empty above anything visible and has to come back out or
+     the gap would read as ~40px larger than it is. 420px on the 400-unit box is
+     scale 1.05, which keeps the circles at the same ~311px they rendered at
+     before the labels were added. */
   :global(.hero-insignia) {
     grid-column: 2;
     grid-row: 1 / span 2;
     justify-self: center;
     align-self: start;
-    margin-top: calc(var(--text-5xl) * 0.525 - 310px * 0.038);
+    margin-top: calc(var(--text-5xl) * 1.05 + var(--space-6) - 420px * 0.095);
   }
 
   .hero-headline {
@@ -186,13 +194,12 @@ import { positioningLead } from '../data/positioning.ts';
     color: var(--color-accent-hover);
   }
 
-  @media (max-width: 40em) {
-    .doors-grid {
-      grid-template-columns: 1fr;
-    }
-
-    /* Mark drops below the paragraph, aligned to the text edge. The headline
-       overlap is desktop-only, so the offset is cleared here. */
+  /* The mark drops below the paragraph, aligned to the text edge; the headline
+     overlap is desktop-only, so the offset is cleared here. This breaks earlier
+     than the doors below because the labels are sized in viewBox units: they
+     stay legible down to ~380px of mark, and the hero's column 2 only clears
+     that above ~56em of viewport. */
+  @media (max-width: 56em) {
     .hero-inner {
       grid-template-columns: 1fr;
     }
@@ -201,12 +208,21 @@ import { positioningLead } from '../data/positioning.ts';
       grid-column: 1;
     }
 
+    /* Capped via `width`, not `max-width`: the component's own scoped
+       `.insignia` rule carries an astro-cid and so outspecifies a max-width
+       set from here. */
     :global(.hero-insignia) {
       grid-column: 1;
       grid-row: 3;
-      width: 240px;
+      width: min(380px, 100%);
       justify-self: start;
       margin-top: var(--space-8);
+    }
+  }
+
+  @media (max-width: 40em) {
+    .doors-grid {
+      grid-template-columns: 1fr;
     }
   }
 
