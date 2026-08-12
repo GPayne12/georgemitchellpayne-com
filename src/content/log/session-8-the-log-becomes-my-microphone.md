@@ -16,11 +16,11 @@ Writing that start meant going back through my own machines - session transcript
 
 ## The ramp to outdated content
 
-The Phase 0 Worksheet had held up as the ultimate test of my deep recollection of professional milestones. It was intended to provide backbone and voice to my digital presence. It held me up to old files. The exercise literally drove me to break out old physical hard drives. It helped me answer questions about how far back and under what circumstances I wanted to even start my Log. The log already demanded that I align to a design schema and gated my releases. If visitors would read about my history on day one, no matter what, they may as well feel the tension of how I got here.
+The [Phase 0 Worksheet](/log/session-1-escape-from-squarespace) had held up as the ultimate test of my deep recollection of professional milestones. It was intended to provide backbone and voice to my digital presence. It held me up to old files. The exercise literally drove me to break out old physical hard drives. It helped me answer questions about how far back and under what circumstances I wanted to even start my Log. The log already demanded that I align to a design schema and gated my releases. If visitors would read about my history on day one, no matter what, they may as well feel the tension of how I got here.
 
 ## What landed
 
-- **The front of the series** — the prologue and the cases entry, the two holes at the opening, both written to the schema every entry has to satisfy before it will render at all.
+- **The front of the series** — the [prologue](/log/session-0-the-stall-before-the-start) and the cases entry, the two holes at the opening, both written to the schema every entry has to satisfy before it will render at all.
 - **The prologue would not settle** — several passes in under an hour: recentred off the stall and onto the ecosystem the stall led to, its verdict flipped from the machine generating to me designing, and the Squarespace decision folded in and then moved back out to the entry where it belonged.
 - **Interrogation instead of drafting** — the machine held the session record and asked the questions; the prose came back the other way. Nothing went up that I had not written.
 - **Voice gating** — the entries already public were passed over from the top and rewritten until they read as mine. One was retitled on the way through and kept its address.
