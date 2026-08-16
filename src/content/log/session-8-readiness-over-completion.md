@@ -1,7 +1,7 @@
 ---
-title: "Session 9: Readiness over Completion"
+title: "Session 14: Readiness over Completion"
 date: 2026-08-07
-order: 9
+order: 14
 tags: ["build-log", "learning-design", "workforce", "ai", "measurement"]
 draft: false
 objective: "Spend a day among the people who buy and build this work, and get a clearer view of the Learning and Development space at the State and Federal levels."
