@@ -1,0 +1,115 @@
+<svg viewBox="0 0 640 320" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Course architecture: terminal-outcome coverage widening across seven lessons in two modules, and grade weight deliberately decoupled from points">
+  <style>
+    .d-title   { font: 600 11px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink,#1a1916); letter-spacing:.03em; }
+    .d-sub     { font: 400 9px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink-muted,#5c5a55); letter-spacing:.02em; }
+    .d-eyebrow { font: 400 9px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-telemetry,#1e7a4a); letter-spacing:.06em; }
+    .d-meta    { font: 400 8px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink-muted,#5c5a55); letter-spacing:.02em; }
+    .d-mod     { font: 600 9px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink-muted,#5c5a55); letter-spacing:.06em; }
+    .d-val     { font: 600 10px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink,#1a1916); }
+    .d-pct     { font: 600 13px/1 var(--font-mono,'JetBrains Mono',monospace); fill: var(--color-ink,#1a1916); }
+    .bar       { fill: var(--color-ld-wash,#f8ece1); stroke: var(--color-ld,#b5642a); stroke-width:1.5; }
+    .bar-full  { fill: var(--color-ld,#b5642a); opacity:.28; stroke: var(--color-ld,#b5642a); stroke-width:1.5; }
+    .seg       { fill: var(--color-eng,#0d7d7d); opacity:.18; stroke: var(--color-eng,#0d7d7d); stroke-width:1; }
+    .seg-alt   { fill: var(--color-eng,#0d7d7d); opacity:.10; stroke: var(--color-eng,#0d7d7d); stroke-width:1; }
+    .seg-hi    { fill: var(--color-eng,#0d7d7d); opacity:.55; stroke: var(--color-eng,#0d7d7d); stroke-width:1.5; }
+    .ttx       { fill: var(--color-eng,#0d7d7d); }
+    .wedge     { fill: var(--color-eng,#0d7d7d); opacity:.12; }
+    .line      { stroke: var(--color-border,#d4cfc7); stroke-width:1.5; }
+    .divider   { stroke: var(--color-border,#d4cfc7); stroke-width:1; stroke-dasharray:4 4; }
+  </style>
+
+  <!-- header -->
+  <text class="d-title" x="20" y="16">COURSE ARCHITECTURE  ·  2 MODULES / 7 LESSONS</text>
+  <text class="d-meta"  x="20" y="30">2024–2025  ·  9 terminal outcomes  ·  27 graded events  ·  10 lecture decks  ·  6 rubric instruments</text>
+  <line class="line" x1="20" y1="40" x2="620" y2="40"/>
+
+  <!-- panel divider -->
+  <line class="divider" x1="336" y1="48" x2="336" y2="262"/>
+
+  <!-- ══ LEFT: outcome coverage ramp (x 20–316) ══ -->
+  <text class="d-eyebrow" x="20" y="56">// terminal outcomes carried per lesson</text>
+
+  <!-- module labels -->
+  <text class="d-mod" x="100" y="72" text-anchor="middle">MODULE 1</text>
+  <text class="d-mod" x="226" y="72" text-anchor="middle">MODULE 2</text>
+
+  <!-- module divider -->
+  <line class="divider" x1="154" y1="78" x2="154" y2="246"/>
+
+  <!-- bars: baseline y=240, scale 9 outcomes = 150px -->
+  <!-- L1.1 = 1 -->
+  <rect class="bar" x="50"  y="223" width="28" height="17"/>
+  <text class="d-val" x="64"  y="217" text-anchor="middle">1</text>
+  <!-- L1.2 = 2 -->
+  <rect class="bar" x="86"  y="207" width="28" height="33"/>
+  <text class="d-val" x="100" y="201" text-anchor="middle">2</text>
+  <!-- L1.3 = 5 (terminal exercise) -->
+  <rect class="bar" x="122" y="157" width="28" height="83"/>
+  <text class="d-val" x="136" y="151" text-anchor="middle">5</text>
+  <!-- L2.1 = 2 -->
+  <rect class="bar" x="158" y="207" width="28" height="33"/>
+  <text class="d-val" x="172" y="201" text-anchor="middle">2</text>
+  <!-- L2.2 = 2 -->
+  <rect class="bar" x="194" y="207" width="28" height="33"/>
+  <text class="d-val" x="208" y="201" text-anchor="middle">2</text>
+  <!-- L2.3 = 9 -->
+  <rect class="bar-full" x="230" y="90" width="28" height="150"/>
+  <text class="d-val" x="244" y="84" text-anchor="middle">9</text>
+  <!-- L2.4 = 9 (terminal + cumulative exercise) -->
+  <rect class="bar-full" x="266" y="90" width="28" height="150"/>
+  <text class="d-val" x="280" y="84" text-anchor="middle">9</text>
+
+  <!-- baseline -->
+  <line class="line" x1="40" y1="240" x2="304" y2="240"/>
+
+  <!-- terminal table-top exercise markers -->
+  <rect class="ttx" x="122" y="242" width="28" height="3"/>
+  <rect class="ttx" x="266" y="242" width="28" height="3"/>
+
+  <!-- lesson labels -->
+  <text class="d-meta" x="64"  y="256" text-anchor="middle">1.1</text>
+  <text class="d-meta" x="100" y="256" text-anchor="middle">1.2</text>
+  <text class="d-meta" x="136" y="256" text-anchor="middle">1.3</text>
+  <text class="d-meta" x="172" y="256" text-anchor="middle">2.1</text>
+  <text class="d-meta" x="208" y="256" text-anchor="middle">2.2</text>
+  <text class="d-meta" x="244" y="256" text-anchor="middle">2.3</text>
+  <text class="d-meta" x="280" y="256" text-anchor="middle">2.4</text>
+
+  <!-- ══ RIGHT: weight decoupled from points (x 356–620) ══ -->
+  <text class="d-eyebrow" x="356" y="56">// points distribution  ·  2,400 total</text>
+
+  <!-- points bar: 264px = 2,400 pts -->
+  <rect class="seg"    x="356" y="64" width="88" height="26"/>
+  <rect class="seg-alt" x="444" y="64" width="88" height="26"/>
+  <rect class="seg"    x="532" y="64" width="44" height="26"/>
+  <rect class="seg-alt" x="576" y="64" width="22" height="26"/>
+  <rect class="seg-hi" x="598" y="64" width="22" height="26"/>
+
+  <text class="d-meta" x="356" y="103">quizzes 800  ·  discussions 800  ·  assignments 400</text>
+  <text class="d-meta" x="356" y="114">tests 200  ·  table-top exercises 200</text>
+
+  <text class="d-eyebrow" x="356" y="134">// grade weight</text>
+
+  <!-- weight bar: 264px = 100% -->
+  <rect class="seg-alt" x="356" y="142" width="158" height="26"/>
+  <rect class="seg-hi"  x="514" y="142" width="106" height="26"/>
+  <text class="d-pct" x="567" y="158" text-anchor="middle" dominant-baseline="middle">40%</text>
+
+  <text class="d-meta" x="356" y="181">all other instruments 60%  ·  table-top exercises 40%</text>
+
+  <!-- the decoupling callout -->
+  <text class="d-eyebrow" x="356" y="203">// the decoupling</text>
+  <text class="d-sub"     x="356" y="217">2 exercises  ·  8% of the points  ·  40% of the grade</text>
+
+  <!-- assessment inventory -->
+  <text class="d-eyebrow" x="356" y="239">// 27 graded events</text>
+  <text class="d-meta"    x="356" y="252">8 quizzes · 8 discussions · 4 assignments · 2 tests</text>
+  <text class="d-meta"    x="356" y="262">3 Kirkpatrick instruments carried at 0% weight</text>
+
+  <!-- ══ FOOTER ══ -->
+  <line class="line" x1="20" y1="270" x2="620" y2="270"/>
+  <text class="d-meta" x="20" y="283">Lesson shell repeats identically ×7  ·  each module ships an alignment table crosswalking objectives × assessments × resources</text>
+  <text class="d-meta" x="20" y="295">Learner time budget 685–1,240 min (≈11–21 hrs)  ·  instructor load modeled separately and explicitly excluded</text>
+  <rect class="ttx" x="20" y="304" width="10" height="3"/>
+  <text class="d-meta" x="36" y="307">terminal table-top exercise  ·  module 2's is cumulative across both  ·  3-band scale: Passing / Grasping / Not Passing</text>
+</svg>
