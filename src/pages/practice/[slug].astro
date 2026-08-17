@@ -79,7 +79,12 @@ const SECTIONS = [
         <section class={`case-section case-section--${key}`}>
           <h2 class="telemetry section-label">{label}</h2>
           {key === 'artifact' && artifactSvg ? (
-            <div class="artifact-diagram" set:html={artifactSvg} />
+            <figure class="artifact-figure">
+              <div class="artifact-diagram" set:html={artifactSvg} />
+              {c.data.artifactNote && (
+                <figcaption class="artifact-note">{c.data.artifactNote}</figcaption>
+              )}
+            </figure>
           ) : (
             <p class="section-body">{c.data[key]}</p>
           )}
@@ -285,6 +290,21 @@ const SECTIONS = [
     height: auto;
     display: block;
     max-width: 640px;
+  }
+
+  .artifact-figure {
+    margin: 0;
+  }
+
+  .artifact-note {
+    margin-top: var(--space-3);
+    max-width: 640px;
+    padding-left: var(--space-3);
+    border-left: 2px solid var(--color-border);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    line-height: 1.7;
+    color: var(--color-ink-muted);
   }
 
   /* ── Case navigation ──────────────────────────────── */

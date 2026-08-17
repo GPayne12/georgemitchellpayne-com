@@ -16,6 +16,8 @@ const cases = defineCollection({
     constraint: z.string(),
     decision: z.string(),
     artifact: z.string(),
+    /** Optional line rendered under the artifact diagram — scope or provenance note. */
+    artifactNote: z.string().optional(),
     measuredOutcome: z.string(),
     engineeringTranslation: z.string(),
   }),
