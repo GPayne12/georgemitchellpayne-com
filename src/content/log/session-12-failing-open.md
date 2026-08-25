@@ -15,7 +15,7 @@ On July 6 I recorded that the security hooks on both machines were fixed. They w
 
 There were gaps, because the hooks read the fields they were matching from the wrong level of the payload, so nothing ever matched and every check passed by default. Then they answered with a value the schema does not accept, so each allowed call logged an error nobody was reading. How long did it drag on for: five weeks.
 
-So I weaved in a more sensible health check. It now probes each live hook with a benign payload and validates what comes back, counts the errors in recent transcripts, and compares configuration across machines. A separate sweep scans every repository for the two defect patterns, and flags fixes that exist on one machine but not the others. All of it runs weekly now, on the Monday schedule, on both machines.
+So I wove in a more sensible health check. It now probes each live hook with a benign payload and validates what comes back, counts the errors in recent transcripts, and compares configuration across machines. A separate sweep scans every repository for the two defect patterns, and flags fixes that exist on one machine but not the others. All of it runs weekly now, on the Monday schedule, on both machines.
 
 ## An instinct is not a control
 
@@ -29,7 +29,7 @@ The same week gave me a smaller version of the same thing. On the 24th I flipped
 
 ## School, at zero
 
-As I continue to retcon my way into present tense with my log entries, I am eventually catching up to the present. And presently, I am in the midst of school. This session also characterizes how I reentered into a period of intense learning — as a fully employed parent and part-time student.
+As I continue to retcon my way into present tense with my log entries, I am eventually catching up to the present. And presently, I am in the midst of school. This session also characterizes how I reentered a period of intense learning — as a fully employed parent and part-time student.
 
 [/coursework](/coursework) went live the same week: the whole program mapped out, 8 core concentrations across 38 courses and 58 weeks, plus a specialization period and a capstone, published at 0 of 10 complete.
 

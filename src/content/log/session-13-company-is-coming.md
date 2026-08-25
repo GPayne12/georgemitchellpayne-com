@@ -12,17 +12,17 @@ excerpt: "A guest pass landed three days before the event, so I opened my own si
 
 ## The house
 
-Here's the deal. I've been working in learning design for the past 10 years, in ostensibly the same department for 7 years, and in my lead role for nearly 4 years (this September!). And ever since 2018, I have been working from home. Working from home allowed me to move 3 times and eventually buy my first house, it allowed me to welcome and raise two beautiful kids to the ages of 5 and 3 (this September!), and to transition into middle adulthood with reliable friends and family between 5 minutes and 5 hours away from me. Working from home for the better part of a decade has been good for me. But conversely, it's made me really hungry to rediscover the professional world in-person.
+Here's the deal. I've been working in learning design for the past 10 years, in ostensibly the same department for 7 years, and in my lead role for nearly 4 years (this September!). And ever since 2018, I have been working from home. Working from home allowed me to move 3 times and eventually buy my first house; it allowed me to welcome and raise two beautiful kids to the ages of 5 and 3 (this September!), and to transition into middle adulthood with reliable friends and family between 5 minutes and 5 hours away from me. Working from home for the better part of a decade has been good for me. But conversely, it's made me really hungry to rediscover the professional world in-person.
 
 Suddenly, one of my professional heroes posts to LinkedIn about having guest passes to a local L&D event. Given the opportunity, I could hear my dad saying, "Nothing beats a failure but a try."
 
-My hero turned professional connection said yes to providing me a guest pass 3 days before the event. I quickly pivoted toward the impression I planned to have on people. I would be an outsider at the event for multiple reasons, but I knew I would at least be around other learning and development professionals. I had poured so much into my website over the past few months. And now I needed it to serve as the landing pad for any conversations I had in person. I would be handing this site to people at the table, in the hallway, during and between sessions, which meant handing it to their phones. So I opened it on mine.
+My hero-turned-professional-connection said yes to providing me a guest pass 3 days before the event. I quickly pivoted toward the impression I planned to have on people. I would be an outsider at the event for multiple reasons, but I knew I would at least be around other learning and development professionals. I had poured so much into my website over the past few months. And now I needed it to serve as the landing pad for any conversations I had in person. I would be handing this site to people at the table, in the hallway, during and between sessions, which meant handing it to their phones. So I opened it on mine.
 
 During a session in July I had opened the same site on the same phone, found the same nav bar falling off the end, and fixed it. I wrote an entry about it. The site had been seemingly mobile-ready for three weeks. What the session in July actually did was make the nav bar wrap without making the list of links inside it wrap, and nothing could surface the difference until a new tab arrived to test it. Analytics was that tab.
 
-I'll come straight about the timing. I fixed both three days before walking into a room full of strangers. I was tidying the house because company was coming.
+I'll be straight about the timing. I fixed both three days before walking into a room full of strangers. I was tidying the house because company was coming.
 
-## The mark
+## The seal
 
 I had lived at the intersections of my Venn diagram for years. I only brandished it after it helped me to convey the intersectionality of my skills. The simple design took on different sizes and began to represent different things. Using it became the mark — the favicon, the touch icon and the whole icon set are now generated from the three-circle diagram, built by a script rather than exported by hand. The letter mark from three weeks earlier is now gone.
 

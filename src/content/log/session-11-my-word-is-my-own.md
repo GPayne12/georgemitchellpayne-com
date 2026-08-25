@@ -27,7 +27,7 @@ Some people question their own written word because it does not read the way the
 
 ## Two things complicate it
 
-First: I can't write fast enough. My poor hands, typing at some slightly above average speed, cannot keep up with my brain. This must be true for others, but because I'm intentionally leaving a written record it really bothers me. There is a lot going on, and distilling a thing down to its essence is deliberate, additional work. Sometimes I forget things as I write, and only after publishing do I recognize the missed opportunities.
+First: I can't write fast enough. My poor hands, typing at some slightly above average speed, cannot keep up with my brain. This must be true for others, but because I'm intentionally leaving a written record, it really bothers me. There is a lot going on, and distilling a thing down to its essence is deliberate, additional work. Sometimes I forget things as I write, and only after publishing do I recognize the missed opportunities.
 
 Second: I don't understand everything. When it comes to technical implementation using AI, there are gaps, and it is why I have gone to such great lengths to read every line of chat transcript and approve edits manually in this first year. Working in the terminal gave me the confidence to apply for the [MS in AI Engineering](/coursework). But it has not made me fluent in machine language yet.
 
