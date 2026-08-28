@@ -143,7 +143,7 @@ const dateFmt = new Intl.DateTimeFormat('en-US', {
                   <p class="course-summary">{c.data.summary}</p>
 
                   {c.data.courses.length > 0 && (
-                    <details class="lessons">
+                    <details class="lessons" open={c.data.status !== 'planned'}>
                       <summary class="lessons-toggle">
                         {c.data.courses.length} courses
                         {c.data.assessment ? ` · ${c.data.assessment}` : ''}
