@@ -1,0 +1,139 @@
+---
+/**
+ * The August 8 change, shown: the insignia bare, then the same insignia carrying
+ * the Practice diagram's labels.
+ *
+ * Both stages render the REAL <Insignia>, not a copy, so this figure cannot drift
+ * from the mark it documents.
+ *
+ * The sizes are not arbitrary. Insignia has two viewBoxes — `52 50 296 296`
+ * tightened to the circles, and the Venn's `0 0 400 386` which reserves the label
+ * margin. The circles occupy the same 296 user units in both, so rendering the bare
+ * mark at 296px and the labelled one at 400px puts the circles at an identical
+ * 296px on screen. Only the labels are added; nothing moves or resizes. Any other
+ * pair of sizes would quietly make the geometry look like it changed, which is the
+ * one thing this figure exists to show it did not.
+ */
+import Insignia from './Insignia.astro';
+---
+
+<figure class="insignia-transition">
+  <div class="it-row">
+    <div class="it-stage">
+      <div class="it-mark is-bare">
+        <Insignia size={296} label="The homepage insignia before August 8 — three overlapping circles, unlabelled" />
+      </div>
+      <p class="telemetry it-caption">before — the mark alone</p>
+    </div>
+
+    <div class="it-arrow" aria-hidden="true">
+      <svg viewBox="0 0 64 24" width="64" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <line x1="2" y1="12" x2="55" y2="12" />
+        <polyline points="46,4 55,12 46,20" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
+
+    <div class="it-stage">
+      <div class="it-mark is-labelled">
+        <Insignia size={400} labels label="The homepage insignia after August 8 — the same three circles, now labelled Learning Design, Engineering and Building, and Leadership and Governance, around a learning engineer centre" />
+      </div>
+      <p class="telemetry it-caption">after — the Practice page's labels</p>
+    </div>
+  </div>
+
+  <figcaption>
+    The same three circles, before and after the eighth. The geometry is identical —
+    same radii, same centres, same colours. The bare mark uses a viewBox tightened to
+    the circles; the labelled one uses the Practice diagram's wider box, which reserves
+    the margin the domain names sit in. Nothing moved. The words were the whole change.
+  </figcaption>
+</figure>
+
+<style>
+  .insignia-transition {
+    margin: var(--space-16) 0 var(--space-8);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--color-border);
+  }
+
+  /*
+   * The labelled mark is 400px at full size and the pair needs ~760px, which does
+   * not fit the 48rem prose column. Above 60rem the figure breaks out 4rem each
+   * side; below it, the row becomes a column and the arrow turns to match.
+   */
+  @media (min-width: 60rem) {
+    .insignia-transition {
+      width: 56rem;
+      margin-inline: calc((48rem - 56rem) / 2);
+    }
+  }
+
+  .it-row {
+    /* One variable drives both stages, so the circles stay the same size as the
+       figure scales down. Bare = --mark, labelled = --mark * 400/296. */
+    --mark: 296px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-6);
+  }
+
+  .it-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .it-mark.is-bare :global(svg.insignia) {
+    width: var(--mark);
+    height: auto;
+  }
+
+  .it-mark.is-labelled :global(svg.insignia) {
+    width: calc(var(--mark) * 400 / 296);
+    height: auto;
+  }
+
+  .it-caption {
+    margin: 0;
+    color: var(--color-ink-muted);
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+  }
+
+  .it-arrow {
+    color: var(--color-ink-muted);
+    flex: none;
+    display: flex;
+  }
+
+  figcaption {
+    margin-top: var(--space-6);
+    color: var(--color-ink-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    text-align: center;
+    max-width: 44rem;
+    margin-inline: auto;
+  }
+
+  @media (max-width: 59.999rem) {
+    .it-row {
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .it-arrow svg {
+      transform: rotate(90deg);
+    }
+  }
+
+  /* Below the labels' legibility floor the type gets small, but shrinking is still
+     better than a figure that overflows the viewport. */
+  @media (max-width: 34rem) {
+    .it-row {
+      --mark: min(240px, 62vw);
+    }
+  }
+</style>
