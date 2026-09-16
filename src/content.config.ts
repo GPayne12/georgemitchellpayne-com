@@ -30,6 +30,8 @@ const builds = defineCollection({
     slug: z.string(),
     order: z.number(),
     repo: z.string().url(),
+    /** Source repo is private: hide the repo link and the live commit strip. */
+    private: z.boolean().default(false),
     demo: z.string().url().optional(),
     stack: z.array(z.string()),
     status: z.enum(['live', 'in-progress']),

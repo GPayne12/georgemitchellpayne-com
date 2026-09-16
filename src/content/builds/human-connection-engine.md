@@ -3,6 +3,7 @@ title: "Human Connection Engine"
 slug: "human-connection-engine"
 order: 3
 repo: "https://github.com/GPayne12/human-connection-engine"
+private: true
 stack: ["React", "TypeScript", "Vite", "Express", "Web Crypto API", "Swift / Vision"]
 status: "in-progress"
 summary: "A local-first tool for sustaining a healthy professional

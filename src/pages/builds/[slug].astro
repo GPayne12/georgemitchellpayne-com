@@ -46,12 +46,16 @@ const { Content } = await render(build);
         ))}
       </ul>
 
-      <GitHubTelemetry repo={build.data.repo} client:only="react" />
+      {!build.data.private && (
+        <GitHubTelemetry repo={build.data.repo} client:only="react" />
+      )}
 
       <div class="build-links">
-        <a href={build.data.repo} rel="noopener noreferrer" class="build-link">
-          view repo →
-        </a>
+        {!build.data.private && (
+          <a href={build.data.repo} rel="noopener noreferrer" class="build-link">
+            view repo →
+          </a>
+        )}
         {isRealUrl(build.data.demo) && (
           <a href={build.data.demo} rel="noopener noreferrer" class="build-link">
             view demo →

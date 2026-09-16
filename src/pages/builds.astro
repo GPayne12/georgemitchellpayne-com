@@ -65,14 +65,16 @@ function isRealUrl(url: string | undefined): boolean {
             </div>
 
             <div class="build-links">
-              <a
-                href={b.data.repo}
-                class="build-link"
-                rel="noopener noreferrer"
-                aria-label={`View ${b.data.title} source on GitHub`}
-              >
-                GitHub →
-              </a>
+              {!b.data.private && (
+                <a
+                  href={b.data.repo}
+                  class="build-link"
+                  rel="noopener noreferrer"
+                  aria-label={`View ${b.data.title} source on GitHub`}
+                >
+                  GitHub →
+                </a>
+              )}
               {isRealUrl(b.data.demo) && (
                 <a
                   href={b.data.demo}
