@@ -1,5 +1,5 @@
 ---
-title: "Session 16: The Toll Gate"
+title: "Session 16: Human Connection"
 date: 2026-08-12
 order: 16
 tags: ["build-log", "human-connection-engine", "network", "linkedin", "design", "process"]
@@ -37,3 +37,7 @@ In this case, every friction is a feature, aimed at me. The failure mode this wh
 One decision that day was not code, and it is the one I expect to hold longest.
 
 Just like the anti-gamification framework for the tool, the features in this tool now unlock on use, not on enthusiasm. The tool awaited a set number of real people to produce a campaign board; the one after that waited until the kanban board was genuinely in use. And these usage gates exist exactly because building the tool was the most comfortable possible substitute for doing the actual thing — communicating. The only way to unlock each subsequent feature for each person is to do the human part at each step and communicate.
+
+## The point
+
+I'm grateful I left my home office for the TOC26 Summit the week before. It reminded me how much I like people. Doing something about it was the right thing to do.
