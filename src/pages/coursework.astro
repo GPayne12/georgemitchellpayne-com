@@ -173,29 +173,24 @@ const dateFmt = new Intl.DateTimeFormat('en-US', {
                     </ul>
                   )}
 
-                  {c.data.status === 'complete' && (
+                  {c.data.status === 'complete' && c.data.verifyUrl && (
                     <div class="course-links">
-                      <a href={`/coursework/${c.data.slug}`} class="course-link">
-                        detail →
+                      <a
+                        href={c.data.verifyUrl}
+                        class="course-link"
+                        rel="noopener noreferrer"
+                        aria-label={`Verify the ${c.data.title} credential`}
+                      >
+                        verify credential →
                       </a>
-                      {c.data.verifyUrl && (
-                        <a
-                          href={c.data.verifyUrl}
-                          class="course-link"
-                          rel="noopener noreferrer"
-                          aria-label={`Verify the ${c.data.title} credential`}
-                        >
-                          verify credential →
-                        </a>
-                      )}
                     </div>
                   )}
 
                   {c.data.status === 'complete' && c.data.reflection && (
-                    <section class="course-reflection" aria-label="Reflection">
-                      <p class="telemetry reflection-label">// reflection</p>
+                    <details class="course-reflection">
+                      <summary class="reflection-toggle">reflection</summary>
                       <p class="reflection-body">{c.data.reflection}</p>
-                    </section>
+                    </details>
                   )}
                 </div>
 
@@ -550,23 +545,26 @@ const dateFmt = new Intl.DateTimeFormat('en-US', {
   }
 
   /* ── Reflection ───────────────────────────────────── */
-  .course-reflection {
+  .reflection-toggle {
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+    letter-spacing: 0.02em;
+    padding: 0.15em 0;
+  }
+
+  .reflection-toggle:hover {
+    color: var(--color-accent);
+  }
+
+  .reflection-body {
+    margin-top: var(--space-3);
     background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-left: 2px solid var(--color-telemetry);
     border-radius: 6px;
     padding: var(--space-4) var(--space-5);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-  }
-
-  .reflection-label {
-    font-size: var(--text-xs);
-    margin: 0;
-  }
-
-  .reflection-body {
     font-size: var(--text-sm);
     line-height: 1.7;
     color: var(--color-ink-muted);
