@@ -15,5 +15,9 @@ courses:
   - "Adopting AI in Your Organization"
   - "LLM-Based Apps"
   - "AI Agents"
-assessment: "Exam (by Dec 13) + project (due Jan 10)"
+assessments:
+  - item: "Exam"
+    due: "Dec 13"
+  - item: "Project"
+    due: "Jan 10"
 ---

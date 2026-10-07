@@ -19,5 +19,9 @@ courses:
   - "Clustering with Unsupervised Learning"
   - "Introduction to Deep Learning"
   - "AI Model Fine-Tuning"
-assessment: "Exam (by Apr 4) + project (due Apr 18)"
+assessments:
+  - item: "Exam"
+    due: "Apr 4"
+  - item: "Project"
+    due: "Apr 18"
 ---

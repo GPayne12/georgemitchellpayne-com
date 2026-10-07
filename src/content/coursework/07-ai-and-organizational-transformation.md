@@ -13,5 +13,9 @@ courses:
   - "AI and Business Transformation"
   - "AI Leadership and Management"
   - "AI and Augmented Productivity"
-assessment: "Exam (by May 16) + presentation (due May 23)"
+assessments:
+  - item: "Exam"
+    due: "May 16"
+  - item: "Presentation"
+    due: "May 23"
 ---

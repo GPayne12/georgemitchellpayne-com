@@ -92,8 +92,19 @@ const coursework = defineCollection({
         summary: z.string(),
         /** The courses inside this concentration, in schedule order. */
         courses: z.array(z.string()).default([]),
-        /** How the course is assessed — "Exam + project", etc. */
-        assessment: z.string().optional(),
+        /**
+         * The graded pieces, listed after the lessons as their own line items.
+         * `result` is shown once recorded ("Passed", "5/5"); until then, `due`.
+         */
+        assessments: z
+          .array(
+            z.object({
+              item: z.string(),
+              due: z.string().optional(),
+              result: z.string().optional(),
+            }),
+          )
+          .default([]),
         /** The few words on finishing it. Required once status is complete. */
         reflection: z.string().optional(),
         skills: z.array(z.string()).default([]),

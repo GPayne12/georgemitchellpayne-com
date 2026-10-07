@@ -146,19 +146,25 @@ const dateFmt = new Intl.DateTimeFormat('en-US', {
                     <details class="lessons" open={c.data.status !== 'planned'}>
                       <summary class="lessons-toggle">
                         {c.data.courses.length} courses
-                        {c.data.assessment ? ` · ${c.data.assessment}` : ''}
+                        {c.data.assessments.length > 0 &&
+                          ` · ${c.data.assessments.map(a => a.item.toLowerCase()).join(' + ')}`}
                       </summary>
                       <ol class="lesson-list">
                         {c.data.courses.map(l => <li>{l}</li>)}
                       </ol>
+                      {c.data.assessments.length > 0 && (
+                        <ul class="assessment-list" role="list" aria-label="Assessments">
+                          {c.data.assessments.map(a => (
+                            <li class={`assessment ${a.result ? 'assessment--done' : ''}`}>
+                              <span class="assessment-item">{a.item}</span>
+                              <span class="assessment-result">
+                                {a.result ?? (a.due ? `due ${a.due}` : 'pending')}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </details>
-                  )}
-
-                  {c.data.status === 'complete' && c.data.reflection && (
-                    <blockquote class="course-reflection">
-                      <p class="telemetry reflection-label">// what it was worth</p>
-                      <p class="reflection-body">{c.data.reflection}</p>
-                    </blockquote>
                   )}
 
                   {c.data.skills.length > 0 && (
@@ -183,6 +189,13 @@ const dateFmt = new Intl.DateTimeFormat('en-US', {
                         </a>
                       )}
                     </div>
+                  )}
+
+                  {c.data.status === 'complete' && c.data.reflection && (
+                    <section class="course-reflection" aria-label="Reflection">
+                      <p class="telemetry reflection-label">// reflection</p>
+                      <p class="reflection-body">{c.data.reflection}</p>
+                    </section>
                   )}
                 </div>
 
@@ -347,6 +360,40 @@ const dateFmt = new Intl.DateTimeFormat('en-US', {
     gap: var(--space-2);
     color: var(--color-ink-muted);
     line-height: 1.5;
+  }
+
+  /* Exam / project / presentation: their own rows under the lessons. */
+  .assessment-list {
+    list-style: none;
+    margin: var(--space-3) 0 0;
+    padding: var(--space-3) 0 0;
+    border-top: 1px dashed var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .assessment {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+    line-height: 1.5;
+  }
+
+  .assessment-item {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  .assessment-result {
+    color: var(--color-ink-muted);
+    white-space: nowrap;
+  }
+
+  .assessment--done .assessment-result {
+    color: var(--color-telemetry);
+    font-weight: 600;
   }
 
   /* ── Group ────────────────────────────────────────── */

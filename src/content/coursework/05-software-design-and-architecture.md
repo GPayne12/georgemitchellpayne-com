@@ -14,5 +14,7 @@ courses:
   - "Paradigms and Patterns"
   - "Enterprise Architectures"
   - "Cloud Services and Architectures"
-assessment: "Exam (by Feb 21)"
+assessments:
+  - item: "Exam"
+    due: "Feb 21"
 ---

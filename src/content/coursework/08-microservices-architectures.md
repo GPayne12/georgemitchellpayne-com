@@ -13,5 +13,7 @@ courses:
   - "Microservices I: Designing and Building"
   - "Microservices II: Deploying and Testing"
   - "Microservices III: Scaling and Kubernetes"
-assessment: "Exam (by Jun 27)"
+assessments:
+  - item: "Exam"
+    due: "Jun 27"
 ---

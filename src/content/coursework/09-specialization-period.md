@@ -10,5 +10,7 @@ term: "Jul 5 – Aug 22, 2027"
 summary: "Seven weeks of concentration coursework, self-selected. Concentration
   exam and case study dates are set per specialization — this entry gets split
   into real courses once the concentration is chosen."
-assessment: "Concentration exam + case study"
+assessments:
+  - item: "Concentration exam"
+  - item: "Case study"
 ---

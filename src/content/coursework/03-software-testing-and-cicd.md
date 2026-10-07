@@ -14,5 +14,7 @@ courses:
   - "Software Testing"
   - "CI/CD and Software Maintenance"
   - "Performance Monitoring"
-assessment: "Exam (by Nov 15)"
+assessments:
+  - item: "Exam"
+    due: "Nov 15"
 ---
